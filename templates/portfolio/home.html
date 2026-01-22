@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Home | Architecture Portfolio{% endblock %}
+{% block title %}Home | ADObek Design{% endblock %}
 
 {% block content %}
 <section class="hero" style="background-image: url('/static/images/hero.jpg');">
@@ -11,24 +11,6 @@
     </div>
 </section>
 
-<section class="section">
-    <div class="container" style="display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;">
-        {% if content.profile_image %}
-        <div class="about-image" style="flex: 1; min-width: 300px;">
-            <img src="{{ content.profile_image.url }}" alt="Profile Image"
-                style="width: 100%; border-radius: 10px; filter: grayscale(100%); transition: filter 0.5s ease;"
-                onmouseover="this.style.filter='grayscale(0%)'" onmouseout="this.style.filter='grayscale(100%)'">
-        </div>
-        {% endif %}
-        <div class="about-content" style="flex: 2; min-width: 300px;">
-            <div class="section-title" style="text-align: left;">
-                <h2>About Us</h2>
-                <p>{{ content.about_text|default:"We believe in the power of simplicity and functionality. Our designs
-                    are a reflection of our commitment to sustainable and innovative architectural solutions." }}</p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="section" style="background-color: var(--secondary-color);">
     <div class="section-title">

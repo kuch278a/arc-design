@@ -42,9 +42,7 @@ class ProjectImage(models.Model):
 
 class HomepageContent(models.Model):
     hero_title = models.CharField(max_length=200, default="Designing the Future")
-    hero_subtitle = models.CharField(max_length=300, default="Minimalist Architecture & Spatial Design")
-    about_text = models.TextField(default="We believe in the power of simplicity and functionality...")
-    profile_image = models.ImageField(upload_to='profile/', null=True, blank=True)
+    hero_subtitle = models.CharField(max_length=300, default="Minimalist Design & Spatial Innovation")
     
     class Meta:
         verbose_name = "Homepage Content"
@@ -63,3 +61,17 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"Message from {self.name} - {self.subject}"
+
+class AboutPage(models.Model):
+    title = models.CharField(max_length=200, default="Our Story")
+    content = models.TextField()
+    image = models.ImageField(upload_to='about/', null=True, blank=True)
+    years_of_experience = models.IntegerField(default=10)
+    philosophy = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        verbose_name = "About Page"
+        verbose_name_plural = "About Page"
+
+    def __str__(self):
+        return "About Page Content"

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from .models import Project, Category, HomepageContent
+from .models import Project, Category, HomepageContent, AboutPage
 from .forms import ContactForm
 
 def home(request):
@@ -35,6 +35,13 @@ def contact(request):
         'form': form,
     }
     return render(request, 'portfolio/contact.html', context)
+
+def about(request):
+    about_content = AboutPage.objects.first()
+    context = {
+        'about': about_content,
+    }
+    return render(request, 'portfolio/about.html', context)
 
 def project_detail(request, slug):
     project = get_object_or_404(Project, slug=slug)

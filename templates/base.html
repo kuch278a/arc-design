@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Architecture Portfolio{% endblock %}</title>
+    <title>{% block title %}ADObek Design{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,10 +18,11 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="{% url 'home' %}">ARCHI<span>TECT</span></a>
+                <a href="{% url 'home' %}">ADObek <span>Design</span></a>
             </div>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
                 <li><a href="{% url 'project_list' %}">Projects</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="/admin/">Admin</a></li>
@@ -34,7 +35,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Architecture Portfolio. All rights reserved.</p>
+        <p>&copy; 2026 ADObek Design. All rights reserved.</p>
     </footer>
 
     <script src="/static/js/main.js"></script>

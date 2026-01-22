@@ -17,8 +17,8 @@ public, _ = Category.objects.get_or_create(name="Public")
 # Create Homepage Content
 HomepageContent.objects.get_or_create(
     hero_title="Designing the Future",
-    hero_subtitle="Minimalist Architecture & Spatial Design",
-    about_text="We believe in the power of simplicity and functionality. Our designs are a reflection of our commitment to sustainable and innovative architectural solutions."
+    hero_subtitle="Minimalist Design & Spatial Innovation",
+    about_text="We are ADObek Design. We believe in the power of simplicity and functionality. Our designs are a reflection of our commitment to sustainable and innovative spatial solutions."
 )
 
 # Function to download a placeholder if image generation failed

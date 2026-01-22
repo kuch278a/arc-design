@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Project, ProjectImage, HomepageContent, ContactMessage
+from .models import Category, Project, ProjectImage, HomepageContent, ContactMessage, AboutPage
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -31,3 +31,10 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_filter = ('is_read', 'created_at')
     search_fields = ('name', 'email', 'subject', 'message')
     readonly_fields = ('created_at',)
+
+@admin.register(AboutPage)
+class AboutPageAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 1:
+            return False
+        return super().has_add_permission(request)
