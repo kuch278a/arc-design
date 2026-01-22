@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} | Architecture Portfolio{% endblock %}
+
+{% block content %}
+<section class="project-hero" style="margin-top: 6rem; height: 70vh; position: relative;">
+    {% if project.featured_image %}
+    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}"
+        style="width: 100%; height: 100%; object-fit: cover;">
+    {% else %}
+    <div
+        style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: white;">
+        <span>Featured Image Missing</span>
+    </div>
+    {% endif %}
+</section>
+
+<section class="section">
+    <div style="display: flex; flex-wrap: wrap; gap: 4rem;">
+        <div style="flex: 2; min-width: 300px;">
+            <h1 style="font-size: 3rem; margin-bottom: 2rem;">{{ project.title }}</h1>
+            <div style="white-space: pre-line;">
+                {{ project.description }}
+            </div>
+        </div>
+        <div style="flex: 1; min-width: 250px; background: var(--secondary-color); padding: 2rem;">
+            <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px;">Project
+                Details</h3>
+            <ul style="list-style: none;">
+                <li style="margin-bottom: 1rem;"><strong
+                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Category</strong>
+                    {{ project.category.name }}</li>
+                <li style="margin-bottom: 1rem;"><strong
+                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Location</strong>
+                    {{ project.location }}</li>
+                <li style="margin-bottom: 1rem;"><strong
+                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Year</strong>
+                    {{ project.year }}</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+{% if project.images.all %}
+<section class="section" style="background-color: var(--secondary-color);">
+    <div class="grid">
+        {% for gallery_image in project.images.all %}
+        <div style="margin-bottom: 2rem;">
+            <img src="{{ gallery_image.image.url }}" alt="{{ gallery_image.caption }}"
+                style="width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            {% if gallery_image.caption %}
+            <p style="margin-top: 1rem; font-style: italic; color: var(--light-text); text-align: center;">{{
+                gallery_image.caption }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}
