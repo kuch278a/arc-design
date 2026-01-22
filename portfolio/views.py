@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from .models import Project, Category, HomepageContent
+from .forms import ContactForm
 
 def home(request):
     featured_projects = Project.objects.filter(is_featured=True)[:3]
@@ -19,10 +21,20 @@ def project_list(request):
     }
     return render(request, 'portfolio/project_list.html', context)
 
-def project_detail(request):
-    # This function expects a slug, but I forgot to add it to the signature in urls.py maybe?
-    # No, urls.py has <slug:slug>. Let me fix the signature.
-    pass
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent successfully! We will get back to you soon.')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'portfolio/contact.html', context)
 
 def project_detail(request, slug):
     project = get_object_or_404(Project, slug=slug)

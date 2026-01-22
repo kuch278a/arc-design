@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Project, ProjectImage, HomepageContent
+from .models import Category, Project, ProjectImage, HomepageContent, ContactMessage
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -21,7 +21,13 @@ class ProjectAdmin(admin.ModelAdmin):
 @admin.register(HomepageContent)
 class HomepageContentAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
-        # Only allow one instance of homepage content
         if self.model.objects.count() >= 1:
             return False
         return super().has_add_permission(request)
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at', 'is_read')
+    list_filter = ('is_read', 'created_at')
+    search_fields = ('name', 'email', 'subject', 'message')
+    readonly_fields = ('created_at',)
