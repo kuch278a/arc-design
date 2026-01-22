@@ -32,9 +32,7 @@
 
             <div style="flex: 1.5; min-width: 300px;">
                 <div class="about-text" style="line-height: 1.8; font-size: 1.1rem; color: #444;">
-                    {{ about.content|linebreaks|default:"We are a design-led architectural practice committed to
-                    creating spaces that inspire and endure. Our approach blends technical precision with creative
-                    intuition, resulting in architecture that is both functional and emotionally resonant." }}
+                    {{ about.content|linebreaks }}
                 </div>
 
                 {% if about.philosophy %}

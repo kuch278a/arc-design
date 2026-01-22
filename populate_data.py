@@ -6,7 +6,7 @@ import requests
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio_site.settings')
 django.setup()
 
-from portfolio.models import Category, Project, ProjectImage, HomepageContent
+from portfolio.models import Category, Project, ProjectImage, HomepageContent, AboutPage
 from django.contrib.auth import get_user_model
 
 # Create Categories
@@ -16,10 +16,22 @@ public, _ = Category.objects.get_or_create(name="Public")
 
 # Create Homepage Content
 HomepageContent.objects.get_or_create(
-    hero_title="Designing the Future",
-    hero_subtitle="Minimalist Design & Spatial Innovation",
-    about_text="We are ADObek Design. We believe in the power of simplicity and functionality. Our designs are a reflection of our commitment to sustainable and innovative spatial solutions."
+    hero_subtitle="Minimalist Design & Spatial Innovation"
 )
+
+# Create About Page Content
+about_page, created = AboutPage.objects.get_or_create(
+    title="Our Story",
+    defaults={
+        'content': "We are a design-led architectural practice committed to creating spaces that inspire and endure. Our approach blends technical precision with creative intuition, resulting in architecture that is both functional and emotionally resonant.",
+        'years_of_experience': 15,
+        'philosophy': "Simplicity is the ultimate sophistication. We strive to create designs that are as functional as they are beautiful.",
+        'image': 'profile/telegram_profile.jpg'
+    }
+)
+if not created:
+    about_page.image = 'profile/telegram_profile.jpg'
+    about_page.save()
 
 # Function to download a placeholder if image generation failed
 def get_placeholder(name):
