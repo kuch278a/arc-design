@@ -11,6 +11,201 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        :root {
+            --primary-color: #080330;
+            --secondary-color: #FAF9F6;
+            --accent-color: #2E6F6C;
+            --white: #ffffff;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body.dark-theme {
+            --bg-color: #121212;
+            --text-color: #ffffff;
+            --primary-color: #ffffff;
+            --secondary-color: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --white: #121212;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        h1,
+        h2,
+        h3,
+        .serif {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--primary-color);
+        }
+
+        .serif-italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .caps {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent-color) !important;
+            color: white !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        header {
+            padding: 1rem 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(127, 127, 127, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            font-weight: 300;
+        }
+
+        footer {
+            padding: 6rem 10% !important;
+            background-color: var(--accent-color) !important;
+            color: white !important;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+        }
+
+        .zigzag-row {
+            display: flex !important;
+            align-items: center;
+            gap: 6rem;
+            margin-bottom: 8rem;
+        }
+
+        .zigzag-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .zigzag-content,
+        .zigzag-image {
+            flex: 1;
+        }
+
+        .zigzag-image img {
+            width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .separator-line {
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        /* Shorter project images as requested */
+        .project-card {
+            height: 400px;
+            overflow: hidden;
+            display: block;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        #theme-toggle {
+            background: none !important;
+            border: 1px solid var(--text-color) !important;
+            color: var(--text-color) !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 4px !important;
+            cursor: pointer;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            background: var(--text-color) !important;
+            color: var(--bg-color) !important;
+        }
+
+        .section {
+            padding: 8rem 5%;
+        }
+    </style>
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -26,6 +221,9 @@
                 <li><a href="{% url 'project_list' %}">Projects</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="/admin/">Admin</a></li>
+                <li>
+                    <button id="theme-toggle">Light</button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -35,9 +233,59 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 ADObek Design. All rights reserved.</p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 1.5rem;">
+                    <a href="/">ADObek <span style="color: white; font-weight: 300;">Design</span></a>
+                </div>
+                <p>Creating sophisticated spaces that inspire and endure. Minimalist architecture with a focus on luxury
+                    and functionality.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>Email: hello@adobek.design</p>
+                <p>Phone: +251 947325252</p>
+                <p>Studio: Alem Bank, AA, Ethiopia</p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">LinkedIn</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ADObek Design. All rights reserved.</p>
+        </div>
     </footer>
 
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                toggle.textContent = 'Dark';
+            } else {
+                document.body.classList.remove('dark-theme');
+                toggle.textContent = 'Light';
+            }
+        }
+
+        toggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark-theme');
+            const newTheme = isDark ? 'light' : 'dark';
+            setTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        }
+    </script>
     <script src="/static/js/main.js"></script>
     {% block extra_js %}{% endblock %}
 </body>

@@ -3,42 +3,62 @@
 {% block title %}Home | ADObek Design{% endblock %}
 
 {% block content %}
-<section class="hero" style="background-image: url('/static/images/hero.jpg');">
-    <div class="hero-content">
-        <h1>{{ content.hero_title|default:"Designing the Future" }}</h1>
-        <p>{{ content.hero_subtitle|default:"Minimalist Architecture & Spatial Design" }}</p>
-        <a href="{% url 'project_list' %}" class="btn">Explore Projects</a>
+<section class="hero" style="background-image: url('/static/images/hero.jpg'); background-attachment: fixed;">
+    <div class="hero-content" style="text-align: center; margin: 0 auto;">
+        <h1 style="font-size: 5rem; margin-bottom: 1.5rem;">{{ content.hero_title|default:"Designing the Future" }}</h1>
+        <p class="caps">{{ content.hero_subtitle|default:"Minimalist Architecture & Spatial Design" }}</p>
+        <div style="margin-top: 3rem;">
+            <a href="{% url 'project_list' %}" class="btn">Explore Portfolio</a>
+        </div>
     </div>
 </section>
 
+<section class="section" style="text-align: center;">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+        <span class="caps" style="color: var(--accent-color);">Welcome</span>
+        <div class="separator-line"></div>
+        <h2 class="serif-italic" style="font-size: 2.5rem; line-height: 1.4; margin: 2rem 0;">
+            "We believe in the power of simplicity and functionality. Our designs are a reflection of our commitment to
+            sustainable and innovative spatial solutions."
+        </h2>
+        <div class="separator-line"></div>
+    </div>
+</section>
 
 <section class="section" style="background-color: var(--secondary-color);">
     <div class="section-title">
-        <h2>Featured Projects</h2>
+        <span class="caps" style="color: var(--accent-color); display: block; margin-bottom: 1rem;">Our Works</span>
+        <h2 style="font-size: 3rem;">Featured Projects</h2>
     </div>
-    <div class="grid">
+    <div class="grid" style="gap: 4rem;">
         {% for project in featured_projects %}
-        <a href="{% url 'project_detail' project.slug %}" class="project-card">
-            {% if project.featured_image %}
-            <img src="{{ project.featured_image.url }}" alt="{{ project.title }}">
-            {% else %}
-            <div
-                style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: white;">
-                <span>No Image</span>
+        <div class="project-item">
+            <a href="{% url 'project_detail' project.slug %}" class="project-card"
+                style="height: 400px; margin-bottom: 1.5rem;">
+                {% if project.featured_image %}
+                <img src="{{ project.featured_image.url }}" alt="{{ project.title }}">
+                {% else %}
+                <div
+                    style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: white;">
+                    <span>No Image</span>
+                </div>
+                {% endif %}
+            </a>
+            <div style="text-align: left;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">{{
+                    project.title }}</h3>
+                <p class="caps" style="opacity: 0.6; font-size: 0.7rem;">{{ project.category.name }} | {{
+                    project.location }}</p>
             </div>
-            {% endif %}
-            <div class="project-overlay">
-                <h3>{{ project.title }}</h3>
-                <p>{{ project.category.name }} | {{ project.location }}</p>
-            </div>
-        </a>
+        </div>
         {% empty %}
-        <p style="grid-column: 1/-1; text-align: center;">No featured projects yet. Add some in the admin panel!</p>
+        <p style="grid-column: 1/-1; text-align: center;">No featured projects yet.</p>
         {% endfor %}
     </div>
-    <div style="text-align: center; margin-top: 3rem;">
-        <a href="{% url 'project_list' %}"
-            style="border-bottom: 2px solid var(--accent-color); padding-bottom: 5px;">View All Projects</a>
+    <div style="text-align: center; margin-top: 4rem;">
+        <a href="{% url 'project_list' %}" class="btn"
+            style="background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);">View
+            All Projects</a>
     </div>
 </section>
 {% endblock %}

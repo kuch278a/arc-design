@@ -6,61 +6,67 @@
 <section class="section">
     <div class="container">
         <div class="section-title">
-            <h2>{{ about.title|default:"About Us" }}</h2>
+            <span class="caps" style="color: var(--accent-color);">Who We Are</span>
+            <h2 style="font-size: 3rem; margin-top: 1rem;">{{ about.title|default:"Our Story" }}</h2>
         </div>
 
-        <div style="display: flex; flex-wrap: wrap; gap: 4rem; align-items: flex-start; margin-top: 3rem;">
-            <div style="flex: 1; min-width: 300px;">
+        <div class="zigzag-row">
+            <div class="zigzag-image">
                 {% if about.image %}
-                <img src="{{ about.image.url }}" alt="{{ about.title }}"
-                    style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                <img src="{{ about.image.url }}" alt="{{ about.title }}">
                 {% else %}
                 <div
-                    style="width: 100%; aspect-ratio: 4/5; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+                    style="width: 100%; aspect-ratio: 4/5; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
                     <span style="color: #999;">No Image Provided</span>
                 </div>
                 {% endif %}
-
-                <div
-                    style="margin-top: 2rem; padding: 2rem; border-left: 4px solid var(--accent-color); background: var(--secondary-color);">
-                    <h3 style="font-size: 3rem; margin-bottom: 0.5rem;">{{ about.years_of_experience|default:"15" }}+
-                    </h3>
-                    <p style="text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">
-                        Years of Excellence</p>
-                </div>
             </div>
-
-            <div style="flex: 1.5; min-width: 300px;">
-                <div class="about-text" style="line-height: 1.8; font-size: 1.1rem; color: #444;">
+            <div class="zigzag-content">
+                <div class="about-text" style="font-size: 1.1rem;">
                     {{ about.content|linebreaks }}
                 </div>
+                <div
+                    style="margin-top: 3rem; padding: 2rem; border-left: 2px solid var(--accent-color); background: var(--secondary-color);">
+                    <h3 style="font-size: 3rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">{{
+                        about.years_of_experience|default:"15" }}+</h3>
+                    <p class="caps">Years of Excellence</p>
+                </div>
+            </div>
+        </div>
 
-                {% if about.philosophy %}
+        {% if about.philosophy %}
+        <div class="zigzag-row">
+            <div class="zigzag-content">
+                <span class="caps" style="color: var(--accent-color);">Our Vision</span>
+                <h3 style="margin: 1.5rem 0; font-size: 2.5rem;">The Philosophy</h3>
+                <div style="font-size: 1.1rem;">
+                    {{ about.philosophy|linebreaks }}
+                </div>
                 <div style="margin-top: 3rem;">
-                    <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Our Philosophy
-                    </h3>
-                    <div style="line-height: 1.8; font-size: 1.1rem; color: #444;">
-                        {{ about.philosophy|linebreaks }}
-                    </div>
-                </div>
-                {% endif %}
-
-                <div style="margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <div>
-                        <h4 style="margin-bottom: 1rem; color: var(--accent-color);">Innovation</h4>
-                        <p style="font-size: 0.9rem;">Using cutting-edge technology to push the boundaries of what's
-                            possible in modern design.</p>
-                    </div>
-                    <div>
-                        <h4 style="margin-bottom: 1rem; color: var(--accent-color);">Sustainability</h4>
-                        <p style="font-size: 0.9rem;">Integrating eco-friendly solutions into every project for a
-                            better, greener future.</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 4rem;">
                     <a href="{% url 'contact' %}" class="btn">Start a Conversation</a>
                 </div>
+            </div>
+            <div class="zigzag-image">
+                <div
+                    style="width: 100%; aspect-ratio: 16/9; background: var(--secondary-color); border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                    <span class="serif-italic"
+                        style="font-size: 1.5rem; padding: 3rem; text-align: center;">"Architecture is the learned game,
+                        correct and magnificent, of forms assembled in the light."</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div style="margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+            <div style="padding: 3rem; background: var(--secondary-color);">
+                <h4 class="caps" style="margin-bottom: 1.5rem; color: var(--accent-color);">Innovation</h4>
+                <p style="font-size: 0.95rem;">Using cutting-edge technology to push the boundaries of what's possible
+                    in modern design.</p>
+            </div>
+            <div style="padding: 3rem; background: var(--secondary-color);">
+                <h4 class="caps" style="margin-bottom: 1.5rem; color: var(--accent-color);">Sustainability</h4>
+                <p style="font-size: 0.95rem;">Integrating eco-friendly solutions into every project for a better,
+                    greener future.</p>
             </div>
         </div>
     </div>
