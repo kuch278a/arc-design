@@ -4,7 +4,7 @@ from .models import Project, Category, HomepageContent, AboutPage
 from .forms import ContactForm
 
 def home(request):
-    featured_projects = Project.objects.filter(is_featured=True)[:3]
+    featured_projects = Project.objects.filter(is_featured=True)[:6]
     content = HomepageContent.objects.first()
     context = {
         'featured_projects': featured_projects,

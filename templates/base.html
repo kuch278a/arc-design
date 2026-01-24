@@ -116,15 +116,16 @@
         }
 
         footer {
-            padding: 6rem 10% !important;
+            padding: 4rem 5% !important;
             background-color: var(--accent-color) !important;
             color: white !important;
+            font-size: 0.9rem;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
         }
 
         .zigzag-row {
@@ -235,26 +236,30 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <div class="logo" style="margin-bottom: 1.5rem;">
+                <div class="logo" style="margin-bottom: 1.2rem;">
                     <a href="/">ADObek <span style="color: white; font-weight: 300;">Design</span></a>
                 </div>
-                <p>Creating sophisticated spaces that inspire and endure. Minimalist architecture with a focus on luxury
-                    and functionality.</p>
+                <p>Sophisticated minimalist architecture focused on luxury and functionality.</p>
             </div>
             <div class="footer-col">
-                <h4>Contact</h4>
-                <p>Email: hello@adobek.design</p>
+                <h4 style="margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Contact</h4>
+                <p>Email: <a href="mailto:hello@adobek.design"
+                        style="color: white; text-decoration: none;">hello@adobek.design</a></p>
                 <p>Phone: +251 947325252</p>
-                <p>Studio: Alem Bank, AA, Ethiopia</p>
             </div>
             <div class="footer-col">
-                <h4>Follow Us</h4>
-                <p><a href="#">Instagram</a></p>
-                <p><a href="#">Facebook</a></p>
-                <p><a href="#">LinkedIn</a></p>
+                <h4 style="margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    Follow</h4>
+                <div style="display: flex; gap: 0.8rem; flex-direction: column;">
+                    <a href="https://t.me/adobek" style="color: white; text-decoration: none;">Telegram</a>
+                    <a href="#" style="color: white; text-decoration: none;">Instagram</a>
+                    <a href="#" style="color: white; text-decoration: none;">LinkedIn</a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom"
+            style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.6; font-size: 0.75rem;">
             <p>&copy; 2026 ADObek Design. All rights reserved.</p>
         </div>
     </footer>
