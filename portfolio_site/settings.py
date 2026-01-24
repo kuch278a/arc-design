@@ -124,3 +124,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email Settings for Login Notifications
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ADMIN_NOTIFICATION_EMAIL = 'admin@example.com'  # Replace with actual email

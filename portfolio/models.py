@@ -73,5 +73,12 @@ class AboutPage(models.Model):
         verbose_name = "About Page"
         verbose_name_plural = "About Page"
 
+
+class LoginAttempt(models.Model):
+    username = models.CharField(max_length=255)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    count = models.IntegerField(default=0)
+    last_attempt = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return "About Page Content"
+        return f"{self.username} - {self.count} attempts"
