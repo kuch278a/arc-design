@@ -38,3 +38,7 @@ class AboutPageAdmin(admin.ModelAdmin):
         if self.model.objects.count() >= 1:
             return False
         return super().has_add_permission(request)
+
+admin.site.site_header = "ADObek Design Management"
+admin.site.site_title = "ADObek Design Admin Portal"
+admin.site.index_title = "Welcome to ADObek Design Management"
