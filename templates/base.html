@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ADObek Design{% endblock %}</title>
+    <title>{% block title %}ADObek Design Build{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,7 +15,7 @@
         :root {
             --primary-color: #080330;
             --secondary-color: #FAF9F6;
-            --accent-color: #2E6F6C;
+            --accent-color: #0c0e0d;
             --white: #ffffff;
             --bg-color: #ffffff;
             --text-color: #333333;
@@ -33,7 +33,13 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
+            background-color: #cbad8d;
+            /* Beige fallback matching the image */
+            background-image: url('/static/images/background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--text-color);
             line-height: 1.8;
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -103,16 +109,28 @@
             margin-left: 2rem;
         }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+        .logo img {
+            height: 120px;
+            width: auto;
+            vertical-align: middle;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: invert(1);
+            mix-blend-mode: multiply;
         }
 
-        .logo span {
-            color: var(--accent-color);
-            font-weight: 300;
+        body.dark-theme .logo img {
+            filter: invert(0);
+            mix-blend-mode: screen;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .footer-col .logo img {
+            height: 50px;
+            filter: invert(0);
+            mix-blend-mode: screen;
         }
 
         footer {
@@ -214,7 +232,9 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="{% url 'home' %}">ADObek <span>Design</span></a>
+                <a href="{% url 'home' %}">
+                    <img src="/static/images/logo.png" alt="ADObek Design Build Logo">
+                </a>
             </div>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
@@ -237,7 +257,9 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo" style="margin-bottom: 1.2rem;">
-                    <a href="/">ADObek <span style="color: white; font-weight: 300;">Design</span></a>
+                    <a href="/">
+                        <img src="/static/images/logo.png" alt="ADObek Design Build Logo">
+                    </a>
                 </div>
                 <p>Sophisticated minimalist architecture focused on luxury and functionality.</p>
             </div>
