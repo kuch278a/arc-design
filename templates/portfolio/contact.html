@@ -1,78 +1,102 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact | ADObek Design Build{% endblock %}
+{% block title %}Consultation & Inquiries | Ashara Interiors — Beka{% endblock %}
 
 {% block content %}
-<section class="section">
-    <div class="container" style="max-width: 800px;">
-        <div class="section-title">
-            <span class="caps" style="color: var(--accent-color);">Get in Touch</span>
-            <h2 style="font-size: 3rem; margin-top: 1rem;">Contact Us</h2>
-            <p class="serif-italic" style="font-size: 1.2rem; margin-top: 1rem;">Have a project in mind? We'd love to
-                hear from you.</p>
+<section class="section" style="padding-top: 4rem;">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Direct Inquiries</span>
+            <h1 class="section-title">Commence a Consultation</h1>
+            <p class="section-subtitle">
+                Discuss spatial commissions, architectural master planning, or interior design projects directly with Beka and the Ashara team.
+            </p>
+            <div class="divider-gold"></div>
         </div>
 
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}"
-            style="padding: 1rem; margin-bottom: 2rem; border-radius: 5px; background-color: {% if message.tags == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; color: {% if message.tags == 'success' %}#155724{% else %}#721c24{% endif %};">
+        <div style="padding: 1.5rem 2rem; margin-bottom: 3rem; border-radius: 4px; background: rgba(30, 78, 78, 0.15); border: 1px solid var(--ashara-teal); color: var(--text-primary); text-align: center; font-weight: 500;">
             {{ message }}
         </div>
         {% endfor %}
         {% endif %}
 
-        <div class="contact-form-wrapper" style="margin-top: 4rem;">
-            <form method="post" class="contact-form">
-                {% csrf_token %}
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem;">
-                    <div class="form-group">
-                        <label for="{{ form.name.id_for_label }}" class="caps"
-                            style="font-size: 0.7rem; color: var(--accent-color);">Name</label>
-                        {{ form.name }}
+        <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start;">
+            <!-- Contact Information Sidebar -->
+            <div style="background: var(--surface-alt); padding: 3rem 2.5rem; border-radius: 4px; border: 1px solid var(--border-color);">
+                <span class="caps" style="color: var(--gold-accent); display: block; margin-bottom: 0.8rem;">The Atelier</span>
+                <h3 style="font-size: 2rem; margin-bottom: 2rem;">Ashara Interiors</h3>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong class="caps" style="display: block; font-size: 0.7rem; color: var(--gold-accent); margin-bottom: 0.4rem;">Principal Architect</strong>
+                    <p style="font-size: 1.1rem; font-weight: 600;">Beka</p>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Founder & Principal Interior Architect</p>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong class="caps" style="display: block; font-size: 0.7rem; color: var(--gold-accent); margin-bottom: 0.4rem;">Direct Email</strong>
+                    <a href="mailto:beka@ashara-interior.com" style="color: var(--ashara-teal); font-weight: 600; font-size: 1.05rem;">beka@ashara-interior.com</a>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong class="caps" style="display: block; font-size: 0.7rem; color: var(--gold-accent); margin-bottom: 0.4rem;">Telephone / WhatsApp</strong>
+                    <p style="font-size: 1.05rem; font-weight: 600;">+251 947 325 252</p>
+                </div>
+
+                <div style="margin-bottom: 2rem;">
+                    <strong class="caps" style="display: block; font-size: 0.7rem; color: var(--gold-accent); margin-bottom: 0.4rem;">Headquarters</strong>
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">Addis Ababa, Ethiopia</p>
+                </div>
+
+                <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                    <strong class="caps" style="display: block; font-size: 0.7rem; color: var(--gold-accent); margin-bottom: 0.8rem;">Direct Channel</strong>
+                    <a href="https://t.me/adobekdb" target="_blank" rel="noopener" class="btn btn-gold" style="width: 100%; text-align: center; padding: 0.8rem;">Connect via Telegram</a>
+                </div>
+            </div>
+
+            <!-- Consultation Form -->
+            <div style="background: var(--card-bg); padding: 3.5rem 3rem; border-radius: 4px; border: 1px solid var(--border-color); box-shadow: var(--shadow-soft);">
+                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Project Inquiry Form</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2.5rem;">
+                    Provide details regarding your prospective civic commission, corporate space, or luxury residence.
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="form-group">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Your Name / Title *</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email Address *</label>
+                            {{ form.email }}
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="{{ form.email.id_for_label }}" class="caps"
-                            style="font-size: 0.7rem; color: var(--accent-color);">Email</label>
-                        {{ form.email }}
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="form-group">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label">Telephone Number</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.subject.id_for_label }}" class="form-label">Subject / Scope *</label>
+                            {{ form.subject }}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group" style="margin-bottom: 3rem;">
-                    <label for="{{ form.subject.id_for_label }}" class="caps"
-                        style="font-size: 0.7rem; color: var(--accent-color);">Subject</label>
-                    {{ form.subject }}
-                </div>
-                <div class="form-group" style="margin-bottom: 4rem;">
-                    <label for="{{ form.message.id_for_label }}" class="caps"
-                        style="font-size: 0.7rem; color: var(--accent-color);">Message</label>
-                    {{ form.message }}
-                </div>
-                <div style="text-align: center;">
-                    <button type="submit" class="btn" style="padding: 1.2rem 4rem; cursor: pointer;">Send
-                        Inquiry</button>
-                </div>
-            </form>
+
+                    <div class="form-group">
+                        <label for="{{ form.message.id_for_label }}" class="form-label">Project Vision & Requirements *</label>
+                        {{ form.message }}
+                    </div>
+
+                    <div style="text-align: right; margin-top: 2rem;">
+                        <button type="submit" class="btn" style="padding: 1.1rem 3.5rem;">Submit Commission Inquiry &rarr;</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-
     </div>
 </section>
-
-<style>
-    .form-control {
-        width: 100%;
-        padding: 1rem 0;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        border-radius: 0;
-        font-family: inherit;
-        background: transparent;
-        transition: border-color 0.3s ease;
-        font-size: 1rem;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: var(--accent-color);
-    }
-</style>
 {% endblock %}

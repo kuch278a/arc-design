@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Project, ProjectImage, HomepageContent, ContactMessage, AboutPage
+from .models import Category, Project, ProjectImage, HomepageContent, ContactMessage, AboutPage, Client
 
 class ProjectImageInline(admin.TabularInline):
     model = ProjectImage
@@ -12,9 +12,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'year', 'is_featured')
+    list_display = ('title', 'client', 'category', 'year', 'is_featured')
     list_filter = ('category', 'is_featured')
-    search_fields = ('title', 'description')
+    search_fields = ('title', 'subtitle', 'client', 'description')
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ProjectImageInline]
 
@@ -27,9 +27,9 @@ class HomepageContentAdmin(admin.ModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'subject', 'created_at', 'is_read')
+    list_display = ('name', 'email', 'phone', 'subject', 'created_at', 'is_read')
     list_filter = ('is_read', 'created_at')
-    search_fields = ('name', 'email', 'subject', 'message')
+    search_fields = ('name', 'email', 'phone', 'subject', 'message')
     readonly_fields = ('created_at',)
 
 @admin.register(AboutPage)
@@ -39,6 +39,13 @@ class AboutPageAdmin(admin.ModelAdmin):
             return False
         return super().has_add_permission(request)
 
-admin.site.site_header = "ADObek Design Management"
-admin.site.site_title = "ADObek Design Admin Portal"
-admin.site.index_title = "Welcome to ADObek Design Management"
+@admin.register(Client)
+class ClientAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'static_logo', 'order')
+    list_filter = ('category',)
+    search_fields = ('name',)
+    list_editable = ('order',)
+
+admin.site.site_header = "Ashara Interiors — Beka's Studio Management"
+admin.site.site_title = "Ashara Interiors Admin Portal"
+admin.site.index_title = "Welcome to Ashara Interiors Management Portal"

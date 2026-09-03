@@ -1,64 +1,220 @@
 {% extends 'base.html' %}
 
-{% block title %}Home | ADObek Design Build{% endblock %}
+{% block title %}Ashara Interiors | Beka — Architecture & Luxury Interior Design{% endblock %}
 
 {% block content %}
-<section class="hero" style="background-image: url('/static/images/hero.jpg'); background-attachment: fixed;">
-    <div class="hero-content" style="text-align: center; margin: 0 auto;">
-        <h1 style="font-size: 5rem; margin-bottom: 1.5rem;">{{ content.hero_title|default:"Designing the Future" }}</h1>
-        <p class="caps">{{ content.hero_subtitle|default:"Minimalist Architecture & Spatial Design" }}</p>
-        <div style="margin-top: 3rem;">
+<!-- Hero Section -->
+<section class="hero-ashara">
+    <div class="hero-backdrop" style="background-image: url('/static/images/our_service.jpg');"></div>
+    <div class="hero-inner">
+        <div class="hero-badge">Ethiopian Civic & Luxury Architecture</div>
+        <h1>{{ content.hero_title|default:"Ashara Interiors" }}</h1>
+        <p class="caps" style="color: var(--gold-accent); letter-spacing: 4px; margin-bottom: 1.5rem;">
+            {{ content.hero_subtitle|default:"Monumental Architecture & Bespoke Spatial Innovation" }}
+        </p>
+        <p class="hero-sub">
+            {{ content.lead_statement|default:"Led by Principal Architect Beka, Ashara Interiors crafts transcendent spatial experiences for Ethiopia's foremost civic institutions, corporate headquarters, and bespoke luxury estates." }}
+        </p>
+        <div class="hero-cta-group">
             <a href="{% url 'project_list' %}" class="btn">Explore Portfolio</a>
+            <a href="{% url 'contact' %}" class="btn btn-gold">Consult with Beka</a>
         </div>
     </div>
 </section>
 
-<section class="section" style="text-align: center;">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-        <span class="caps" style="color: var(--accent-color);">Welcome</span>
-        <div class="separator-line"></div>
-        <h2 class="serif-italic" style="font-size: 2.5rem; line-height: 1.4; margin: 2rem 0;">
-            "We believe in the power of simplicity and functionality. Our designs are a reflection of our commitment to
-            sustainable and innovative spatial solutions."
-        </h2>
-        <div class="separator-line"></div>
-    </div>
-</section>
-
-<section class="section" style="background-color: var(--secondary-color);">
-    <div class="section-title">
-        <span class="caps" style="color: var(--accent-color); display: block; margin-bottom: 1rem;">Our Works</span>
-        <h2 style="font-size: 3rem;">Featured Projects</h2>
-    </div>
-    <div class="grid" style="gap: 4rem;">
-        {% for project in featured_projects %}
-        <div class="project-item">
-            <a href="{% url 'project_detail' project.slug %}" class="project-card"
-                style="height: 400px; margin-bottom: 1.5rem;">
-                {% if project.featured_image %}
-                <img src="{{ project.featured_image.url }}" alt="{{ project.title }}">
+<!-- Studio Philosophy / Leadership Highlight -->
+<section class="section">
+    <div class="container">
+        <div class="lead-spotlight">
+            <div class="lead-img-box">
+                {% if about.image %}
+                <img src="{{ about.image.url }}" alt="{{ about.lead_architect|default:'Beka' }} — Principal Interior Architect">
                 {% else %}
-                <div
-                    style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: white;">
-                    <span>No Image</span>
-                </div>
+                <img src="/static/images/our_service.jpg" alt="Ashara Interiors Atelier">
                 {% endif %}
-            </a>
-            <div style="text-align: left;">
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">{{
-                    project.title }}</h3>
-                <p class="caps" style="opacity: 0.6; font-size: 0.7rem;">{{ project.category.name }} | {{
-                    project.location }}</p>
+                <div class="lead-exp-badge">
+                    <div class="num">{{ about.years_of_experience|default:"15" }}+</div>
+                    <div class="label">Years of<br>Excellence</div>
+                </div>
+            </div>
+
+            <div>
+                <span class="section-tag">Leadership & Vision</span>
+                <h2 class="section-title" style="font-size: 2.8rem; margin-bottom: 1.5rem;">
+                    {{ about.lead_architect|default:"Beka" }}
+                </h2>
+                <p class="caps" style="color: var(--gold-accent); margin-bottom: 1.8rem;">
+                    {{ about.lead_role|default:"Founder & Principal Interior Architect" }}
+                </p>
+                <p class="serif-italic" style="font-size: 1.4rem; line-height: 1.6; margin-bottom: 1.8rem; color: var(--text-primary);">
+                    "{{ about.philosophy|default:'Architecture is not merely the enclosure of space; it is the choreographing of light, memory, and human dignity.' }}"
+                </p>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem;">
+                    {{ about.content|truncatewords:60 }}
+                </p>
+                <div>
+                    <a href="{% url 'about' %}" class="project-view-link" style="font-size: 0.85rem;">Read Full Biography & Atelier Philosophy &rarr;</a>
+                </div>
             </div>
         </div>
-        {% empty %}
-        <p style="grid-column: 1/-1; text-align: center;">No featured projects yet.</p>
-        {% endfor %}
-    </div>
-    <div style="text-align: center; margin-top: 4rem;">
-        <a href="{% url 'project_list' %}" class="btn"
-            style="background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color);">View
-            All Projects</a>
     </div>
 </section>
-{% endblock %}
+
+<!-- Featured Works Grid -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Portfolio</span>
+            <h2 class="section-title">Signature Commissions</h2>
+            <p class="section-subtitle">
+                A curation of landmark state suites, civic auditoriums, and corporate headquarters conceptualized and realized by Beka.
+            </p>
+            <div class="divider-gold"></div>
+        </div>
+
+        <div class="projects-grid">
+            {% for project in featured_projects %}
+            <div class="project-card-ashara">
+                <a href="{% url 'project_detail' project.slug %}" class="project-thumb-wrap">
+                    {% if project.featured_image %}
+                    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" loading="lazy">
+                    {% else %}
+                    <img src="/static/images/our_service.jpg" alt="{{ project.title }}" loading="lazy">
+                    {% endif %}
+                    <span class="project-category-badge">{{ project.category.name }}</span>
+                </a>
+                <div class="project-meta-content">
+                    {% if project.client %}
+                    <span class="project-client-name">{{ project.client }}</span>
+                    {% endif %}
+                    <h3 class="project-card-title">
+                        <a href="{% url 'project_detail' project.slug %}">{{ project.title }}</a>
+                    </h3>
+                    <p class="project-desc-excerpt">
+                        {{ project.description|truncatewords:20 }}
+                    </p>
+                    <div class="project-footer-meta">
+                        <span>{{ project.location }} &bull; {{ project.year }}</span>
+                        <a href="{% url 'project_detail' project.slug %}" class="project-view-link">Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">No projects populated yet.</p>
+            {% endfor %}
+        </div>
+
+        <div style="text-align: center; margin-top: 4.5rem;">
+            <a href="{% url 'project_list' %}" class="btn btn-outline">View Complete Archive</a>
+        </div>
+    </div>
+</section>
+
+<!-- Architectural Disciplines & Services -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Capabilities</span>
+            <h2 class="section-title">Architectural Disciplines</h2>
+            <p class="section-subtitle">Comprehensive interior architecture from initial spatial master-planning to bespoke artisanal fabrication.</p>
+            <div class="divider-gold"></div>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="caps" style="color: var(--gold-accent); display: block; margin-bottom: 0.8rem;">01 / Civic</span>
+                <h3>Governmental & State Suites</h3>
+                <p>Monumental conference halls, executive presidential quarters, and civic assembly auditoriums with dignified Ethiopian symbolism.</p>
+            </div>
+            <div class="service-card">
+                <span class="caps" style="color: var(--gold-accent); display: block; margin-bottom: 0.8rem;">02 / Corporate</span>
+                <h3>Corporate Headquarters</h3>
+                <p>High-prestige executive boardrooms, double-height atrium colonnades, and modern collaborative spaces for industry leaders.</p>
+            </div>
+            <div class="service-card">
+                <span class="caps" style="color: var(--gold-accent); display: block; margin-bottom: 0.8rem;">03 / Media</span>
+                <h3>Acoustic Studios & Media</h3>
+                <p>Precision sound-isolated broadcast facilities, television studios, and circular parametric acoustic galleries.</p>
+            </div>
+            <div class="service-card">
+                <span class="caps" style="color: var(--gold-accent); display: block; margin-bottom: 0.8rem;">04 / Luxury</span>
+                <h3>Bespoke Residences</h3>
+                <p>Curated private estates, penthouse retreats, and custom timber joinery tailored for discerning private patrons.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Value Pillars -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Philosophy</span>
+            <h2 class="section-title">Core Design Pillars</h2>
+            <p class="section-subtitle">The foundational principles guiding every line drawn at Beka's atelier.</p>
+            <div class="divider-gold"></div>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-number">01</div>
+                <h3 class="pillar-title">{{ about.pillar_one_title|default:"Monumental Architecture" }}</h3>
+                <p class="pillar-desc">{{ about.pillar_one_desc|default:"Synthesizing Ethiopian cultural heritage with refined modernist civic design and monumental scale." }}</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-number">02</div>
+                <h3 class="pillar-title">{{ about.pillar_two_title|default:"Bespoke Craftsmanship" }}</h3>
+                <p class="pillar-desc">{{ about.pillar_two_desc|default:"Precision-engineered acoustics, artisanal timber joinery, and tailored luxury materiality." }}</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-number">03</div>
+                <h3 class="pillar-title">{{ about.pillar_three_title|default:"Sustainable Innovation" }}</h3>
+                <p class="pillar-desc">{{ about.pillar_three_desc|default:"Circadian lighting automation, biophilic integration, and enduring environmental longevity." }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Official Client Matrix Section -->
+{% if clients %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Trust & Prestige</span>
+            <h2 class="section-title">Official Client Matrix</h2>
+            <p class="section-subtitle">
+                Proud to have delivered monumental spaces for Ethiopia's foremost civic, governmental, and private institutions.
+            </p>
+            <div class="divider-gold"></div>
+        </div>
+
+        <div class="client-matrix-grid">
+            {% for client in clients %}
+            <div class="client-logo-card">
+                {% if client.logo %}
+                <img src="{{ client.logo.url }}" alt="{{ client.name }}" loading="lazy">
+                {% elif client.static_logo %}
+                <img src="/static/client_logos/{{ client.static_logo }}" alt="{{ client.name }}" loading="lazy">
+                {% endif %}
+                <span class="client-name-label">{{ client.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Consultation CTA Banner -->
+<section class="section" style="background: linear-gradient(rgba(10, 21, 37, 0.92), rgba(10, 21, 37, 0.92)), url('/static/images/our_service.jpg') center/cover fixed; color: #FFFFFF; text-align: center;">
+    <div class="container" style="max-width: 800px;">
+        <span class="caps" style="color: var(--ashara-gold); display: block; margin-bottom: 1rem;">Direct Commissions</span>
+        <h2 style="font-size: 3.5rem; color: #FFFFFF; margin-bottom: 1.5rem;">Commence Your Project with Beka</h2>
+        <p style="color: #C8D1DC; font-size: 1.15rem; line-height: 1.8; margin-bottom: 2.5rem;">
+            Whether designing a national civic landmark, corporate headquarters, or bespoke private estate, our atelier offers comprehensive design direction.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-gold">Schedule a Private Consultation</a>
+    </div>
+</section>
+{% endblock %}

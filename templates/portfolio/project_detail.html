@@ -1,59 +1,163 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ project.title }} | ADObek Design Build{% endblock %}
+{% block title %}{{ project.title }} | Ashara Interiors — Beka{% endblock %}
 
 {% block content %}
-<section class="project-hero" style="margin-top: 6rem; height: 70vh; position: relative;">
+<!-- Case Study Hero -->
+<section class="project-detail-hero">
     {% if project.featured_image %}
-    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}"
-        style="width: 100%; height: 100%; object-fit: cover;">
+    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}">
     {% else %}
-    <div
-        style="width: 100%; height: 100%; background: #333; display: flex; align-items: center; justify-content: center; color: white;">
-        <span>Featured Image Missing</span>
-    </div>
+    <img src="/static/images/our_service.jpg" alt="{{ project.title }}">
     {% endif %}
+    <div class="project-detail-hero-overlay">
+        <div class="project-detail-title-box">
+            {% if project.subtitle %}
+            <p>{{ project.subtitle }}</p>
+            {% else %}
+            <p>{{ project.category.name }} &bull; {{ project.year }}</p>
+            {% endif %}
+            <h1>{{ project.title }}</h1>
+        </div>
+    </div>
 </section>
 
+<!-- Case Study Main Content & Specs -->
 <section class="section">
-    <div style="display: flex; flex-wrap: wrap; gap: 4rem;">
-        <div style="flex: 2; min-width: 300px;">
-            <h1 style="font-size: 3rem; margin-bottom: 2rem;">{{ project.title }}</h1>
-            <div style="white-space: pre-line;">
-                {{ project.description }}
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div style="margin-bottom: 3rem; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px;">
+            <a href="{% url 'home' %}" style="color: var(--gold-accent);">Home</a> / 
+            <a href="{% url 'project_list' %}" style="color: var(--gold-accent);">Commissions</a> / 
+            <span>{{ project.title }}</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 5rem; align-items: start;">
+            <!-- Narrative -->
+            <div>
+                <span class="section-tag">Case Study</span>
+                <h2 style="font-size: 2.4rem; margin-bottom: 2rem;">Architectural Narrative & Spatial Intent</h2>
+                
+                <div style="font-size: 1.15rem; line-height: 1.9; color: var(--text-primary); white-space: pre-line; margin-bottom: 3rem;">
+                    {{ project.description }}
+                </div>
+
+                <div style="padding: 2rem 2.5rem; background: var(--surface-alt); border-left: 3px solid var(--gold-accent); border-radius: 2px;">
+                    <p class="serif-italic" style="font-size: 1.25rem; line-height: 1.6;">
+                        "The goal was not merely to satisfy functional programmatic needs, but to sculpt an enduring monument of dignity and focus."
+                    </p>
+                    <p class="caps" style="font-size: 0.7rem; color: var(--gold-accent); margin-top: 0.8rem;">
+                        — Beka, Lead Interior Architect
+                    </p>
+                </div>
+            </div>
+
+            <!-- Project Specifications Panel -->
+            <div class="project-spec-panel">
+                <h3 style="font-size: 1.3rem; margin-bottom: 1.8rem; text-transform: uppercase; letter-spacing: 2px;">Commission Details</h3>
+                
+                <div class="spec-item">
+                    <span class="spec-label">Lead Architect</span>
+                    <span class="spec-val">Beka</span>
+                </div>
+
+                {% if project.client %}
+                <div class="spec-item">
+                    <span class="spec-label">Client / Entity</span>
+                    <span class="spec-val">{{ project.client }}</span>
+                </div>
+                {% endif %}
+
+                <div class="spec-item">
+                    <span class="spec-label">Typology</span>
+                    <span class="spec-val">{{ project.category.name }}</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Location</span>
+                    <span class="spec-val">{{ project.location }}</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Completion</span>
+                    <span class="spec-val">{{ project.year }}</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Atelier</span>
+                    <span class="spec-val">Ashara Interiors</span>
+                </div>
+
+                <div style="margin-top: 2.5rem;">
+                    <a href="{% url 'contact' %}" class="btn" style="width: 100%; text-align: center; padding: 1rem;">Inquire About This Typology</a>
+                </div>
             </div>
         </div>
-        <div style="flex: 1; min-width: 250px; background: var(--secondary-color); padding: 2rem;">
-            <h3 style="margin-bottom: 1.5rem; text-transform: uppercase; font-size: 1rem; letter-spacing: 2px;">Project
-                Details</h3>
-            <ul style="list-style: none;">
-                <li style="margin-bottom: 1rem;"><strong
-                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Category</strong>
-                    {{ project.category.name }}</li>
-                <li style="margin-bottom: 1rem;"><strong
-                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Location</strong>
-                    {{ project.location }}</li>
-                <li style="margin-bottom: 1rem;"><strong
-                        style="display: block; font-size: 0.8rem; color: var(--light-text); text-transform: uppercase;">Year</strong>
-                    {{ project.year }}</li>
-            </ul>
-        </div>
     </div>
 </section>
 
+<!-- Gallery Showcase -->
 {% if project.images.all %}
-<section class="section" style="background-color: var(--secondary-color);">
-    <div class="grid">
-        {% for gallery_image in project.images.all %}
-        <div style="margin-bottom: 2rem;">
-            <img src="{{ gallery_image.image.url }}" alt="{{ gallery_image.caption }}"
-                style="width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            {% if gallery_image.caption %}
-            <p style="margin-top: 1rem; font-style: italic; color: var(--light-text); text-align: center;">{{
-                gallery_image.caption }}</p>
-            {% endif %}
+<section class="section section-dark">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Visual Documentation</span>
+            <h2 class="section-title">Spatial Gallery</h2>
+            <div class="divider-gold"></div>
         </div>
-        {% endfor %}
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2.5rem;">
+            {% for gallery_image in project.images.all %}
+            <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-soft);">
+                <img src="{{ gallery_image.image.url }}" alt="{{ gallery_image.caption }}" loading="lazy" style="width: 100%; height: 320px; object-fit: cover;">
+                {% if gallery_image.caption %}
+                <div style="padding: 1.2rem; text-align: center; font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">
+                    {{ gallery_image.caption }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Related Projects -->
+{% if related_projects %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Related Commissions</span>
+            <h2 class="section-title">More in {{ project.category.name }}</h2>
+            <div class="divider-gold"></div>
+        </div>
+
+        <div class="projects-grid">
+            {% for rel_proj in related_projects %}
+            <div class="project-card-ashara">
+                <a href="{% url 'project_detail' rel_proj.slug %}" class="project-thumb-wrap">
+                    {% if rel_proj.featured_image %}
+                    <img src="{{ rel_proj.featured_image.url }}" alt="{{ rel_proj.title }}" loading="lazy">
+                    {% else %}
+                    <img src="/static/images/our_service.jpg" alt="{{ rel_proj.title }}" loading="lazy">
+                    {% endif %}
+                    <span class="project-category-badge">{{ rel_proj.category.name }}</span>
+                </a>
+                <div class="project-meta-content">
+                    {% if rel_proj.client %}
+                    <span class="project-client-name">{{ rel_proj.client }}</span>
+                    {% endif %}
+                    <h3 class="project-card-title">
+                        <a href="{% url 'project_detail' rel_proj.slug %}">{{ rel_proj.title }}</a>
+                    </h3>
+                    <div class="project-footer-meta" style="margin-top: auto;">
+                        <span>{{ rel_proj.location }} &bull; {{ rel_proj.year }}</span>
+                        <a href="{% url 'project_detail' rel_proj.slug %}" class="project-view-link">Case Study &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endif %}

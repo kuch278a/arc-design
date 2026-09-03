@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)+amjv#9bc6l)+ywsic=-gg!s(&x7vwh&%h9lvn8-&(620x@gy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -125,6 +125,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email Settings for Login Notifications
+# Email Settings for Login Notifications and Contact Form
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ADMIN_NOTIFICATION_EMAIL = 'admin@example.com'  # Replace with actual email
+DEFAULT_FROM_EMAIL = 'beka@ashara-interior.com'
+ADMIN_NOTIFICATION_EMAIL = 'beka@ashara-interior.com'
