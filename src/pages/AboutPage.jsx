@@ -65,39 +65,73 @@ export default function AboutPage({ onNavigate, onSelectProject, isSection = fal
 
       {/* 2.5 LEADERSHIP SPOTLIGHT: Adobek - Principal Architect */}
       <section className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-12">
+        {/* Section label */}
+        <div className="text-center mb-10">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-adobek-teal dark:text-adobek-gold font-semibold mb-2">
+            LEADERSHIP & VISION
+          </p>
+          <h2 className="font-serif text-2xl sm:text-3xl text-adobek-charcoal dark:text-white font-normal">
+            The Architect Behind the Vision
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-center bg-gray-50/60 dark:bg-white/[0.02] border border-gray-200/70 dark:border-white/10 p-8 sm:p-12 rounded-sm">
-          <div className="md:col-span-4 relative">
-            <div className="aspect-[4/5] overflow-hidden rounded-sm bg-gray-200 dark:bg-adobek-charcoal shadow-md">
-              <img
-                src="./assets/adobek_profile.jpg"
-                alt="Adobek — Principal Interior Architect"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85';
-                }}
-              />
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-adobek-teal text-white p-4 shadow-lg text-center min-w-[110px] border border-adobek-gold/30">
-              <div className="font-serif text-2xl font-light leading-none text-adobek-gold">15+</div>
-              <div className="text-[9px] uppercase tracking-widest mt-1 font-medium text-white/90">Years Experience</div>
+          {/* Portrait */}
+          <div className="md:col-span-4 relative flex justify-center md:justify-start">
+            <div className="relative w-full max-w-[320px]">
+              <div className="aspect-[3/4] overflow-hidden rounded-sm bg-gray-200 dark:bg-adobek-charcoal shadow-xl">
+                <img
+                  src="./assets/adobek_profile.jpg"
+                  alt="Adobek — Founder & Principal Interior Architect"
+                  className="w-full h-full object-cover object-center"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85';
+                  }}
+                />
+              </div>
+              {/* Experience badge */}
+              <div className="absolute -bottom-5 -right-5 bg-adobek-teal text-white px-5 py-4 shadow-lg text-center border border-adobek-gold/40">
+                <div className="font-serif text-3xl font-light leading-none text-adobek-gold">5+</div>
+                <div className="text-[9px] uppercase tracking-widest mt-1 font-medium text-white/80">Years Experience</div>
+              </div>
             </div>
           </div>
 
-          <div className="md:col-span-8 space-y-4">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-adobek-teal dark:text-adobek-gold font-semibold block">
-              LEADERSHIP & DIRECTION
-            </span>
-            <h3 className="font-serif text-3xl sm:text-4xl text-adobek-charcoal dark:text-white font-normal">
-              Adobek
-            </h3>
-            <p className="text-xs uppercase tracking-widest text-adobek-gold font-medium">
-              Founder & Principal Interior Architect
+          {/* Bio */}
+          <div className="md:col-span-8 space-y-5 pt-4 md:pt-0">
+            <div>
+              <h3 className="font-serif text-4xl sm:text-5xl text-adobek-charcoal dark:text-white font-normal leading-tight">
+                Adobek
+              </h3>
+              <p className="text-[11px] uppercase tracking-[0.28em] text-adobek-gold font-semibold mt-2">
+                Founder &amp; Principal Interior Architect
+              </p>
+            </div>
+
+            <div className="w-10 h-[2px] bg-adobek-gold" />
+
+            <p className="text-gray-700 dark:text-gray-300 font-light text-sm leading-relaxed">
+              With over five years of distinguished practice, Adobek leads ADObek Design Build with a rare fusion of monumental civic purpose, acoustic mastery, and refined material artistry. His landmark commissions span national governmental headquarters, premier corporate campuses, and intimate private residences across Ethiopia.
             </p>
-            <p className="text-gray-700 dark:text-gray-300 font-light text-xs sm:text-sm leading-relaxed">
-              With over fifteen years of distinguished architectural practice, Adobek spearheads Adobek Interior' design vision. His work navigates the nexus of monumental civic purpose, acoustic precision, and refined material narratives, having realized landmark commissions for national institutions and private patrons alike.
+            <p className="text-gray-600 dark:text-gray-400 font-light text-sm leading-relaxed">
+              Rooted in Addis Ababa's architectural tradition yet informed by European minimalism, Adobek's philosophy centres on spaces that carry cultural memory while embracing the clarity of contemporary design.
             </p>
-            <div className="pt-2 border-l-2 border-adobek-gold pl-4 italic text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-serif">
+
+            <blockquote className="border-l-2 border-adobek-gold pl-5 italic text-sm text-gray-600 dark:text-gray-300 font-serif leading-relaxed">
               "Architecture is not merely the enclosure of space; it is the choreographing of light, memory, and human dignity."
+            </blockquote>
+
+            <div className="flex flex-wrap gap-3 pt-2">
+              <span className="text-[10px] uppercase tracking-[0.22em] font-semibold border border-adobek-teal/40 dark:border-adobek-gold/30 text-adobek-teal dark:text-adobek-gold px-3 py-1.5">
+                Interior Architecture
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.22em] font-semibold border border-adobek-teal/40 dark:border-adobek-gold/30 text-adobek-teal dark:text-adobek-gold px-3 py-1.5">
+                Civic Design
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.22em] font-semibold border border-adobek-teal/40 dark:border-adobek-gold/30 text-adobek-teal dark:text-adobek-gold px-3 py-1.5">
+                Luxury Residential
+              </span>
             </div>
           </div>
         </div>
