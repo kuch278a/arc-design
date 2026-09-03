@@ -1,6 +1,6 @@
 ﻿/**
- * Ashara Interiors — Client-side scripts
- * Architecture & Interior Design Portfolio for Beka
+ * Adobek Interior — Client-side scripts
+ * Architecture & Interior Design Portfolio for Adobek
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDark = document.body.classList.contains('dark-theme');
             const nextTheme = isDark ? 'light' : 'dark';
             applyTheme(nextTheme);
-            localStorage.setItem('ashara_theme', nextTheme);
+            localStorage.setItem('adobek_theme', nextTheme);
         });
 
-        const storedTheme = localStorage.getItem('ashara_theme');
+        const storedTheme = localStorage.getItem('adobek_theme');
         if (storedTheme) {
             applyTheme(storedTheme);
         } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -71,5 +71,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    console.log('Ashara Interiors portfolio initialized for Beka.');
+    console.log('Adobek Interior portfolio initialized for Adobek.');
 });

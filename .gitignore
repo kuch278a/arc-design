@@ -7,11 +7,14 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-.Python
-build/
-develop-eggs/
+# Node & Vite
+node_modules/
 dist/
-downloads/
+dist-ssr/
+*.local
+.env
+.env.*.local
+.env.local
 eggs/
 .eggs/
 lib/
@@ -61,7 +64,8 @@ pytestdebug.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media
+media/
+staticfiles/
 
 # Flask stuff:
 instance/

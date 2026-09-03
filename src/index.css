@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    color-scheme: light dark;
+  }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply font-sans text-adobek-charcoal dark:text-adobek-sand transition-colors duration-300;
+    background-color: #E8EDF2;
+    background-image: url('/bg_pattern.svg');
+    background-repeat: repeat;
+    overflow-x: hidden;
+  }
+
+  html.dark body {
+    background-color: #0A1525;
+    background-image: url('/bg_pattern_dark.svg');
+    background-repeat: repeat;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  input, textarea, select, button {
+    font-family: inherit;
+  }
+
+  ::selection {
+    @apply bg-adobek-teal text-white dark:bg-adobek-gold dark:text-adobek-dark;
+  }
+}
+
+.font-cursive {
+  font-family: 'Pinyon Script', 'Alex Brush', cursive !important;
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CDC4;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9C9083;
+}
+
+/* Luxury animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-progress-fill {
+  animation: progressFill linear forwards;
+}

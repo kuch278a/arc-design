@@ -1,21 +1,21 @@
 /* ==========================================================================
-   ASHARA INTERIORS — Luxury Editorial Design System (for Beka)
+   BEKA INTERIOR — Luxury Editorial Design System (for Adobek)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
     /* Brand Tokens */
-    --ashara-teal: #1E4E4E;
-    --ashara-teal-dark: #123333;
-    --ashara-teal-light: #2c6e6e;
-    --ashara-gold: #D4AF37;
-    --ashara-gold-light: #F4E8C1;
-    --ashara-sand: #F5F2EB;
-    --ashara-sand-light: #FAF8F5;
-    --ashara-charcoal: #1A1A1A;
-    --ashara-muted: #6B7280;
-    --ashara-border: rgba(30, 78, 78, 0.12);
+    --adobek-teal: #1E4E4E;
+    --adobek-teal-dark: #123333;
+    --adobek-teal-light: #2c6e6e;
+    --adobek-gold: #D4AF37;
+    --adobek-gold-light: #F4E8C1;
+    --adobek-sand: #F5F2EB;
+    --adobek-sand-light: #FAF8F5;
+    --adobek-charcoal: #1A1A1A;
+    --adobek-muted: #6B7280;
+    --adobek-border: rgba(30, 78, 78, 0.12);
 
     /* Theme Tokens (Light Mode Default) */
     --bg-color: #FAF8F5;
@@ -119,7 +119,7 @@ img {
     left: 0;
     height: 3px;
     width: 0%;
-    background: linear-gradient(90deg, var(--ashara-teal), var(--ashara-gold));
+    background: linear-gradient(90deg, var(--adobek-teal), var(--adobek-gold));
     z-index: 2100;
     transition: width 0.1s linear;
 }
@@ -231,7 +231,7 @@ nav {
 
 .nav-cta {
     padding: 0.6rem 1.6rem !important;
-    background: var(--ashara-teal) !important;
+    background: var(--adobek-teal) !important;
     color: #FFFFFF !important;
     border-radius: 2px;
     letter-spacing: 1.5px !important;
@@ -239,7 +239,7 @@ nav {
 }
 
 .nav-cta:hover {
-    background: var(--ashara-teal-dark) !important;
+    background: var(--adobek-teal-dark) !important;
     transform: translateY(-1px);
 }
 
@@ -288,7 +288,7 @@ nav {
 .btn {
     display: inline-block;
     padding: 1.1rem 2.8rem;
-    background: var(--ashara-teal);
+    background: var(--adobek-teal);
     color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: 2.5px;
@@ -302,14 +302,14 @@ nav {
 }
 
 .btn:hover {
-    background: var(--ashara-teal-dark);
+    background: var(--adobek-teal-dark);
     color: #FFFFFF;
     box-shadow: 0 10px 25px rgba(30, 78, 78, 0.25);
     transform: translateY(-2px);
 }
 
 .btn-gold {
-    background: var(--ashara-gold);
+    background: var(--adobek-gold);
     color: #0A1525;
 }
 
@@ -330,7 +330,7 @@ nav {
 }
 
 /* Hero Section */
-.hero-ashara {
+.hero-adobek {
     min-height: calc(100vh - 85px);
     display: flex;
     align-items: center;
@@ -461,7 +461,7 @@ nav {
     gap: 3rem;
 }
 
-.project-card-ashara {
+.project-card-adobek {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -472,7 +472,7 @@ nav {
     flex-direction: column;
 }
 
-.project-card-ashara:hover {
+.project-card-adobek:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-elevated);
     border-color: rgba(212, 175, 55, 0.4);
@@ -492,7 +492,7 @@ nav {
     transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.project-card-ashara:hover .project-thumb-wrap img {
+.project-card-adobek:hover .project-thumb-wrap img {
     transform: scale(1.06);
 }
 
@@ -502,7 +502,7 @@ nav {
     left: 1.25rem;
     background: rgba(10, 21, 37, 0.85);
     backdrop-filter: blur(8px);
-    color: var(--ashara-gold-light);
+    color: var(--adobek-gold-light);
     border: 1px solid rgba(212, 175, 55, 0.3);
     font-size: 0.65rem;
     letter-spacing: 2px;
@@ -553,7 +553,7 @@ nav {
 }
 
 .project-view-link {
-    color: var(--ashara-teal);
+    color: var(--adobek-teal);
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -683,7 +683,7 @@ body.dark-theme .project-view-link {
 }
 
 .service-card:hover {
-    border-color: var(--ashara-teal);
+    border-color: var(--adobek-teal);
     transform: translateY(-4px);
 }
 
@@ -697,7 +697,7 @@ body.dark-theme .project-view-link {
     font-size: 0.9rem;
 }
 
-/* Beka Lead Spotlight */
+/* Adobek Lead Spotlight */
 .lead-spotlight {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -721,7 +721,7 @@ body.dark-theme .project-view-link {
     position: absolute;
     bottom: -1.5rem;
     right: -1.5rem;
-    background: var(--ashara-teal);
+    background: var(--adobek-teal);
     color: #FFFFFF;
     padding: 1.8rem 2.2rem;
     border-radius: 4px;
@@ -735,7 +735,7 @@ body.dark-theme .project-view-link {
     font-size: 3.2rem;
     line-height: 1;
     font-weight: 700;
-    color: var(--ashara-gold-light);
+    color: var(--adobek-gold-light);
 }
 
 .lead-exp-badge .label {
@@ -780,7 +780,7 @@ body.dark-theme .project-view-link {
 }
 
 .project-detail-title-box p {
-    color: var(--ashara-gold-light);
+    color: var(--adobek-gold-light);
     letter-spacing: 3px;
     text-transform: uppercase;
     font-size: 0.85rem;
@@ -852,13 +852,13 @@ body.dark-theme .project-view-link {
 
 .form-control:focus {
     outline: none;
-    border-color: var(--ashara-teal);
+    border-color: var(--adobek-teal);
     box-shadow: 0 0 0 3px rgba(30, 78, 78, 0.15);
 }
 
 /* Luxury Footer */
 footer {
-    background: var(--ashara-teal-dark);
+    background: var(--adobek-teal-dark);
     color: #F5F2EB;
     padding: 6rem 5% 3rem;
     position: relative;
@@ -874,7 +874,7 @@ footer {
 }
 
 .footer-col h4 {
-    color: var(--ashara-gold-light);
+    color: var(--adobek-gold-light);
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.8rem;
     letter-spacing: 2.5px;
@@ -896,7 +896,7 @@ footer {
 }
 
 .footer-col a:hover {
-    color: var(--ashara-gold);
+    color: var(--adobek-gold);
 }
 
 .footer-bottom {
@@ -936,9 +936,9 @@ footer {
 
 .filter-tab-btn:hover,
 .filter-tab-btn.active {
-    background: var(--ashara-teal);
+    background: var(--adobek-teal);
     color: #FFFFFF;
-    border-color: var(--ashara-teal);
+    border-color: var(--adobek-teal);
 }
 
 /* Responsive Overrides */
@@ -987,4 +987,4 @@ footer {
         gap: 1rem;
         text-align: center;
     }
-}
+}
