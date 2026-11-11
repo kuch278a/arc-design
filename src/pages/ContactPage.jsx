@@ -189,15 +189,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: Enquiries Form (7 Cols) */}
-          <div className="md:col-span-7 space-y-6">
-            <div className="space-y-2">
-              <h2 className="font-serif text-2xl sm:text-3xl text-terion-charcoal dark:text-white font-normal tracking-wide">
-                Send an Enquiry
-              </h2>
-              <p className="text-xs text-terion-stone dark:text-terion-gray font-light">
-                Fill in your details below and our team will get in touch regarding your architectural commission.
-              </p>
-            </div>
+          <div className="md:col-span-7">
 
             {submitted ? (
               <div className="p-8 sm:p-12 rounded-2xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 text-center space-y-4 animate-fade-in font-serif shadow-terion">
