@@ -90,11 +90,8 @@
         100% { width: 0%; margin-left: 100%; }
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-C9pBCKh0.js"></script>
-    <link rel="modulepreload" crossorigin href="./assets/vendor-misc-9sMxgkcb.js">
-    <link rel="modulepreload" crossorigin href="./assets/vendor-react-UFtKwZAU.js">
-    <link rel="stylesheet" crossorigin href="./assets/vendor-misc-BGETmRrk.css">
-    <link rel="stylesheet" crossorigin href="./assets/index-CnNVNlnc.css">
+    <script type="module" crossorigin src="./assets/index-DWm7we1n.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CKIhgs-r.css">
   </head>
   <body class="bg-white text-adobek-charcoal font-serif antialiased selection:bg-adobek-teal selection:text-white">
 
@@ -109,6 +106,18 @@
       <p class="loader-tagline">Adobek &bull; Curating Architectural Excellence</p>
     </div>
 
-    <div id="root"></div>
+    <div id="root"></div>
+    <script>
+      // Fallback: dismiss loader after 2.5s if not already removed by React
+      setTimeout(function() {
+        var loader = document.getElementById('adobek-loader');
+        if (loader && !loader.classList.contains('fade-out')) {
+          loader.classList.add('fade-out');
+          setTimeout(function() {
+            if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+          }, 600);
+        }
+      }, 2500);
+    </script>
   </body>
 </html>
