@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { Button } from '@astryxdesign/core/Button';
+import { Badge } from '@astryxdesign/core/Badge';
 import { getDynamicProjects } from '../services/firebaseService';
 import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
 
@@ -27,94 +30,67 @@ export default function ProjectsPage({ onNavigate, onSelectProject, isSection = 
   };
 
   return (
-    <div className="bg-transparent animate-fade-in transition-colors duration-300">
+    <div className="space-y-16 sm:space-y-24 pb-24 transition-colors duration-300">
       
-      {/* Optional Terracotta Banner if rendered standalone */}
+      {/* Editorial Header Banner */}
       {!isSection && (
-        <section className="relative bg-adobek-terracotta text-white overflow-hidden py-24 sm:py-32 px-6 lg:px-12 text-center">
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-black/10 pointer-events-none"></div>
-          <div className="max-w-3xl mx-auto space-y-6 relative z-10">
-            <blockquote className="font-serif italic text-3xl sm:text-4xl lg:text-5xl font-light leading-snug sm:leading-tight">
-              “Design with passion, authenticity, and positivity to create spaces that inspire and uplift the soul.”
-            </blockquote>
-            <div className="space-y-1 pt-3">
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.28em] font-semibold text-white">
-                DANIEL MESFIN
-              </p>
-              <p className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.32em] font-light text-white/90">
-                CREATIVE DIRECTOR
-              </p>
-            </div>
-          </div>
+        <section className="max-w-6xl mx-auto px-4 sm:px-8 pt-8 sm:pt-12 text-center space-y-4">
+          <Badge
+            variant="neutral"
+            icon={<Sparkles className="w-3 h-3 text-terion-orange" />}
+            label="Curated Portfolio"
+            className="!py-1.5 !px-4 !rounded-full !text-[10.5px] !tracking-[0.25em] !uppercase !bg-terion-card dark:!bg-terion-card-dark !border !border-terion-border/60 dark:!border-white/10 !text-terion-stone dark:!text-terion-gray !shadow-xs"
+          />
+
+          <h1 className="font-serif text-4xl sm:text-6xl text-terion-charcoal dark:text-white font-light tracking-tight">
+            Architectural <span className="italic font-normal">Works &amp; Commissions</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-terion-stone dark:text-terion-gray font-light max-w-xl mx-auto leading-relaxed">
+            Explore our curated portfolio of commercial headquarters, luxury residences, healthcare complexes, and architectural landmarks.
+          </p>
         </section>
       )}
 
-      {/* PROJECTS 2x3 GRID SECTION */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-12 sm:pt-16 pb-12 space-y-10">
-        
-        {/* Header with Divider Lines */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10">
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-adobek-charcoal dark:text-white tracking-wide transition-colors duration-300 text-center">
-            Featured Projects
-          </h2>
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
-        </div>
-
-        {/* Category Filters */}
-        <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 pt-2">
-          {categories.map((cat) => {
-            const isActive = selectedFilter === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedFilter(cat)}
-                className={`px-4 py-1.5 text-[9.5px] sm:text-[10px] uppercase tracking-[0.2em] font-medium transition-all duration-300 border ${
-                  isActive
-                    ? 'bg-adobek-teal text-white border-adobek-teal dark:bg-adobek-gold dark:text-adobek-dark dark:border-adobek-gold shadow-xs'
-                    : 'bg-transparent text-gray-600 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-adobek-teal dark:hover:border-adobek-gold hover:text-adobek-teal dark:hover:text-adobek-gold'
-                }`}
-              >
-                {cat === 'ALL' ? 'All Works' : cat}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 2x3 Project Cards Grid with Figma Teal/Green Bottom Label Cards */}
-        <div key={selectedFilter} className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 pt-4 animate-fade-in">
+      {/* Projects 2-Column Terion Grid */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8">
+        <div key={selectedFilter} className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 animate-fade-in">
           {filteredProjects.map((item) => (
             <div
               key={item.id}
               onClick={() => handleProjectClick(item)}
-              className="group relative cursor-pointer aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-adobek-charcoal shadow-sm hover:shadow-2xl hover:-translate-y-2 active:scale-[0.98] transition-all duration-500 ease-out"
+              className="group cursor-pointer rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 overflow-hidden shadow-terion hover:shadow-terion-hover transition-all duration-300 flex flex-col"
             >
-              {/* Photo */}
-              <img
-                src={item.image}
-                loading="lazy"
-                decoding="async"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = item.fallbackImage;
-                }}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-              />
+              {/* Image with Tag */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-black">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = item.fallbackImage || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85';
+                  }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+              </div>
 
-              {/* Signature Solid Forest Teal/Green Bottom Label Box matching Figma */}
-              <div className="absolute inset-x-0 bottom-0 bg-adobek-teal/95 dark:bg-adobek-teal/95 backdrop-blur-[2px] p-5 sm:p-6 text-white transition-all duration-300 group-hover:bg-adobek-teal">
-                <span className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.28em] text-white/80 font-medium block">
-                  {item.category || item.tag}
-                </span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal mt-0.5 text-white">
-                  {item.title}
-                </h3>
+              {/* Card Meta Footer */}
+              <div className="p-6 sm:p-8 flex items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="font-serif text-xl sm:text-2xl text-terion-charcoal dark:text-white font-normal group-hover:text-terion-orange transition-colors">
+                    {item.title}
+                  </h3>
+                </div>
+
+                <div className="w-10 h-10 rounded-full border border-terion-border dark:border-white/15 flex items-center justify-center text-terion-stone dark:text-white group-hover:bg-terion-orange group-hover:text-white group-hover:border-terion-orange transition-all duration-200 shrink-0">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
               </div>
             </div>
           ))}
         </div>
-
       </section>
 
     </div>

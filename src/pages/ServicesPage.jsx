@@ -1,213 +1,212 @@
 import React, { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Sparkles, Plus, Minus, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Button } from '@astryxdesign/core/Button';
+import { Badge } from '@astryxdesign/core/Badge';
 import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
 
-const ACCORDION_ITEMS = [
+const SERVICES_DATA = [
   {
     id: 1,
-    number: '1.',
-    title: 'Interior Design',
-    content: 'Comprehensive spatial planning, luxury material curation, tailored color palettes, and end-to-end styling for executive bureaus, high-end residences, and cultural venues.'
+    number: '01',
+    title: 'Residential Interior Design',
+    category: 'Private Living',
+    tagline: 'Sculpting intimate sanctuaries of warmth, light, and enduring elegance.',
+    description: 'We deliver turnkey interior design for luxury estates, villas, and modern apartments. From spatial layout to bespoke dressing suites, our approach blends classical architectural proportions with tactile organic materials.',
+    deliverables: [
+      'Comprehensive 3D spatial renders & lighting schemas',
+      'Bespoke kitchen, bathroom, and dressing room millwork',
+      'Curated Italian marble, travertine, and fine timber sourcing',
+      'Full FF&E procurement, styling, and white-glove handover'
+    ],
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 2,
-    number: '2.',
-    title: 'Architectural Design',
-    content: 'Master planning, spatial articulation, facade development, and structural coordination blending classical proportions with modern sustainable engineering.'
+    number: '02',
+    title: 'Space Planning & Architectural Design',
+    category: 'Spatial Engineering',
+    tagline: 'Harmonizing flow, natural light, and structural precision.',
+    description: 'Master spatial planning that optimizes room proportions, circulation paths, and internal sightlines. We specialize in circadian daylight engineering and seamless spatial transitions.',
+    deliverables: [
+      'Architectural space planning & partition redesign',
+      'Acoustic resonance appraisals & modular paneling',
+      'Circadian automation & concealed lighting troughs',
+      'Structural feasibility & MEP engineering coordination'
+    ],
+    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=90'
   },
   {
     id: 3,
-    number: '3.',
-    title: 'House Redesign',
-    content: 'Transforming existing residential architecture through structural re-modelling, spatial flow optimization, bespoke joinery, and harmonized lighting schemas.'
+    number: '03',
+    title: 'Commercial & Civic Interior Design',
+    category: 'Institutional & Corporate',
+    tagline: 'Monumental civic bureaus and corporate headquarters built for prominence.',
+    description: 'Designing state presidential suites, media broadcast studios, and financial corporate flagships. We fuse Ethiopian cultural geometry with modern institutional dignity.',
+    deliverables: [
+      'Grand ceremonial state rooms & executive suites',
+      'Broadcast-grade acoustic studios & recording rooms',
+      'High-security biometric routing & executive lounges',
+      'Corporate spatial identity & reception landmarks'
+    ],
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85'
   },
   {
     id: 4,
-    number: '4.',
-    title: 'Design Consultancy',
-    content: 'Strategic acoustic appraisals, luxury FF&E procurement advisory, lighting design consultations, and spatial branding for institutions and corporations.'
+    number: '04',
+    title: 'Bespoke Furniture & Artisanal Joinery',
+    category: 'Artisanal Craftsmanship',
+    tagline: 'Tailored architectural millwork executed with master woodworkers.',
+    description: 'Every landmark commission features bespoke elements made specifically for that space — handcrafted timber credenzas, parametric acoustic domes, and brass-inlaid dining tables.',
+    deliverables: [
+      'Custom coffered timber domes and acoustic wall fins',
+      'Handcrafted executive desks & boardroom tables',
+      'Precision architectural joinery & concealed storage',
+      'Artisanal metalwork, brass accents, and upholstery'
+    ],
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=85'
   }
 ];
 
 export default function ServicesPage({ onNavigate, onSelectProject, isSection = false }) {
-  // In Figma, item 3 is expanded by default
-  const [openIndex, setOpenIndex] = useState(3);
+  const [expandedService, setExpandedService] = useState(1);
 
-  const toggleAccordion = (id) => {
-    setOpenIndex(openIndex === id ? null : id);
-  };
-
-  const handleProjectClick = (projId) => {
-    const proj = DEFAULT_PROJECTS_LIST.find((p) => p.id === projId) || DEFAULT_PROJECTS_LIST[0];
-    if (onSelectProject) {
-      onSelectProject(proj);
-    } else if (onNavigate) {
-      onNavigate('projects');
-    }
+  const toggleService = (id) => {
+    setExpandedService(expandedService === id ? null : id);
   };
 
   return (
-    <div className="bg-transparent animate-fade-in transition-colors duration-300">
+    <div className="space-y-16 sm:space-y-24 pb-24 transition-colors duration-300">
       
-      {/* 1. HERO: "How We Work" Dark Cathedral Arch Banner matching Figma Image 2 */}
-      <section className="relative w-full min-h-[500px] sm:min-h-[560px] flex items-center justify-center bg-black overflow-hidden px-6 py-20 text-center">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-70 scale-100"
-          style={{
-            backgroundImage: `url('./our_service.jpg')`
-          }}
-        ></div>
-        
-        {/* Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px]"></div>
+      {/* Header Banner */}
+      {!isSection && (
+        <section className="max-w-6xl mx-auto px-4 sm:px-8 pt-8 sm:pt-12 text-center space-y-4">
+          <Badge
+            variant="neutral"
+            icon={<Sparkles className="w-3 h-3 text-terion-orange" />}
+            label="Core Capabilities"
+            className="!py-1.5 !px-4 !rounded-full !text-[10.5px] !tracking-[0.25em] !uppercase !bg-terion-card dark:!bg-terion-card-dark !border !border-terion-border/60 dark:!border-white/10 !text-terion-stone dark:!text-terion-gray !shadow-xs"
+          />
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-3xl mx-auto space-y-6 text-white px-4">
-          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.32em] text-adobek-gold font-semibold">
-            SERVICES & EXPERTISE
+          <h1 className="font-serif text-4xl sm:text-6xl text-terion-charcoal dark:text-white font-light tracking-tight">
+            Comprehensive <span className="italic font-normal">Interior &amp; Architecture</span>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-terion-stone dark:text-terion-gray font-light max-w-xl mx-auto leading-relaxed">
+            From initial spatial appraisals to turnkey master joinery installation, we craft spaces that radiate calm and distinction.
           </p>
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-wide text-white">
-            How We Work
-          </h2>
-          
-          <p className="text-xs sm:text-[13.5px] leading-relaxed sm:leading-loose text-white/90 font-light tracking-wide max-w-2xl mx-auto">
-            Adobek Interior is an interior design, architecture, and build company passionate about creating inspiring spaces that radiate positivity and reflect our clients' unique identities. Specializing in governmental bureaus, commercial spaces, hotels, residential projects, and cultural landmarks, we offer comprehensive services ranging from stand-alone interior design to complete turnkey solutions.
-          </p>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 2. "How We Can Help" Section with Numbered Accordion */}
-      <section className="max-w-3xl mx-auto px-6 sm:px-10 pt-16 sm:pt-24 space-y-12">
-        <h3 className="font-serif text-3xl sm:text-4xl text-center text-adobek-charcoal dark:text-white font-normal tracking-wide transition-colors duration-300">
-          How We Can Help
-        </h3>
-
-        {/* Accordion List */}
-        <div className="divide-y divide-gray-200 dark:divide-white/10">
-          {ACCORDION_ITEMS.map((item) => {
-            const isOpen = openIndex === item.id;
-            return (
-              <div key={item.id} className="py-6 transition duration-200">
-                <button
-                  onClick={() => toggleAccordion(item.id)}
-                  className="w-full flex items-center justify-between text-left group"
-                >
-                  <div className="flex items-baseline gap-4 sm:gap-6">
-                    <span className="font-serif text-xl sm:text-2xl text-adobek-charcoal dark:text-white font-light transition-colors duration-300">
-                      {item.number}
-                    </span>
-                    <span className="font-serif text-xl sm:text-2xl text-adobek-charcoal dark:text-white font-normal group-hover:text-adobek-teal dark:group-hover:text-adobek-gold transition-colors duration-300">
-                      {item.title}
-                    </span>
-                  </div>
-                  <span className="text-gray-400 group-hover:text-adobek-teal dark:group-hover:text-adobek-gold transition-colors duration-200">
-                    {isOpen ? (
-                      <Minus className="w-5 h-5 transition-transform duration-300" />
-                    ) : (
-                      <Plus className="w-5 h-5 transition-transform duration-300" />
-                    )}
+      {/* 4 Dedicated Service Cards with Expandable Details */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-6">
+        {SERVICES_DATA.map((srv) => {
+          const isOpen = expandedService === srv.id;
+          return (
+            <div
+              key={srv.id}
+              className="rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 overflow-hidden shadow-terion transition-all duration-300"
+            >
+              {/* Card Header Row */}
+              <button
+                onClick={() => toggleService(srv.id)}
+                className="w-full p-6 sm:p-10 flex items-center justify-between gap-4 text-left focus:outline-none"
+              >
+                <div className="flex items-center gap-4 sm:gap-8">
+                  <span className="font-serif text-2xl sm:text-3xl text-terion-orange font-light">
+                    {srv.number}
                   </span>
-                </button>
-
-                {/* Animated Body Content */}
-                {isOpen && (
-                  <div className="pt-4 pl-8 sm:pl-11 pr-4 animate-fade-in">
-                    <p className="text-xs sm:text-[13px] leading-relaxed text-gray-600 dark:text-gray-300 font-light transition-colors duration-300">
-                      {item.content}
-                    </p>
+                  <div className="space-y-0.5">
+                    <span className="text-[10px] uppercase tracking-[0.25em] text-terion-stone dark:text-terion-gray font-light block">
+                      {srv.category}
+                    </span>
+                    <h2 className="font-serif text-xl sm:text-3xl text-terion-charcoal dark:text-white font-normal">
+                      {srv.title}
+                    </h2>
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+                </div>
 
-        {/* ENQUIRE NOW Button (Outlined Box) */}
-        <div className="text-center pt-4">
-          <button
-            onClick={() => onNavigate('contact')}
-            className="inline-block px-10 py-3 border border-gray-900 dark:border-white/20 text-adobek-charcoal dark:text-white text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-adobek-teal dark:hover:bg-adobek-gold hover:text-white dark:hover:text-adobek-dark hover:border-adobek-teal dark:hover:border-adobek-gold transition duration-300 shadow-2xs"
-          >
-            ENQUIRE NOW
-          </button>
-        </div>
+                <div className="w-10 h-10 rounded-full border border-terion-border dark:border-white/10 flex items-center justify-center text-terion-stone dark:text-white hover:bg-terion-orange hover:text-white transition shrink-0">
+                  {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                </div>
+              </button>
+
+              {/* Expandable Body */}
+              {isOpen && (
+                <div className="px-6 pb-8 sm:px-10 sm:pb-10 pt-2 border-t border-terion-border/40 dark:border-white/5 animate-fade-in grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                  <div className="md:col-span-7 space-y-5">
+                    <p className="font-serif italic text-base sm:text-lg text-terion-charcoal dark:text-terion-sand font-light">
+                      “{srv.tagline}”
+                    </p>
+                    <p className="text-xs sm:text-sm text-terion-stone dark:text-terion-gray font-light leading-relaxed">
+                      {srv.description}
+                    </p>
+
+                    {/* Deliverables Checklist */}
+                    <div className="space-y-2 pt-2">
+                      <div className="text-[11px] uppercase tracking-wider font-semibold text-terion-charcoal dark:text-white">
+                        Key Deliverables
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-terion-stone dark:text-terion-gray">
+                        {srv.deliverables.map((item, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-terion-orange shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-3">
+                      <Button
+                        label="Inquire About This Service"
+                        variant="primary"
+                        size="md"
+                        onClick={() => onNavigate('contact')}
+                        endContent={<ArrowRight className="w-3.5 h-3.5" />}
+                        className="!px-6 !py-2.5 !rounded-full !bg-terion-orange hover:!bg-terion-orange-hover !text-white !border-none !text-xs !font-semibold !tracking-wide !shadow-sm transition"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="md:col-span-5">
+                    <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-md">
+                      <img
+                        src={srv.image}
+                        alt={srv.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </section>
 
-      {/* 3. Quote Banner matching Figma Image 2 */}
-      <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <blockquote className="font-serif italic text-2xl sm:text-3xl lg:text-4xl text-adobek-charcoal dark:text-white leading-relaxed font-light transition-colors duration-300">
-          “Simplicity is the ultimate sophistication.”
-        </blockquote>
-      </section>
-
-      {/* 4. "Recent Projects" Section matching Figma Image 2 */}
-      <section className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 pt-8 space-y-12">
-        
-        {/* Heading with Divider Lines */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10">
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
-          <h3 className="font-serif text-2xl sm:text-3xl text-adobek-charcoal dark:text-white tracking-wide transition-colors duration-300">
-            Recent Projects
+      {/* Consultation Box */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-8 text-center">
+        <div className="rounded-3xl bg-[#1C1A18] text-white p-10 sm:p-14 space-y-4 border border-white/5 shadow-terion-dark">
+          <span className="text-[10px] uppercase tracking-[0.28em] text-terion-orange font-semibold">
+            BOOK A CONSULTATION
+          </span>
+          <h3 className="font-serif text-2xl sm:text-4xl font-light">
+            Need a Tailored Architectural Proposal?
           </h3>
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
-        </div>
-
-        {/* 2 Project Cards Grid with Solid Teal Label Box */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-          
-          {/* Card 1: Amibara Properties */}
-          <div 
-            onClick={() => handleProjectClick(5)}
-            className="group relative cursor-pointer aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-adobek-charcoal shadow-sm hover:shadow-md transition-all duration-500"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=85"
-              alt="Amibara Properties"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          <p className="text-xs text-terion-gray font-light max-w-md mx-auto">
+            Our principal team will review your drawings, program requirements, and schedule a dedicated spatial consultation.
+          </p>
+          <div className="pt-2">
+            <Button
+              label="Contact Our Studio"
+              variant="primary"
+              size="lg"
+              onClick={() => onNavigate('contact')}
+              endContent={<ArrowRight className="w-3.5 h-3.5" />}
+              className="!px-8 !py-3.5 !rounded-full !bg-terion-orange hover:!bg-terion-orange-hover !text-white !border-none !text-xs !font-semibold !tracking-wide !shadow-sm transition"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-adobek-teal/95 dark:bg-adobek-teal/95 backdrop-blur-[2px] p-5 sm:p-6 text-white transition-all duration-300">
-              <span className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.28em] text-white/80 font-medium block">
-                PRIVATE COMPANY
-              </span>
-              <h4 className="font-serif text-xl sm:text-2xl font-normal mt-0.5 text-white">
-                Amibara Properties
-              </h4>
-            </div>
           </div>
-
-          {/* Card 2: Ministry of Revenues */}
-          <div 
-            onClick={() => handleProjectClick(6)}
-            className="group relative cursor-pointer aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-adobek-charcoal shadow-sm hover:shadow-md transition-all duration-500"
-          >
-            <img
-              src="./assets/p6_revenues.png"
-              alt="Ministry of Revenues"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-adobek-teal/95 dark:bg-adobek-teal/95 backdrop-blur-[2px] p-5 sm:p-6 text-white transition-all duration-300">
-              <span className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.28em] text-white/80 font-medium block">
-                GOVERNMENTAL
-              </span>
-              <h4 className="font-serif text-xl sm:text-2xl font-normal mt-0.5 text-white">
-                Ministry of Revenues
-              </h4>
-            </div>
-          </div>
-
         </div>
-
-        {/* View All Projects Link */}
-        <div className="text-center pt-6">
-          <button
-            onClick={() => onNavigate('projects')}
-            className="text-[10.5px] uppercase tracking-[0.28em] font-semibold text-gray-800 dark:text-gray-200 hover:text-adobek-teal dark:hover:text-adobek-gold transition border-b border-gray-400 dark:border-white/20 pb-0.5"
-          >
-            VIEW ALL PROJECTS
-          </button>
-        </div>
-
       </section>
 
     </div>

@@ -27,12 +27,12 @@ function PageLoadingFallback() {
 
 function getInitialPage() {
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-  if (['admin', 'projects', 'services', 'about', 'contact', 'blog', 'project-detail'].includes(hash)) {
+  if (['admin', 'projects', 'services', 'about', 'contact', 'project-detail'].includes(hash)) {
     return hash;
   }
   const searchParams = new URLSearchParams(window.location.search);
   const pageParam = searchParams.get('page') || (searchParams.has('admin') ? 'admin' : null);
-  if (pageParam && ['admin', 'projects', 'services', 'about', 'contact', 'blog', 'project-detail'].includes(pageParam.toLowerCase())) {
+  if (pageParam && ['admin', 'projects', 'services', 'about', 'contact', 'project-detail'].includes(pageParam.toLowerCase())) {
     return pageParam.toLowerCase();
   }
   const path = window.location.pathname.toLowerCase();
@@ -107,7 +107,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-adobek-charcoal dark:bg-adobek-dark dark:text-adobek-sand font-sans antialiased transition-colors duration-300">
+    <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-terion-bg text-terion-charcoal dark:bg-terion-bg-dark dark:text-terion-sand font-sans antialiased transition-colors duration-300">
       
       {/* 1. Figma Header Navigation Bar */}
       <Navbar 
@@ -138,10 +138,6 @@ export default function App() {
 
           {activePage === 'contact' && (
             <ContactPage onNavigate={handleNavigate} />
-          )}
-
-          {activePage === 'blog' && (
-            <BlogPage />
           )}
 
           {activePage === 'admin' && (

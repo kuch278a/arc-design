@@ -1,155 +1,205 @@
 import React from 'react';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, ArrowUp, Globe } from 'lucide-react';
 import AdobekLogo from './AdobekLogo';
 
-// Configurable Company Social Links
 const SOCIAL_LINKS = {
+  telegram: 'https://t.me/bereketgirma16',
   facebook: 'https://www.facebook.com/adobekinterior',
   instagram: 'https://www.instagram.com/adobekinterior',
-  telegram: 'https://t.me/adobekdb',
+  tiktok: 'https://www.tiktok.com/@adobekinterior',
   linkedin: 'https://www.linkedin.com/company/adobek-interior',
   phone: 'tel:+251947325252',
-  email: 'mailto:adobek@adobek-interior.com'
+  email: 'mailto:adobek@adobek-interior.com',
+  website: 'https://adobek-interior.com'
 };
 
 export default function Footer({ onNavigate }) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="bg-adobek-teal text-white pt-10 pb-6 px-6 sm:px-10 lg:px-16 mt-auto">
-      <div className="max-w-7xl mx-auto space-y-10">
-
-        {/* Main Footer Row matching Figma */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 items-start">
-
-          {/* 1. Left: Brand Logo in White */}
-          <div className="md:col-span-3">
+    <footer className="w-full bg-[#181715] text-white pt-16 pb-8 px-6 sm:px-10 lg:px-16 border-t border-white/5 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto space-y-12">
+        
+        {/* Main 5-Column Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+          
+          {/* Col 1: Brand Logo & Title */}
+          <div className="flex flex-col items-start space-y-3">
             <button
               onClick={() => onNavigate('home')}
-              className="text-left focus:outline-none hover:opacity-90 transition"
-              aria-label="Adobek Interior Home"
+              className="flex flex-col items-center text-center focus:outline-none group"
+              aria-label="Adobek Interior Design Home"
             >
-              <AdobekLogo size={96} light={true} className="text-white" textClassName="text-white" />
+              <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center p-2 mb-2 group-hover:border-white/40 transition">
+                <AdobekLogo size={42} light={true} className="text-white" textClassName="text-white" />
+              </div>
+              <span className="font-serif tracking-[0.25em] font-semibold text-xs text-white uppercase">
+                ADOBEK
+              </span>
+              <span className="text-[8.5px] uppercase tracking-[0.3em] text-white/60 font-light mt-0.5">
+                INTERIORS
+              </span>
             </button>
           </div>
 
-          {/* 2. Middle-Left: Contact Info */}
-          <div className="md:col-span-3 space-y-1.5 text-xs text-white/90 font-light">
-            <h4 className="font-semibold text-xs tracking-wider text-white mb-2 uppercase">Principal Atelier</h4>
-            <p className="font-semibold text-white">Adobek — Founder & Lead Designer</p>
-            <p>
-              <a href={SOCIAL_LINKS.phone} className="hover:text-white hover:underline transition">
-                +251 947 325 252
-              </a>
-            </p>
-            <p className="pt-0.5">
-              <a href={SOCIAL_LINKS.email} className="hover:text-white hover:underline transition">
-                adobek@adobek-interior.com
-              </a>
-            </p>
-          </div>
-
-          {/* 3. Middle-Right: Address */}
-          <div className="md:col-span-3 space-y-1.5 text-xs text-white/90 font-light">
-            <h4 className="font-semibold text-xs tracking-wider text-white mb-2">Address</h4>
-            <p>Bole Medhanialem,</p>
-            <p>Addis Ababa, Ethiopia</p>
-          </div>
-
-          {/* 4. Right: Navigation & Live Social Media Accounts */}
-          <div className="md:col-span-3 flex flex-col justify-between space-y-6">
-            <nav className="flex flex-col space-y-2 text-[11px] uppercase tracking-[0.2em] font-medium text-white/90">
-              <button
-                onClick={() => onNavigate('home')}
-                className="text-left hover:text-white transition"
-              >
-                HOME
-              </button>
-              <button
-                onClick={() => onNavigate('projects')}
-                className="text-left hover:text-white transition"
-              >
-                PROJECTS
-              </button>
-              <button
-                onClick={() => onNavigate('services')}
-                className="text-left hover:text-white transition"
-              >
-                OUR SERVICES
-              </button>
-              <button
-                onClick={() => onNavigate('about')}
-                className="text-left hover:text-white transition"
-              >
-                ABOUT US
-              </button>
-              <button
-                onClick={() => onNavigate('blog')}
-                className="text-left hover:text-white transition"
-              >
-                BLOG
-              </button>
-              <button
-                onClick={() => onNavigate('contact')}
-                className="text-left hover:text-white transition"
-              >
-                CONTACT
-              </button>
-            </nav>
-
-            {/* Live Social Media Links with new tab behavior */}
-            <div className="flex items-center gap-4 text-white/90">
-              {/* Facebook */}
-              <a
-                href={SOCIAL_LINKS.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Adobek Interior on Facebook"
-                className="p-1 hover:text-white hover:scale-115 transition-all duration-200"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-
-              {/* Instagram */}
-              <a
-                href={SOCIAL_LINKS.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Adobek Interior on Instagram"
-                className="p-1 hover:text-white hover:scale-115 transition-all duration-200"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-
-              {/* TikTok */}
-              <a
-                href={SOCIAL_LINKS.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Adobek Interior on TikTok"
-                className="p-1 hover:text-white hover:scale-115 transition-all duration-200"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.19 1.15 2.15 2.34 2.39.75.16 1.55.05 2.22-.32.74-.41 1.25-1.11 1.42-1.92.1-1.04.05-2.09.05-3.14V.02h.07z" />
-                </svg>
-              </a>
-
-              {/* LinkedIn */}
-              <a
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Adobek Interior on LinkedIn"
-                className="p-1 hover:text-white hover:scale-115 transition-all duration-200"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
+          {/* Col 2: Contact */}
+          <div className="space-y-3">
+            <h4 className="font-serif text-sm sm:text-base text-white font-medium">
+              Contact
+            </h4>
+            <div className="space-y-2 text-xs text-white/85 font-light">
+              <p>
+                <a href="tel:+251947325252" className="hover:text-terion-orange transition block">
+                  +251 947 325 252
+                </a>
+                <a href="tel:+251923704339" className="hover:text-terion-orange transition block text-white/60 hover:text-terion-orange mt-0.5">
+                  +251 923 704 339
+                </a>
+              </p>
+              <p>
+                <a href={SOCIAL_LINKS.email} className="hover:text-terion-orange transition block">
+                  adobek@adobek-interior.com
+                </a>
+              </p>
+              <p className="pt-0.5">
+                <a
+                  href={SOCIAL_LINKS.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-terion-orange transition inline-flex items-center gap-1.5 text-white/90"
+                >
+                  <span className="w-4 h-4 rounded-full bg-[#0088cc]/20 text-[#0088cc] flex items-center justify-center p-0.5 shrink-0">
+                    <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.941z"/>
+                    </svg>
+                  </span>
+                  <span>Telegram: @bereketgirma16</span>
+                </a>
+              </p>
             </div>
+          </div>
+
+          {/* Col 3: Address */}
+          <div className="space-y-3">
+            <h4 className="font-serif text-sm sm:text-base text-white font-medium">
+              Address
+            </h4>
+            <div className="space-y-1 text-xs text-white/75 font-light leading-relaxed">
+              <p>Bole Medhanialem</p>
+              <p>Behind Edna Mall</p>
+              <p>Addis Ababa, Ethiopia</p>
+            </div>
+          </div>
+
+          {/* Col 4: Navigation Links */}
+          <div className="space-y-2.5">
+            <ul className="space-y-2 text-xs font-medium uppercase tracking-[0.15em] text-white/90">
+              <li>
+                <button
+                  onClick={() => onNavigate('projects')}
+                  className="hover:text-terion-orange transition text-left"
+                >
+                  PROJECTS
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('services')}
+                  className="hover:text-terion-orange transition text-left"
+                >
+                  OUR SERVICES
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('about')}
+                  className="hover:text-terion-orange transition text-left"
+                >
+                  ABOUT US
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavigate('contact')}
+                  className="hover:text-terion-orange transition text-left"
+                >
+                  CONTACT
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 5: Social Icons */}
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <a
+              href={SOCIAL_LINKS.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Telegram"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.196 1.006.128.832.941z"/>
+              </svg>
+            </a>
+            <a
+              href={SOCIAL_LINKS.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+            >
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+            >
+              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.19 1.15 2.15 2.34 2.39.75.16 1.55.05 2.22-.32.74-.41 1.25-1.11 1.42-1.92.1-1.04.05-2.09.05-3.14V.02h.07z" />
+              </svg>
+            </a>
+            <a
+              href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            
           </div>
 
         </div>
 
-        {/* Bottom Copyright Center */}
-        <div className="pt-8 border-t border-white/10 flex items-center justify-center text-[10px] sm:text-[11px] text-white/70 font-light">
-          <p>©Adobek Interior 2025</p>
+        {/* Bottom Bar: Centered Copyright & Scroll-to-Top Button */}
+        <div className="pt-8 border-t border-white/10 relative flex items-center justify-center">
+          <p className="text-xs text-white/60 font-light text-center">
+            &copy; Adobek Interior Design and Building | All rights reserved
+          </p>
+
+          <button
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className="absolute right-0 w-9 h-9 rounded-full bg-white/10 hover:bg-terion-orange hover:border-terion-orange text-white flex items-center justify-center transition border border-white/10 shadow-xs"
+          >
+            <ArrowUp className="w-4 h-4" />
+          </button>
         </div>
 
       </div>

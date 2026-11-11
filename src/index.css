@@ -5,10 +5,15 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
+  }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
     color-scheme: light dark;
+    font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
   }
   
   html.dark {
@@ -16,21 +21,18 @@
   }
   
   body {
-    @apply font-sans text-adobek-charcoal dark:text-adobek-sand transition-colors duration-300;
-    background-color: #E8EDF2;
-    background-image: url('/bg_pattern.svg');
-    background-repeat: repeat;
+    @apply font-serif text-terion-charcoal dark:text-terion-sand transition-colors duration-300;
+    font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
+    background-color: #EEEDEA;
     overflow-x: hidden;
   }
 
   html.dark body {
-    background-color: #0A1525;
-    background-image: url('/bg_pattern_dark.svg');
-    background-repeat: repeat;
+    background-color: #121110;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+  h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {
+    font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
   }
 
   input, textarea, select, button {
@@ -40,6 +42,28 @@
   ::selection {
     @apply bg-adobek-teal text-white dark:bg-adobek-gold dark:text-adobek-dark;
   }
+}
+
+.btn-ashara-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: #1E4E4E;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 0.125rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-ashara-primary:hover {
+  background-color: #163B3B;
+  box-shadow: 0 4px 14px rgba(30, 78, 78, 0.35);
 }
 
 .font-cursive {

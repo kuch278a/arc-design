@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Lightbulb, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, ArrowUpRight, Phone } from 'lucide-react';
+import { Button } from '@astryxdesign/core/Button';
 import AdobekLogo from './AdobekLogo';
 
 export default function Navbar({ activePage, setActivePage, theme, toggleTheme }) {
@@ -8,12 +9,11 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
-    { id: 'home', label: 'HOME' },
-    { id: 'projects', label: 'PROJECTS' },
-    { id: 'services', label: 'OUR SERVICES' },
-    { id: 'about', label: 'ABOUT US' },
-    { id: 'blog', label: 'BLOG' },
-    { id: 'contact', label: 'CONTACT' },
+    { id: 'home', label: 'Home' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'services', label: 'Services' },
+    { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   useEffect(() => {
@@ -36,101 +36,96 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
   };
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 dark:bg-adobek-dark/95 backdrop-blur-md shadow-xs border-b border-gray-200/70 dark:border-white/10' 
-        : 'bg-white/90 dark:bg-adobek-dark/90 backdrop-blur-sm border-b border-gray-100/80 dark:border-white/5'
-    }`}>
-      {/* Real-time Scroll Progress Indicator Bar */}
+    <header className="sticky top-0 z-50 w-full pt-3 pb-2 px-4 sm:px-8 transition-all duration-300">
+      {/* Scroll Progress Indicator */}
       <div 
-        className="absolute top-0 left-0 h-[2.5px] bg-gradient-to-r from-adobek-teal via-adobek-gold to-adobek-terracotta z-50 transition-all duration-150 ease-out pointer-events-none"
+        className="fixed top-0 left-0 h-[2.5px] bg-terion-orange z-50 transition-all duration-150 ease-out pointer-events-none"
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-28 flex items-center justify-between">
+      <div className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between border ${
+        isScrolled 
+          ? 'bg-white/90 dark:bg-terion-card-dark/90 backdrop-blur-md shadow-terion border-terion-border/80 dark:border-white/10' 
+          : 'bg-white/70 dark:bg-terion-card-dark/70 backdrop-blur-sm border-terion-border/50 dark:border-white/5'
+      }`}>
         
-        {/* Brand Logo: Clicking Logo goes to Home */}
+        {/* Brand Logo & Name */}
         <button
           onClick={() => handleNavClick('home')}
-          className="group text-left focus:outline-none transition-transform hover:opacity-90"
+          className="flex items-center gap-3 text-left focus:outline-none group"
           aria-label="Adobek Interior Home"
         >
           <AdobekLogo 
-            size={80} 
+            size={44} 
             light={theme === 'dark'} 
-            className={theme === 'dark' ? "text-white" : "text-adobek-teal"} 
-            textClassName={theme === 'dark' ? "text-adobek-gold" : "text-adobek-teal"} 
+            className={theme === 'dark' ? "text-white" : "text-terion-charcoal"} 
+            textClassName={theme === 'dark' ? "text-terion-orange" : "text-terion-charcoal"} 
           />
+          <div className="hidden sm:flex flex-col text-left">
+            <span className="font-serif tracking-widest font-semibold text-xs text-terion-charcoal dark:text-white uppercase">
+              Adobek
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.25em] text-terion-muted dark:text-terion-gray font-light">
+              Interior Design
+            </span>
+          </div>
         </button>
 
-        {/* Right Nav Container */}
-        <div className="flex items-center space-x-6 sm:space-x-8">
-          {/* Desktop Navigation Links matching Figma */}
-          <nav className="hidden md:flex items-center space-x-10 text-[11.5px] uppercase tracking-[0.24em] font-medium text-gray-800 dark:text-gray-200">
-            {navLinks.map((link) => {
-              const isActive = activePage === link.id || (activePage === 'project-detail' && link.id === 'projects');
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => handleNavClick(link.id)}
-                  className={`relative py-1 transition-colors duration-200 ${
-                    isActive
-                      ? 'text-adobek-charcoal dark:text-white font-semibold'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-adobek-teal dark:hover:text-adobek-gold'
-                  }`}
-                >
-                  {link.label}
-                  {isActive && (
-                    <span className="absolute inset-x-0 -bottom-1.5 h-[1.5px] bg-adobek-charcoal/80 dark:bg-adobek-gold" />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Luxury Light/Dark Mode Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2.5 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-adobek-teal dark:hover:text-adobek-gold transition duration-300 focus:outline-none"
-            aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          >
-            {theme === 'dark' ? (
-              <Lightbulb className="w-[18px] h-[18px]" />
-            ) : (
-              <Moon className="w-[18px] h-[18px]" />
-            )}
-          </button>
-
-          {/* Mobile Hamburger Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-adobek-teal dark:hover:text-adobek-gold focus:outline-none"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-      </div>
-
-      {/* Mobile Dropdown Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-adobek-charcoal border-b border-gray-200 dark:border-white/5 px-6 py-6 space-y-4 animate-fade-in shadow-lg">
+        {/* Center Pill Nav Links (Desktop) */}
+        <nav className="hidden md:flex items-center gap-1 bg-terion-bg/60 dark:bg-white/5 p-1 rounded-full border border-terion-border/40 dark:border-white/5">
           {navLinks.map((link) => {
             const isActive = activePage === link.id || (activePage === 'project-detail' && link.id === 'projects');
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`block w-full text-left py-2.5 text-xs uppercase tracking-[0.2em] font-medium transition ${
-                  isActive ? 'text-adobek-teal dark:text-adobek-gold font-bold' : 'text-gray-600 dark:text-gray-300'
+                className={`px-4 py-1.5 rounded-full text-[12px] font-medium transition-all duration-200 ${
+                  isActive
+                    ? 'bg-terion-charcoal text-white dark:bg-white dark:text-terion-charcoal shadow-sm'
+                    : 'text-terion-stone dark:text-terion-gray hover:text-terion-charcoal dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
                 }`}
               >
                 {link.label}
               </button>
             );
           })}
+        </nav>
+
+  
+
+      </div>
+
+      {/* Mobile Drawer Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden max-w-6xl mx-auto mt-2 rounded-2xl bg-white/95 dark:bg-terion-card-dark/95 backdrop-blur-xl border border-terion-border dark:border-white/10 p-5 shadow-terion-hover space-y-2 animate-fade-in">
+          {navLinks.map((link) => {
+            const isActive = activePage === link.id || (activePage === 'project-detail' && link.id === 'projects');
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleNavClick(link.id)}
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition ${
+                  isActive 
+                    ? 'bg-terion-orange/10 text-terion-orange font-semibold' 
+                    : 'text-terion-stone dark:text-terion-gray hover:bg-terion-bg dark:hover:bg-white/5'
+                }`}
+              >
+                <span>{link.label}</span>
+                {isActive && <span className="w-1.5 h-1.5 rounded-full bg-terion-orange"></span>}
+              </button>
+            );
+          })}
+          <div className="pt-2">
+            <Button
+              label="Book Consultation"
+              variant="primary"
+              size="md"
+              width="100%"
+              onClick={() => handleNavClick('contact')}
+              endContent={<ArrowUpRight className="w-4 h-4" />}
+              className="!rounded-xl !bg-terion-orange hover:!bg-terion-orange-hover !text-white !border-none !text-xs !font-semibold !tracking-wide !shadow-sm transition"
+            />
+          </div>
         </div>
       )}
     </header>

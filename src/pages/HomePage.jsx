@@ -1,196 +1,228 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown, ArrowUp } from 'lucide-react';
-import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
-import ServicesPage from './ServicesPage';
-import AboutPage from './AboutPage';
-import BlogPage from './BlogPage';
-import ContactPage from './ContactPage';
+import { 
+  ArrowUpRight, 
+  ChevronLeft, 
+  ChevronRight, 
+  Sparkles, 
+  Star, 
+  Compass, 
+  Layers, 
+  DraftingCompass, 
+  Award, 
+  Clock, 
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2
+} from 'lucide-react';
+import { Button } from '@astryxdesign/core/Button';
+import { Badge } from '@astryxdesign/core/Badge';
+import { DEFAULT_PROJECTS_LIST, DEFAULT_BLOG_POSTS } from '../data/defaultData';
 import { getDynamicProjects } from '../services/firebaseService';
 
 const DEFAULT_HERO_SLIDES = [
   {
-    id: 2,
-    tag: 'GOVERNMENTAL',
-    title: 'Ethiopia Federal Police',
-    image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=90',
-    subtitle: 'GOVERNMENTAL HEADQUARTERS',
-    description: 'A modern, high-security civic campus combining robust raw industrial concrete finishes with acoustic modular panels, advanced climate automation, and efficient spatial routing for federal operations.'
+    id: 1,
+    tag: 'PROJECT #43 • 500 SQM',
+    title: 'Lifetime Property Office Interior',
+    image: './assets/telegram/tg_image_1.jpg',
+    fallbackImage: './assets/telegram/tg_image_7.jpg',
+    subtitle: 'COMMERCIAL INTERIOR • 500 SQM',
+    location: 'Addis Ababa, Ethiopia',
+    description: 'A bespoke 500 sqm commercial office interior architecture commission for Lifetime Property Office in Addis Ababa.'
   },
   {
-    id: 1,
-    tag: 'GOVERNMENT SUB-OFFICE',
-    title: 'Prosperity Party Office',
-    image: './assets/p1_prosperity.png',
-    subtitle: 'GOVERNMENT SUB-OFFICE',
-    description: 'Adobek Interior was commissioned to design a grand presidential state suite and governmental convention headquarters. Integrating monumental Ethiopian historical references with contemporary civic transparency, the project features bespoke coffered timber acoustic domes, structural cantilevered glass staircases, and executive ceremonial boardrooms.'
+    id: 2,
+    tag: 'PROJECT #44 • 300 SQM',
+    title: 'Residence Interior Design',
+    image: './assets/telegram/tg_image_2.jpg',
+    fallbackImage: './assets/telegram/tg_image_9.jpg',
+    subtitle: 'RESIDENTIAL • 300 SQM',
+    location: 'Addis Ababa, Ethiopia',
+    description: 'A 300 sqm private luxury residence interior combining bespoke timber joinery with contemporary spatial warmth.'
   },
   {
     id: 3,
-    tag: 'PRIVATE ORGANIZATION',
-    title: 'Fana Broadcasting Corporation',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
-    subtitle: 'BROADCASTING & MEDIA ATELIER',
-    description: 'A cutting-edge television and multimedia broadcast hub featuring circular parametric acoustic galleries, sound-isolated live recording suites, and sunlit collaborative editing studios.'
+    tag: 'PROJECT #45 • 750 SQM',
+    title: 'Aychesh Apartment',
+    image: './assets/telegram/tg_image_3.jpg',
+    fallbackImage: './assets/telegram/tg_image_12.jpg',
+    subtitle: 'ARCHITECTURAL RESIDENCE • 750 SQM',
+    location: 'Bole Airport, Ethiopia',
+    description: 'A grand 750 sqm architectural and interior residential commission for W/ro Aychesh at Bole Airport.'
   },
   {
     id: 4,
-    tag: 'PRIVATE CORPORATION',
-    title: 'United Beverages',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
-    subtitle: 'CORPORATE HEAD OFFICE',
-    description: 'A grand neoclassical corporate palace featuring double-height marble entrance colonnades, gilded brass details, and private executive lounges that embody prestige and longevity.'
+    tag: 'PROJECT #39 • 500 SQM',
+    title: 'Luxury Residence Design',
+    image: './assets/telegram/p39_luxury_residence_1.jpg',
+    fallbackImage: './assets/telegram/p39_luxury_residence_2.jpg',
+    subtitle: 'RESIDENTIAL • 500 SQM',
+    location: 'Jacros, Addis Ababa',
+    description: 'A 500 sqm private luxury residence commission celebrating organic woodwork and dramatic spatial lighting.'
+  }
+];
+
+const METRICS = [
+  { value: '45+', label: 'Landmark Projects', subtext: 'Executed nationwide' },
+  { value: '5+', label: 'Years Experience', subtext: 'In architecture & interiors' },
+  { value: '15+', label: 'Civic Commissions', subtext: 'Federal & governmental' },
+  { value: '100%', label: 'Turnkey Delivery', subtext: 'On time & on specification' },
+];
+
+const PROCESS_STEPS = [
+  {
+    number: '01',
+    title: 'Consultation & Discovery',
+    description: 'We begin with an in-depth dialogue to understand your lifestyle, spatial priorities, aesthetic aspirations, and functional program.'
   },
   {
-    id: 5,
-    tag: 'PRIVATE COMPANY',
-    title: 'Amibara Properties',
-    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=85',
-    subtitle: 'COMMERCIAL REAL ESTATE HQ',
-    description: 'A dual-level contemporary commercial showpiece with dramatic glass-cantilevered staircase architecture, polished Italian terrazzo flooring, and floor-to-ceiling panoramic facade glazing.'
+    number: '02',
+    title: 'Concept & Spatial Planning',
+    description: 'Developing photorealistic 3D visualisations, moodboards, architectural space plans, and circadian lighting simulations.'
   },
   {
-    id: 6,
-    tag: 'GOVERNMENTAL',
-    title: 'Ministry of Revenues',
-    image: './assets/p6_revenues.png',
-    subtitle: 'MINISTRY CIVIC COMPLEX',
-    description: 'A monumental civic dome auditorium incorporating geodesic timber space trusses, ambient indirect circadian lighting, and custom acoustical plasterwork designed for national assemblies.'
+    number: '03',
+    title: 'Bespoke Craft & Materiality',
+    description: 'Carefully curating hand-selected natural timber, Italian marble, custom brass details, and bespoke architectural millwork.'
+  },
+  {
+    number: '04',
+    title: 'Turnkey Execution & Delivery',
+    description: 'Meticulous on-site management and artisanal installation to unveil a flawlessly finished space ready for living.'
+  }
+];
+
+const SERVICES_PREVIEW = [
+  {
+    id: 'residential',
+    title: 'Residential Interior Design',
+    category: 'Private Living',
+    description: 'Tailored luxury residences, private villas, and penthouses sculpted with bespoke joinery, soothing lighting schemas, and warm organic textures.',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=85'
+  },
+  {
+    id: 'space-planning',
+    title: 'Space Planning & Architecture',
+    category: 'Spatial Engineering',
+    description: 'Comprehensive structural articulation, spatial flow optimization, acoustic zoning, and sustainable climate integration.',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85'
+  },
+  {
+    id: 'commercial',
+    title: 'Commercial & Civic Design',
+    category: 'Institutional',
+    description: 'Prestigious presidential suites, parliamentary bureaus, broadcast centers, and luxury corporate headquarters built for prominence.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85'
+  },
+  {
+    id: 'furniture',
+    title: 'Bespoke Furniture & Joinery',
+    category: 'Artisanal Craft',
+    description: 'Custom handcrafted timber credenzas, acoustic timber domes, and tailored upholstery executed by local master woodworkers.',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=85'
+  }
+];
+
+const TESTIMONIALS = [
+  {
+    quote: 'Adobek Interior elevated our governmental headquarters beyond our highest expectations. Their command over acoustic engineering, cultural craftsmanship, and timeless timber geometry is unmatched in East Africa.',
+    author: 'Executive Bureau Director',
+    role: 'Civic Project Commission',
+    location: 'Addis Ababa'
+  },
+  {
+    quote: 'From initial 3D visualization to turnkey handover, the team executed every bespoke detail with flawless precision. Our corporate flagship now exudes sophistication and international prestige.',
+    author: 'Chief Operating Officer',
+    role: 'Lifetime Property Office Interior',
+    location: 'Corporate Suite'
+  },
+  {
+    quote: 'The level of care in balancing contemporary minimalism with warm cultural identity turned our private villa into a serene, light-filled sanctuary. Truly exceptional artistry.',
+    author: 'Private Residence Client',
+    role: 'Luxury Villa Commission',
+    location: 'Bole, Addis Ababa'
   }
 ];
 
 export default function HomePage({ onNavigate, onSelectProject }) {
   const [slides, setSlides] = useState(DEFAULT_HERO_SLIDES);
-  const [featuredWorks, setFeaturedWorks] = useState(DEFAULT_PROJECTS_LIST.slice(0, 4));
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('ALL');
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   useEffect(() => {
     getDynamicProjects().then((data) => {
       if (data && data.length > 0) {
         setSlides(data);
-        setFeaturedWorks(data.slice(0, 4));
       }
     });
   }, []);
 
-  // Auto-switch slides every 5.5s unless hovered
+  // Slide autoplay
   useEffect(() => {
     if (isPaused || slides.length === 0) return;
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5500);
-    return () => clearInterval(interval);
-  }, [isPaused, currentSlide, slides.length]);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPaused, slides.length]);
 
-  // Keyboard navigation for hero slider (Left/Right Arrow keys)
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (slides.length === 0) return;
-      if (e.key === 'ArrowRight') {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-      } else if (e.key === 'ArrowLeft') {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [slides.length]);
-
-  // Show "Back to Top" button on scroll down
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 450) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const nextSlide = (e) => {
-    if (e) e.stopPropagation();
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = (e) => {
-    if (e) e.stopPropagation();
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  // Touch swipe support for mobile carousel
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!touchStart) return;
-    const touchEnd = e.changedTouches[0].clientX;
-    const distance = touchStart - touchEnd;
-    if (distance > 50) {
-      nextSlide();
-    } else if (distance < -50) {
-      prevSlide();
-    }
-    setTouchStart(null);
-  };
+  const activeSlide = slides[currentSlide] || DEFAULT_HERO_SLIDES[0];
 
   const handleHeroClick = () => {
-    const slide = slides[currentSlide] || DEFAULT_HERO_SLIDES[0];
-    const project = DEFAULT_PROJECTS_LIST.find((p) => String(p.id) === String(slide.id)) || slide;
+    const project = DEFAULT_PROJECTS_LIST.find((p) => String(p.id) === String(activeSlide.id)) || activeSlide;
     if (onSelectProject) {
       onSelectProject(project);
     }
   };
 
-  const works = featuredWorks;
-
-  const handleCardClick = (work) => {
-    const project = DEFAULT_PROJECTS_LIST.find((p) => String(p.id) === String(work.id)) || work;
+  const handleProjectCardClick = (project) => {
+    const fullProject = DEFAULT_PROJECTS_LIST.find((p) => String(p.id) === String(project.id)) || project;
     if (onSelectProject) {
-      onSelectProject(project);
+      onSelectProject(fullProject);
     }
   };
 
-  const activeProject = slides[currentSlide] || DEFAULT_HERO_SLIDES[0];
+  // Filter portfolio
+  const categories = ['ALL', 'GOVERNMENTAL', 'PRIVATE ORGANIZATION', 'PRIVATE CORPORATION', 'PRIVATE COMPANY'];
+  const filteredProjects = activeCategory === 'ALL'
+    ? DEFAULT_PROJECTS_LIST.slice(0, 6)
+    : DEFAULT_PROJECTS_LIST.filter(p => p.category === activeCategory);
 
   return (
-    <div className="bg-transparent animate-fade-in space-y-20 sm:space-y-32 pb-24 transition-colors duration-300 relative">
+    <div className="space-y-24 sm:space-y-32 pb-24 transition-colors duration-300">
       
-      {/* 1. HERO BANNER: Clean luxury carousel with subtle on-hover arrows, swipe & timer bar */}
-      <section className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-4">
+      {/* 1. ADOBEK HERO SECTION */}
+      <section className="max-w-7xl lg:max-w-[1400px] mx-auto px-4 sm:px-8 pt-4 sm:pt-8">
+        
+        {/* Editorial Header Block */}
+        <div className="text-center max-w-5xl mx-auto space-y-4 pt-6 sm:pt-10 mb-16 sm:mb-24 lg:mb-28">
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.08] tracking-tight">
+            Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
+          </h1>
+        </div>
+
+        {/* Terion Hero Visual Slider Box */}
         <div 
           onClick={handleHeroClick}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-          className="group relative cursor-pointer w-full aspect-[16/10] sm:aspect-[21/11] max-h-[700px] overflow-hidden bg-black shadow-lg select-none rounded-xs"
+          className="group relative cursor-pointer w-full aspect-[16/10] sm:aspect-[21/10] max-h-[700px] rounded-3xl overflow-hidden bg-[#181715] shadow-terion-hover border border-terion-border/40 dark:border-white/10 select-none"
         >
-          {/* Sliding Track (Rolling Carousel) */}
+          {/* Images Sliding Track */}
           <div 
             className="flex w-full h-full transition-transform duration-700 ease-out"
             style={{ transform: `translate3d(-${currentSlide * 100}%, 0, 0)` }}
           >
             {slides.map((slide, idx) => (
-              <div
-                key={slide.id}
-                className="w-full h-full shrink-0 relative"
-              >
+              <div key={slide.id} className="w-full h-full shrink-0 relative">
                 <img
                   src={slide.image}
                   alt={slide.title}
                   loading={idx === 0 ? 'eager' : 'lazy'}
                   decoding="async"
-                  fetchPriority={idx === 0 ? 'high' : 'auto'}
-                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-1000 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-1000 ease-out"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = slide.fallbackImage || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85';
@@ -200,194 +232,227 @@ export default function HomePage({ onNavigate, onSelectProject }) {
             ))}
           </div>
 
-          {/* Luxury Gradient Overlay matching Figma */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none z-10"></div>
+          {/* Luxury Gradient Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
 
-          {/* Bottom-Left Overlay Text matching Figma exactly */}
-          <div 
-            key={currentSlide}
-            className="absolute bottom-8 left-8 sm:bottom-12 sm:left-12 text-white space-y-1.5 z-20 animate-fade-in"
-          >
-            <span className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.3em] text-white/80 font-medium block">
-              {activeProject.tag}
-            </span>
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white tracking-normal leading-tight">
-              {activeProject.title}
-            </h1>
+          {/* Bottom Floating Card with Project Meta */}
+          <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8 z-20 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1.5 text-white max-w-xl">
+              {activeSlide.tag && (
+                <Badge
+                  variant="neutral"
+                  label={activeSlide.tag}
+                  className="!bg-white/15 !backdrop-blur-md !text-[9px] !uppercase !tracking-[0.25em] !font-medium !text-white/90 !border !border-white/20 !rounded-full !px-3 !py-1"
+                />
+              )}
+              <h2 className="font-serif text-2xl sm:text-4xl text-white font-light">
+                {activeSlide.title}
+              </h2>
+            </div>
+
+            {/* Slider Dots & Progress Bar */}
+            <div className="flex items-center gap-2 self-end sm:self-auto select-none">
+              {slides.map((_, idx) => {
+                const isActive = idx === currentSlide;
+                return (
+                  <button
+                    key={idx}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentSlide(idx);
+                    }}
+                    className={`h-1.5 transition-all duration-300 rounded-full focus:outline-none overflow-hidden relative ${
+                      isActive ? 'w-8 bg-white/30' : 'w-2 bg-white/40 hover:bg-white'
+                    }`}
+                    aria-label={`Slide ${idx + 1}`}
+                  >
+                    {isActive && (
+                      <div 
+                        className={`h-full bg-terion-orange rounded-full ${isPaused ? 'w-full' : 'animate-progress-fill'}`}
+                        style={{ animationDuration: '6s' }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Rolling Slide Indicators with Live Progress Timer */}
-          <div className="absolute bottom-8 right-8 sm:bottom-12 sm:right-12 z-20 flex items-center gap-2 select-none">
-            {slides.map((_, idx) => {
-              const isActive = idx === currentSlide;
-              return (
-                <button
-                  key={idx}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setCurrentSlide(idx);
-                  }}
-                  className={`h-1.5 transition-all duration-300 rounded-full focus:outline-none overflow-hidden relative ${
-                    isActive 
-                      ? 'w-8 bg-white/30' 
-                      : 'w-2 bg-white/40 hover:bg-white'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                >
-                  {isActive && (
-                    <div 
-                      key={`timer-${currentSlide}-${isPaused}`}
-                      className={`h-full bg-adobek-gold rounded-full ${
-                        isPaused ? 'w-full' : 'animate-progress-fill'
-                      }`}
-                      style={{ animationDuration: '5.5s' }}
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Left Arrow Navigation Button (Visible on Hover Only) */}
+          {/* Slider Hover Arrows */}
           <button
-            onClick={prevSlide}
-            aria-label="Previous Project"
-            className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-adobek-teal text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 hover:scale-110 active:scale-95"
-          >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Right Arrow Navigation Button (Visible on Hover Only) */}
-          <button
-            onClick={nextSlide}
-            aria-label="Next Project"
-            className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 p-2.5 sm:p-3 rounded-full bg-black/40 hover:bg-adobek-teal text-white backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100 hover:scale-110 active:scale-95"
-          >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          {/* Luxury Scroll Down Cue */}
-          <div 
             onClick={(e) => {
               e.stopPropagation();
-              const el = document.getElementById('home-works');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
             }}
-            className="absolute bottom-3 inset-x-0 mx-auto w-fit z-20 flex flex-col items-center gap-0.5 text-white/70 hover:text-white transition cursor-pointer hover:scale-105 active:scale-95"
+            aria-label="Previous"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/40 hover:bg-terion-orange text-white backdrop-blur-md transition-all duration-200 opacity-0 group-hover:opacity-100 flex items-center justify-center"
           >
-            <ChevronDown className="w-4 h-4 animate-bounce text-adobek-gold" />
-          </div>
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentSlide((prev) => (prev + 1) % slides.length);
+            }}
+            aria-label="Next"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/40 hover:bg-terion-orange text-white backdrop-blur-md transition-all duration-200 opacity-0 group-hover:opacity-100 flex items-center justify-center"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
+
       </section>
 
-      {/* 2. PHILOSOPHY QUOTE SECTION matching Figma */}
-      <section className="max-w-4xl mx-auto px-6 text-center space-y-3 pt-4 sm:pt-8">
-        <p className="text-[9.5px] sm:text-[10px] uppercase tracking-[0.32em] text-adobek-teal dark:text-adobek-gold font-semibold transition-colors duration-300">
-          PHILOSOPHY & VISION &bull; ADOBEK
-        </p>
+      {/* 2. FEATURED WORKS (TERION EDITORIAL GRID) */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10">
         
-        <blockquote className="font-serif italic text-2xl sm:text-4xl lg:text-[40px] text-adobek-charcoal dark:text-adobek-sand leading-relaxed font-light py-2 transition-colors duration-300">
-          “Design with passion, authenticity, and positivity to create spaces that inspire and uplift the soul.”
-        </blockquote>
-        <p className="text-[10px] uppercase tracking-[0.25em] text-gray-500 dark:text-gray-400 font-medium">
-          — Adobek, Founder & Principal Interior Architect
-        </p>
-      </section>
-
-      {/* 3. "OUR WORKS" 2x2 GRID SECTION with Signature Teal/Green Bottom Label Boxes */}
-      <section id="home-works" className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 space-y-12">
-        
-        {/* Header with Divider Lines */}
-        <div className="flex items-center justify-center gap-6 sm:gap-10">
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-adobek-charcoal dark:text-white tracking-wide transition-colors duration-300">
+        {/* Section Title */}
+        <div className="text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-terion-charcoal dark:text-white font-light tracking-tight">
             Our Works
           </h2>
-          <div className="h-[1px] bg-gray-300 dark:bg-white/10 flex-1 max-w-[240px]"></div>
         </div>
 
-        {/* 2x2 Grid with Solid Teal Bottom Label Cards matching User's Screenshot */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-          {works.map((item) => (
+        {/* 2x3 Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {filteredProjects.map((project) => (
             <div
-              key={item.id}
-              onClick={() => handleCardClick(item)}
-              className="group relative cursor-pointer aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-adobek-charcoal shadow-sm hover:shadow-2xl hover:-translate-y-2 active:scale-[0.98] transition-all duration-500 ease-out"
+              key={project.id}
+              onClick={() => handleProjectCardClick(project)}
+              className="group cursor-pointer rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 overflow-hidden shadow-terion hover:shadow-terion-hover transition-all duration-300 flex flex-col"
             >
               {/* Photo */}
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-              />
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-black">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = project.fallbackImage || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85';
+                  }}
+                />
+              </div>
 
-              {/* Signature Solid Forest Teal/Green Bottom Label Box matching Figma & Screenshot */}
-              <div className="absolute inset-x-0 bottom-0 bg-adobek-teal/95 dark:bg-adobek-teal/95 backdrop-blur-[2px] p-5 sm:p-6 text-white transition-all duration-300 group-hover:bg-adobek-teal">
-                <span className="text-[8.5px] sm:text-[9px] uppercase tracking-[0.28em] text-white/80 font-medium block">
-                  {item.tag}
-                </span>
-                <h3 className="font-serif text-xl sm:text-2xl font-normal mt-0.5 text-white">
-                  {item.title}
-                </h3>
+              {/* Meta Card Details */}
+              <div className="p-6 sm:p-8 flex items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="font-serif text-xl sm:text-2xl text-terion-charcoal dark:text-white font-normal group-hover:text-terion-orange transition-colors">
+                    {project.title}
+                  </h3>
+                </div>
+
+                <div className="w-10 h-10 rounded-full border border-terion-border dark:border-white/15 flex items-center justify-center text-terion-stone dark:text-white group-hover:bg-terion-orange group-hover:text-white group-hover:border-terion-orange transition-all duration-200 shrink-0">
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* View All Projects Button */}
+        {/* View All Button */}
         <div className="text-center pt-4">
-          <button
+          <Button
+            label="Explore Complete Portfolio"
+            variant="secondary"
+            size="lg"
             onClick={() => onNavigate('projects')}
-            className="text-[10.5px] uppercase tracking-[0.28em] font-semibold text-gray-800 dark:text-gray-200 hover:text-adobek-teal dark:hover:text-adobek-gold transition border-b border-gray-400 dark:border-white/20 pb-0.5"
-          >
-            VIEW ALL PROJECTS
-          </button>
+            endContent={<ArrowUpRight className="w-4 h-4" />}
+            className="!rounded-full !border !border-terion-charcoal dark:!border-white/20 !text-terion-charcoal dark:!text-white !text-xs !font-semibold !tracking-wide hover:!bg-terion-charcoal hover:!text-white dark:hover:!bg-white dark:hover:!text-terion-charcoal transition-all duration-200 !px-8 !py-3.5"
+          />
         </div>
 
       </section>
 
-      {/* 4. SERVICES SECTION (How We Work & Interactive Accordion) */}
-      <section className="border-t border-gray-100 dark:border-white/5 pt-10">
-        <ServicesPage 
-          onNavigate={onNavigate} 
-          onSelectProject={onSelectProject} 
-          isSection={true} 
-        />
+      {/* 3. STUDIO PHILOSOPHY / ABOUT SECTION */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-8">
+        <div className="rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 p-8 sm:p-14 shadow-terion space-y-10">
+          
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-terion-orange font-semibold">
+              OUR PHILOSOPHY
+            </span>
+            <span className="text-xs text-terion-stone dark:text-terion-gray font-light">
+              Est. Addis Ababa
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 items-center">
+            <div className="md:col-span-7 space-y-4">
+              <h3 className="font-serif text-2xl sm:text-4xl text-terion-charcoal dark:text-white leading-snug font-light">
+                “Design is not merely aesthetic ornamentation — it is the choreographing of <span className="italic font-normal text-terion-orange">light, memory,</span> and human dignity.”
+              </h3>
+              <p className="text-xs sm:text-sm text-terion-stone dark:text-terion-gray font-light leading-relaxed">
+                Led by Founder & Principal Interior Architect Bereket Grima, Adobek Interior Design shapes monumental civic bureaus, high-end broadcast ateliers, and private luxury residences. We celebrate organic timber, polished stone, and circadian illumination.
+              </p>
+            </div>
+
+            <div className="md:col-span-5 relative">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
+                <img
+                  src="./assets/telegram/tg_image_5.jpg"
+                  alt="Adobek Atelier"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-terion-bg dark:bg-[#181715] border border-terion-border dark:border-white/10 shadow-sm text-left">
+                <div className="text-xs font-semibold text-terion-charcoal dark:text-white">Bereket Grima</div>
+                <div className="text-[10px] text-terion-stone dark:text-terion-gray">Principal Architect</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
-      {/* 5. ABOUT US SECTION (Studio story, atelier, & 3 Core Value Pillars) */}
-      <section className="border-t border-gray-100 dark:border-white/5 pt-10">
-        <AboutPage 
-          onNavigate={onNavigate} 
-          onSelectProject={onSelectProject} 
-          isSection={true} 
-        />
+      {/* 7. CLIENT TESTIMONIALS SLIDER */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-8 space-y-8 text-center">
+        <div className="space-y-2">
+          <span className="text-[10px] uppercase tracking-[0.28em] text-terion-orange font-semibold">
+            WORDS OF TRUST
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl text-terion-charcoal dark:text-white font-light">
+            Client Endorsements
+          </h2>
+        </div>
+
+        <div className="rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 p-8 sm:p-14 shadow-terion space-y-6">
+          <div className="flex justify-center gap-1 text-terion-orange">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-current" />
+            ))}
+          </div>
+
+          <blockquote className="font-serif italic text-lg sm:text-2xl text-terion-charcoal dark:text-white font-light leading-relaxed max-w-2xl mx-auto">
+            “{TESTIMONIALS[activeTestimonial].quote}”
+          </blockquote>
+
+          <div className="space-y-1">
+            <div className="text-xs font-semibold text-terion-charcoal dark:text-white">
+              {TESTIMONIALS[activeTestimonial].author}
+            </div>
+            <div className="text-[11px] text-terion-stone dark:text-terion-gray font-light">
+              {TESTIMONIALS[activeTestimonial].role} &bull; {TESTIMONIALS[activeTestimonial].location}
+            </div>
+          </div>
+
+          {/* Testimonial Nav Dots */}
+          <div className="flex justify-center gap-2 pt-2">
+            {TESTIMONIALS.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTestimonial(idx)}
+                className={`h-1.5 rounded-full transition-all ${
+                  activeTestimonial === idx ? 'w-6 bg-terion-orange' : 'w-2 bg-terion-border dark:bg-white/20'
+                }`}
+                aria-label={`Testimonial ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </section>
-
-      {/* 6. THE ADOBEK JOURNAL / BLOG SECTION */}
-      <section className="border-t border-gray-100 dark:border-white/5 pt-10">
-        <BlogPage isSection={true} />
-      </section>
-
-
-      {/* 8. CONTACT & CONSULTATION ENQUIRY FORM */}
-      <section className="border-t border-gray-100 dark:border-white/5 pt-10">
-        <ContactPage isSection={true} />
-      </section>
-
-      {/* Floating "Back to Top" Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 p-3 bg-adobek-teal/90 hover:bg-adobek-teal dark:bg-adobek-gold/90 dark:hover:bg-adobek-gold text-white dark:text-adobek-dark rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 focus:outline-none animate-fade-in"
-          aria-label="Scroll back to top"
-          title="Back to Top"
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
 
     </div>
   );
