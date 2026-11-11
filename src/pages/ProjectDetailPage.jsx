@@ -135,9 +135,6 @@ export default function ProjectDetailPage({ onNavigate, onSelectProject, project
               </div>
               <div className="p-6 flex items-center justify-between">
                 <div>
-                  <span className="text-[9px] uppercase tracking-[0.2em] text-terion-stone dark:text-terion-gray font-light block">
-                    {rec.category}
-                  </span>
                   <h4 className="font-serif text-xl text-terion-charcoal dark:text-white group-hover:text-terion-orange transition">
                     {rec.title}
                   </h4>
