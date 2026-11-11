@@ -72,14 +72,7 @@ export default function ContactPage() {
           
           {/* Left Column: Direct Atelier Information (5 Cols) */}
           <div className="md:col-span-5 space-y-6">
-            <div className="space-y-2">
-              <h2 className="font-serif text-2xl sm:text-3xl text-terion-charcoal dark:text-white font-normal tracking-wide">
-                Direct Contact
-              </h2>
-              <p className="text-xs text-terion-stone dark:text-terion-gray font-light">
-                Reach Principal Architect Bereket Grima and our senior design atelier.
-              </p>
-            </div>
+            
             
             <div className="space-y-3 font-serif">
               {/* Telephone Card */}
@@ -131,14 +124,7 @@ export default function ContactPage() {
                       <span>@bereketgirma16</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
-                    <a
-                      href="https://t.me/Bek0308"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-terion-bg dark:bg-white/10 text-terion-charcoal dark:text-white hover:bg-terion-orange hover:text-white transition text-xs font-medium"
-                    >
-                      <span>@Bek0308</span>
-                    </a>
+                    
                   </div>
                 </div>
               </div>
