@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>A</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adobek | Curated Luxury Interior Design & Architecture</title>
+    
+    <!-- Performance Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="preload" as="image" href="./assets/adobek_logo_white.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600;1,700&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Loading Screen Styles (inline so it renders instantly) -->
+    <style>
+      #adobek-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #0A1525;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+
+      #adobek-loader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* Logo container */
+      .loader-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 35px;
+        animation: loaderFadeIn 0.8s ease-out both;
+      }
+
+      .loader-logo img {
+        height: 75px;
+        width: auto;
+        -o-object-fit: contain;
+           object-fit: contain;
+      }
+
+      /* Animated progress bar */
+      .loader-bar-track {
+        width: 200px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 2px;
+        overflow: hidden;
+        animation: loaderFadeIn 0.8s ease-out 0.3s both;
+      }
+
+      .loader-bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 2px;
+        background: linear-gradient(90deg, #1E4E4E, #C5A880, #DF6D27);
+        animation: loaderProgress 2.2s ease-in-out infinite;
+      }
+
+      /* Tagline */
+      .loader-tagline {
+        margin-top: 24px;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 14px;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.35);
+        animation: loaderFadeIn 1s ease-out 0.6s both;
+      }
+
+      @keyframes loaderFadeIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes loaderProgress {
+        0% { width: 0%; margin-left: 0; }
+        50% { width: 70%; margin-left: 15%; }
+        100% { width: 0%; margin-left: 100%; }
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-BPgqW70j.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vendor-misc-9sMxgkcb.js">
+    <link rel="modulepreload" crossorigin href="./assets/vendor-react-UFtKwZAU.js">
+    <link rel="stylesheet" crossorigin href="./assets/vendor-misc-BGETmRrk.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-CnNVNlnc.css">
+  </head>
+  <body class="bg-white text-adobek-charcoal font-serif antialiased selection:bg-adobek-teal selection:text-white">
+
+    <!-- Premium Loading Screen (shows instantly, removed by React) -->
+    <div id="adobek-loader">
+      <div class="loader-logo">
+        <img src="./assets/adobek_logo_white.png" alt="ADObek Design Build" onerror="this.style.display='none'" />
+      </div>
+      <div class="loader-bar-track">
+        <div class="loader-bar-fill"></div>
+      </div>
+      <p class="loader-tagline">Adobek &bull; Curating Architectural Excellence</p>
+    </div>
+
+    <div id="root"></div>
+  </body>
+</html>
