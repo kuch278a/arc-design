@@ -194,15 +194,8 @@ export default function HomePage({ onNavigate, onSelectProject }) {
     <div className="space-y-24 sm:space-y-32 pb-24 transition-colors duration-300">
       
       {/* 1. ADOBEK HERO SECTION */}
-      <section className="max-w-7xl lg:max-w-[1400px] mx-auto px-4 sm:px-8 pt-4 sm:pt-8">
+      <section className="max-w-7xl lg:max-w-[1400px] mx-auto px-4 sm:px-8 pt-2 sm:pt-4">
         
-        {/* Editorial Header Block */}
-        <div className="text-center max-w-5xl mx-auto space-y-4 pt-6 sm:pt-10 mb-16 sm:mb-24 lg:mb-28">
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.08] tracking-tight">
-            Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
-          </h1>
-        </div>
-
         {/* Terion Hero Visual Slider Box */}
         <div 
           onClick={handleHeroClick}
@@ -299,6 +292,13 @@ export default function HomePage({ onNavigate, onSelectProject }) {
           >
             <ChevronRight className="w-5 h-5" />
           </button>
+        </div>
+
+        {/* Editorial Header Block (Below Hero Slider) */}
+        <div className="text-center max-w-5xl mx-auto space-y-4 pt-12 sm:pt-16 lg:pt-20">
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.08] tracking-tight">
+            Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
+          </h1>
         </div>
 
       </section>
