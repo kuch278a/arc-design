@@ -120,14 +120,12 @@ export default function App() {
 
       {/* 1. Header Navigation Bar (Client Website Only) */}
       {activePage !== 'admin' && (
-        <div className="relative z-20">
-          <Navbar 
-            activePage={activePage} 
-            setActivePage={handleNavigate} 
-            theme={theme} 
-            toggleTheme={toggleTheme} 
-          />
-        </div>
+        <Navbar 
+          activePage={activePage} 
+          setActivePage={handleNavigate} 
+          theme={theme} 
+          toggleTheme={toggleTheme} 
+        />
       )}
 
       {/* 2. Main Page View Router with Suspense */}
