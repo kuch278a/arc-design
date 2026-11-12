@@ -397,9 +397,9 @@ export default function HomePage({ onNavigate, onSelectProject }) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-terion-bg dark:bg-[#181715] border border-terion-border dark:border-white/10 shadow-sm text-left">
-                <div className="text-xs font-semibold text-terion-charcoal dark:text-white">Bereket Grima</div>
-                <div className="text-[10px] text-terion-stone dark:text-terion-gray">Principal Architect</div>
+              <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-white border border-terion-border/60 shadow-sm text-left">
+                <div className="text-xs font-semibold text-terion-charcoal">Bereket Grima</div>
+                <div className="text-[10px] text-terion-stone">Principal Architect</div>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='serif'>A</text></svg>" />
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    <link rel="preload" as="image" href="./assets/adobek_logo_white.png" />
+    <link rel="preload" as="image" href="./assets/adobek_logo_transparent.png" />
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600;1,700&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Loading Screen Styles (inline so it renders instantly) -->
@@ -24,7 +24,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: #0A1525;
+        background: #FFFFFF;
         transition: opacity 0.6s ease, visibility 0.6s ease;
       }
 
@@ -52,7 +52,7 @@
       .loader-bar-track {
         width: 200px;
         height: 2px;
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(0, 0, 0, 0.08);
         border-radius: 2px;
         overflow: hidden;
         animation: loaderFadeIn 0.8s ease-out 0.3s both;
@@ -62,7 +62,7 @@
         height: 100%;
         width: 0%;
         border-radius: 2px;
-        background: linear-gradient(90deg, #1E4E4E, #C5A880, #DF6D27);
+        background: linear-gradient(90deg, #111111, #C5A880, #E6772E);
         animation: loaderProgress 2.2s ease-in-out infinite;
       }
 
@@ -74,7 +74,7 @@
         font-weight: 300;
         font-size: 14px;
         letter-spacing: 0.12em;
-        color: rgba(255, 255, 255, 0.35);
+        color: #726C66;
         animation: loaderFadeIn 1s ease-out 0.6s both;
       }
 
@@ -90,12 +90,12 @@
       }
     </style>
   </head>
-  <body class="bg-white text-adobek-charcoal font-serif antialiased selection:bg-adobek-teal selection:text-white">
+  <body class="bg-white text-terion-charcoal font-serif antialiased selection:bg-terion-orange selection:text-white">
 
     <!-- Premium Loading Screen (shows instantly, removed by React) -->
     <div id="adobek-loader">
       <div class="loader-logo">
-        <img src="./assets/adobek_logo_white.png" alt="ADObek Design Build" onerror="this.style.display='none'" />
+        <img src="./assets/adobek_logo_transparent.png" alt="ADObek Design Build" onerror="this.src='./assets/adobek_logo.png'" />
       </div>
       <div class="loader-bar-track">
         <div class="loader-bar-fill"></div>

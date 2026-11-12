@@ -44,7 +44,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-terion-bg dark:bg-terion-bg-dark min-h-screen animate-fade-in transition-colors duration-300 font-serif">
+    <div className="bg-white min-h-screen animate-fade-in transition-colors duration-300 font-serif">
       
       {/* Editorial Header Section - Compact so content is visible above the fold */}
       <section aria-labelledby="contact-page-heading" className="w-full pt-8 sm:pt-12 pb-6 px-5 sm:px-6 lg:px-12 text-center">

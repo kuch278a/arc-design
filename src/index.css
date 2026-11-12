@@ -12,23 +12,19 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
-    color-scheme: light dark;
+    color-scheme: light;
     font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
-  }
-  
-  html.dark {
-    color-scheme: dark;
   }
   
   body {
-    @apply font-serif text-terion-charcoal dark:text-terion-sand transition-colors duration-300;
+    @apply font-serif text-terion-charcoal transition-colors duration-300;
     font-family: 'Lora', 'Cormorant Garamond', Georgia, serif;
-    background-color: #EEEDEA;
+    background-color: #FFFFFF;
     overflow-x: hidden;
   }
 
   html.dark body {
-    background-color: #121110;
+    background-color: #FFFFFF;
   }
 
   h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select {

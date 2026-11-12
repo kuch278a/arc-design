@@ -186,14 +186,14 @@ export default function ServicesPage({ onNavigate, onSelectProject, isSection = 
 
       {/* Consultation Box */}
       <section className="max-w-4xl mx-auto px-4 sm:px-8 text-center">
-        <div className="rounded-3xl bg-[#1C1A18] text-white p-10 sm:p-14 space-y-4 border border-white/5 shadow-terion-dark">
+        <div className="rounded-3xl bg-terion-card text-terion-charcoal p-10 sm:p-14 space-y-4 border border-terion-border/60 shadow-terion">
           <span className="text-[10px] uppercase tracking-[0.28em] text-terion-orange font-semibold">
             BOOK A CONSULTATION
           </span>
-          <h3 className="font-serif text-2xl sm:text-4xl font-light">
+          <h3 className="font-serif text-2xl sm:text-4xl text-terion-charcoal font-light">
             Need a Tailored Architectural Proposal?
           </h3>
-          <p className="text-xs text-terion-gray font-light max-w-md mx-auto">
+          <p className="text-xs text-terion-stone font-light max-w-md mx-auto">
             Our principal team will review your drawings, program requirements, and schedule a dedicated spatial consultation.
           </p>
           <div className="pt-2">

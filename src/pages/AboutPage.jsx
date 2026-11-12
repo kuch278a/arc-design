@@ -63,12 +63,12 @@ export default function AboutPage({ onNavigate, onSelectProject, isSection = fal
 
       {/* Leadership Spotlight: Bereket Grima */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8">
-        <div className="rounded-3xl bg-[#1C1A18] text-white border border-white/5 p-8 sm:p-14 shadow-terion-dark">
+        <div className="rounded-3xl bg-terion-card text-terion-charcoal border border-terion-border/60 p-8 sm:p-14 shadow-terion">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
             
             {/* Portrait */}
             <div className="md:col-span-4 flex justify-center">
-              <div className="relative w-full max-w-[300px] aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <div className="relative w-full max-w-[300px] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100">
                 <img
                   src="./assets/adobek_profile.jpg"
                   alt="Bereket Grima"
@@ -78,8 +78,8 @@ export default function AboutPage({ onNavigate, onSelectProject, isSection = fal
                     e.target.src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=85';
                   }}
                 />
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-black/70 backdrop-blur-md border border-white/10 text-center">
-                  <div className="font-serif text-lg text-white font-light">5+ Years</div>
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-white/95 backdrop-blur-md border border-terion-border/60 text-center shadow-xs">
+                  <div className="font-serif text-lg text-terion-charcoal font-light">5+ Years</div>
                   <div className="text-[9px] uppercase tracking-wider text-terion-orange font-medium">
                     Architectural Mastery
                   </div>
@@ -92,14 +92,14 @@ export default function AboutPage({ onNavigate, onSelectProject, isSection = fal
               <span className="text-[10px] uppercase tracking-[0.25em] text-terion-orange font-semibold">
                 PRINCIPAL ARCHITECT
               </span>
-              <h3 className="font-serif text-3xl sm:text-5xl text-white font-light">
+              <h3 className="font-serif text-3xl sm:text-5xl text-terion-charcoal font-light">
                 Bereket Grima
               </h3>
-              <p className="text-xs sm:text-sm text-terion-gray font-light leading-relaxed">
+              <p className="text-xs sm:text-sm text-terion-stone font-light leading-relaxed">
                 As Founder and Lead Interior Architect of Adobek Interior Design, Bereket Grima has established a distinguished signature in civic and luxury residential design. His philosophy roots itself in cultural authenticity, celebrating indigenous timber carving techniques and monumental masonry.
               </p>
               
-              <blockquote className="border-l-2 border-terion-orange pl-4 italic text-xs sm:text-sm text-terion-sand font-serif leading-relaxed">
+              <blockquote className="border-l-2 border-terion-orange pl-4 italic text-xs sm:text-sm text-terion-stone font-serif leading-relaxed">
                 “Architecture is not merely the enclosure of space; it is the choreographing of light, memory, and human dignity.”
               </blockquote>
 
@@ -108,7 +108,7 @@ export default function AboutPage({ onNavigate, onSelectProject, isSection = fal
                   <Badge
                     key={idx}
                     variant="neutral"
-                    className="px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] uppercase tracking-wider text-white font-medium"
+                    className="px-3.5 py-1 rounded-full bg-terion-bg border border-terion-border text-[10px] uppercase tracking-wider text-terion-charcoal font-medium"
                   >
                     {badge}
                   </Badge>

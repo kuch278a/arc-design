@@ -45,9 +45,7 @@ function getInitialPage() {
 export default function App() {
   const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'projects' | 'services' | 'about' | 'contact' | 'blog' | 'admin' | 'project-detail'
   const [selectedProject, setSelectedProject] = useState(DEFAULT_PROJECTS_LIST[0]);
-  const [theme, setTheme] = useState(() => {
-    return sessionStorage.getItem('theme') || 'dark';
-  });
+  const [theme] = useState('light');
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -75,18 +73,16 @@ export default function App() {
     }
   }, []);
 
+  // Enforce permanent white / light mode
   useEffect(() => {
     const root = window.document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    sessionStorage.setItem('theme', theme);
-  }, [theme]);
+    root.classList.remove('dark');
+    sessionStorage.setItem('theme', 'light');
+    localStorage.setItem('theme', 'light');
+  }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    // Permanent white mode
   };
 
   const handleNavigate = (page) => {
@@ -107,7 +103,7 @@ export default function App() {
   };
 
   return (
-    <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-terion-bg text-terion-charcoal dark:bg-terion-bg-dark dark:text-terion-sand font-sans antialiased transition-colors duration-300">
+    <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-white text-terion-charcoal font-serif antialiased transition-colors duration-300">
       
       {/* 1. Figma Header Navigation Bar */}
       <Navbar 

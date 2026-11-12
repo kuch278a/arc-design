@@ -57,9 +57,9 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
         >
           <AdobekLogo 
             size={44} 
-            light={theme === 'dark'} 
-            className={theme === 'dark' ? "text-white" : "text-terion-charcoal"} 
-            textClassName={theme === 'dark' ? "text-terion-orange" : "text-terion-charcoal"} 
+            light={false} 
+            className="text-terion-charcoal" 
+            textClassName="text-terion-charcoal" 
           />
           <div className="hidden sm:flex flex-col text-left">
             <span className="font-serif tracking-widest font-semibold text-xs text-terion-charcoal dark:text-white uppercase">
