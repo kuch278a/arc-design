@@ -13,7 +13,6 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
     { id: 'projects', label: 'Projects' },
     { id: 'services', label: 'Services' },
     { id: 'about', label: 'About' },
-    { id: 'journal', label: 'Journal' },
     { id: 'contact', label: 'Contact' },
   ];
 
