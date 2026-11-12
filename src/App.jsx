@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import InteractiveDotGrid from './components/InteractiveDotGrid';
 import { DEFAULT_PROJECTS_LIST } from './data/defaultData';
 
 // Lazy-loaded Pages for instant initial load and optimal code-splitting
@@ -103,20 +104,34 @@ export default function App() {
   };
 
   return (
-    <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-white text-terion-charcoal font-serif antialiased transition-colors duration-300">
+    <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-white text-terion-charcoal font-serif antialiased transition-colors duration-300 relative">
       
-      {/* 1. Header Navigation Bar (Client Website Only) */}
+      {/* Global Interactive Canvas Dot Grid (Everywhere) */}
       {activePage !== 'admin' && (
-        <Navbar 
-          activePage={activePage} 
-          setActivePage={handleNavigate} 
-          theme={theme} 
-          toggleTheme={toggleTheme} 
+        <InteractiveDotGrid
+          gap={26}
+          proximityRadius={140}
+          baseRadius={1.4}
+          activeRadius={3.8}
+          activeColor={{ r: 225, g: 29, b: 72 }}
+          isGlobal={true}
         />
       )}
 
+      {/* 1. Header Navigation Bar (Client Website Only) */}
+      {activePage !== 'admin' && (
+        <div className="relative z-20">
+          <Navbar 
+            activePage={activePage} 
+            setActivePage={handleNavigate} 
+            theme={theme} 
+            toggleTheme={toggleTheme} 
+          />
+        </div>
+      )}
+
       {/* 2. Main Page View Router with Suspense */}
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         <Suspense fallback={<PageLoadingFallback />}>
           {activePage === 'home' && (
             <HomePage onNavigate={handleNavigate} onSelectProject={handleSelectProject} />
@@ -158,7 +173,9 @@ export default function App() {
 
       {/* 3. Footer (Client Website Only) */}
       {activePage !== 'admin' && (
-        <Footer onNavigate={handleNavigate} />
+        <div className="relative z-10">
+          <Footer onNavigate={handleNavigate} />
+        </div>
       )}
 
     </div>

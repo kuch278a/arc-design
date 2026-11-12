@@ -4,15 +4,17 @@ import React, { useRef, useEffect } from 'react';
  * InteractiveDotGrid
  * A canvas-driven interactive dot matrix that reacts to cursor proximity
  * with dynamic scale, opacity, and color interpolation with smooth physics decay.
+ * Supports both standalone section wrapper and global full-viewport background mode.
  */
 export default function InteractiveDotGrid({
   gap = 26,                              // Distance between dots in px
   baseRadius = 1.4,                      // Idle dot radius
   activeRadius = 3.8,                    // Max dot radius near cursor
-  proximityRadius = 135,                 // Hover influence radius in px
+  proximityRadius = 140,                 // Hover influence radius in px
   baseColor = 'rgba(215, 215, 220, 0.65)', // Idle dot color
   activeColor = { r: 225, g: 29, b: 72 }, // Active dot RGB (ruby/crimson #e11d48)
   className = '',
+  isGlobal = false,
   children
 }) {
   const containerRef = useRef(null);
@@ -21,8 +23,7 @@ export default function InteractiveDotGrid({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const container = containerRef.current;
-    if (!canvas || !container) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let animationFrameId;
@@ -31,10 +32,17 @@ export default function InteractiveDotGrid({
     let dots = [];
 
     const handleResize = () => {
-      const rect = container.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      width = rect.width;
-      height = rect.height;
+      if (isGlobal) {
+        width = window.innerWidth;
+        height = window.innerHeight;
+      } else {
+        const rect = containerRef.current 
+          ? containerRef.current.getBoundingClientRect() 
+          : { width: window.innerWidth, height: window.innerHeight };
+        width = rect.width;
+        height = rect.height;
+      }
 
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -60,16 +68,23 @@ export default function InteractiveDotGrid({
     };
 
     handleResize();
-    const resizeObserver = new ResizeObserver(() => handleResize());
-    resizeObserver.observe(container);
+    window.addEventListener('resize', handleResize, { passive: true });
 
     const onMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        active: true
-      };
+      if (isGlobal) {
+        mouseRef.current = {
+          x: e.clientX,
+          y: e.clientY,
+          active: true
+        };
+      } else if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+          active: true
+        };
+      }
     };
 
     const onMouseLeave = () => {
@@ -77,7 +92,7 @@ export default function InteractiveDotGrid({
     };
 
     window.addEventListener('mousemove', onMouseMove, { passive: true });
-    container.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseleave', onMouseLeave);
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -130,11 +145,19 @@ export default function InteractiveDotGrid({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', onMouseMove);
-      container.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('mouseleave', onMouseLeave);
     };
-  }, [gap, baseRadius, activeRadius, proximityRadius, baseColor, activeColor]);
+  }, [gap, baseRadius, activeRadius, proximityRadius, baseColor, activeColor, isGlobal]);
+
+  if (isGlobal) {
+    return (
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className={`relative overflow-hidden w-full ${className}`}>
