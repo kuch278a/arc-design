@@ -18,7 +18,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { DEFAULT_PROJECTS_LIST, DEFAULT_BLOG_POSTS } from '../data/defaultData';
+import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
 
 // Firebase configuration strictly from environment variables (No old Adobek-Interior fallbacks)
 const firebaseConfig = {
@@ -65,7 +65,7 @@ export { db, auth, storage };
 /**
  * Upload an image file to Firebase Storage and return the download URL.
  * @param {File} file - The image file to upload
- * @param {string} folder - Storage folder (e.g. 'projects', 'blog')
+ * @param {string} folder - Storage folder (e.g. 'projects')
  * @returns {{ success: boolean, url?: string, error?: string }}
  */
 export async function uploadImage(file, folder = 'images') {
@@ -218,57 +218,7 @@ export async function deleteProject(projectId) {
 }
 
 // ----------------------------------------------------
-// 3. DYNAMIC BLOG / JOURNAL CMS
-// ----------------------------------------------------
-
-/**
- * Get all blog articles (Firestore with fallback to BLOG_POSTS)
- */
-export async function getDynamicBlogPosts() {
-  if (isFirebaseConfigured && db) {
-    try {
-      const snapshot = await getDocs(collection(db, 'blog_posts'));
-      if (!snapshot.empty) {
-        return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-      }
-    } catch (error) {
-      console.warn('Firestore blog fetch failed, using default posts:', error);
-    }
-  }
-
-  const stored = localStorage.getItem('adobek_blog_posts');
-  return stored ? JSON.parse(stored) : DEFAULT_BLOG_POSTS;
-}
-
-/**
- * Save or update a blog post in CMS
- */
-export async function saveBlogPost(postData) {
-  const id = postData.id ? String(postData.id) : 'post_' + Date.now();
-  const payload = { ...postData, id, updatedAt: new Date().toISOString() };
-
-  if (isFirebaseConfigured && db) {
-    try {
-      await setDoc(doc(db, 'blog_posts', id), payload, { merge: true });
-      return { success: true, id, isLive: true };
-    } catch (error) {
-      console.error('Firestore save blog error:', error);
-    }
-  }
-
-  const posts = await getDynamicBlogPosts();
-  const existingIdx = posts.findIndex(p => String(p.id) === String(id));
-  if (existingIdx >= 0) {
-    posts[existingIdx] = payload;
-  } else {
-    posts.unshift(payload);
-  }
-  localStorage.setItem('adobek_blog_posts', JSON.stringify(posts));
-  return { success: true, id, isLive: false };
-}
-
-// ----------------------------------------------------
-// 4. AUTHENTICATION HELPERS
+// 3. AUTHENTICATION HELPERS
 // ----------------------------------------------------
 
 export async function loginAdminUser(email, password) {

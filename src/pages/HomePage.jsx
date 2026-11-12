@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@astryxdesign/core/Button';
 import { Badge } from '@astryxdesign/core/Badge';
-import { DEFAULT_PROJECTS_LIST, DEFAULT_BLOG_POSTS } from '../data/defaultData';
+import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
 import { getDynamicProjects } from '../services/firebaseService';
 
 const DEFAULT_HERO_SLIDES = [

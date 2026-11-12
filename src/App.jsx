@@ -42,7 +42,7 @@ function getInitialPage() {
 }
 
 export default function App() {
-  const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'projects' | 'services' | 'about' | 'contact' | 'blog' | 'admin' | 'project-detail'
+  const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'projects' | 'services' | 'about' | 'contact' | 'admin' | 'project-detail'
   const [selectedProject, setSelectedProject] = useState(DEFAULT_PROJECTS_LIST[0]);
   const [theme] = useState('light');
 
