@@ -194,14 +194,14 @@ export default function HomePage({ onNavigate, onSelectProject }) {
     <div className="space-y-24 sm:space-y-32 pb-24 transition-colors duration-300">
       
       {/* 1. ADOBEK HERO SECTION */}
-      <section className="max-w-7xl lg:max-w-[1400px] mx-auto px-4 sm:px-8 pt-2 sm:pt-4">
+      <section className="max-w-7xl 2xl:max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-2 sm:pt-4">
         
         {/* Terion Hero Visual Slider Box */}
         <div 
           onClick={handleHeroClick}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="group relative cursor-pointer w-full aspect-[16/10] sm:aspect-[21/10] max-h-[700px] rounded-3xl overflow-hidden bg-[#181715] shadow-terion-hover border border-terion-border/40 dark:border-white/10 select-none"
+          className="group relative cursor-pointer w-full h-[52vh] sm:h-[60vh] md:h-[65vh] lg:h-[70vh] min-h-[360px] sm:min-h-[440px] max-h-[680px] 2xl:max-h-[760px] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#181715] shadow-terion-hover border border-terion-border/40 dark:border-white/10 select-none"
         >
           {/* Images Sliding Track */}
           <div 
@@ -297,14 +297,14 @@ export default function HomePage({ onNavigate, onSelectProject }) {
       </section>
 
       {/* 2. EDITORIAL STATEMENT / HEADLINE (BETWEEN HERO AND PROJECTS) */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-10 sm:py-16 lg:py-20 text-center">
-        <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.12] tracking-tight">
+      <section className="max-w-4xl lg:max-w-5xl 2xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 text-center">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.18] sm:leading-[1.14] md:leading-[1.1] tracking-tight">
           Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
         </h1>
       </section>
 
       {/* 3. FEATURED WORKS (TERION EDITORIAL GRID) */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10">
+      <section className="max-w-7xl 2xl:max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 space-y-8 sm:space-y-10">
         
         {/* Section Title */}
         <div className="text-center">
@@ -366,8 +366,8 @@ export default function HomePage({ onNavigate, onSelectProject }) {
 
       </section>
 
-      {/* 3. STUDIO PHILOSOPHY / ABOUT SECTION */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-8">
+      {/* 4. STUDIO PHILOSOPHY / ABOUT SECTION */}
+      <section className="max-w-7xl 2xl:max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="rounded-3xl bg-terion-card dark:bg-terion-card-dark border border-terion-border/60 dark:border-white/10 p-8 sm:p-14 shadow-terion space-y-10">
           
           <div className="flex items-center justify-between">

@@ -48,7 +48,7 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <div className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-5 sm:px-7 py-2.5 sm:py-3 flex items-center justify-between border ${
+      <div className={`max-w-7xl 2xl:max-w-[1500px] mx-auto rounded-full transition-all duration-300 px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between border ${
         isScrolled 
           ? 'bg-white/90 dark:bg-terion-card-dark/90 backdrop-blur-md shadow-terion border-terion-border/80 dark:border-white/10' 
           : 'bg-white/70 dark:bg-terion-card-dark/70 backdrop-blur-sm border-terion-border/50 dark:border-white/5'
@@ -79,14 +79,14 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
 
 
         {/* Right-Aligned Nav Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-terion-bg/60 dark:bg-white/5 p-1 rounded-full border border-terion-border/40 dark:border-white/5">
+        <nav className="hidden md:flex items-center gap-1 lg:gap-1.5 bg-terion-bg/60 dark:bg-white/5 p-1 rounded-full border border-terion-border/40 dark:border-white/5">
           {navLinks.map((link) => {
             const isActive = activePage === link.id || (activePage === 'project-detail' && link.id === 'projects');
             return (
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                className={`px-4.5 sm:px-5 py-2 rounded-full text-[14px] sm:text-[15px] font-medium transition-all duration-200 ${
+                className={`px-3 sm:px-4 lg:px-5 py-1.5 lg:py-2 rounded-full text-[13px] lg:text-[14px] xl:text-[15px] font-medium transition-all duration-200 ${
                   isActive
                     ? 'bg-terion-charcoal text-white dark:bg-white dark:text-terion-charcoal shadow-sm'
                     : 'text-terion-stone dark:text-terion-gray hover:text-terion-charcoal dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
