@@ -29,6 +29,8 @@ import {
   getDynamicProjects, 
   saveProject, 
   deleteProject, 
+  getDynamicJournalPosts,
+  saveJournalPost,
   isFirebaseConfigured,
   loginAdminUser,
   logoutAdminUser,
@@ -49,9 +51,10 @@ export default function AdminPortal({ onNavigate }) {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   // Portal Tab & Data States
-  const [activeTab, setActiveTab] = useState('leads'); // 'leads' | 'projects'
+  const [activeTab, setActiveTab] = useState('leads'); // 'leads' | 'projects' | 'journal'
   const [leads, setLeads] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [journalPosts, setJournalPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [notification, setNotification] = useState('');
 
@@ -60,6 +63,10 @@ export default function AdminPortal({ onNavigate }) {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [projectImageFile, setProjectImageFile] = useState(null);
   const [projectImagePreview, setProjectImagePreview] = useState('');
+  const [editingPost, setEditingPost] = useState(null);
+  const [journalImageFile, setJournalImageFile] = useState(null);
+  const [journalImagePreview, setJournalImagePreview] = useState('');
+  const [isJournalModalOpen, setIsJournalModalOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
@@ -96,12 +103,14 @@ export default function AdminPortal({ onNavigate }) {
   const loadAllData = async () => {
     setIsLoading(true);
     try {
-      const [leadsData, projectsData] = await Promise.all([
+      const [leadsData, projectsData, journalData] = await Promise.all([
         getConsultations(),
-        getDynamicProjects()
+        getDynamicProjects(),
+        getDynamicJournalPosts()
       ]);
       setLeads(leadsData || []);
       setProjects(projectsData || []);
+      setJournalPosts(journalData || []);
     } catch (err) {
       console.error('Failed to load admin data:', err);
     } finally {
@@ -148,6 +157,35 @@ export default function AdminPortal({ onNavigate }) {
       await deleteProject(id);
       showToast('Project removed');
       await loadAllData();
+    }
+  };
+
+  // --- Journal CRUD ---
+  const handleSaveJournalPost = async (e) => {
+    e.preventDefault();
+    if (!editingPost) return;
+    setIsUploading(true);
+    try {
+      let postData = { ...editingPost };
+      if (journalImageFile) {
+        const uploadResult = await uploadImage(journalImageFile, 'journal');
+        if (uploadResult.success) {
+          postData.image = uploadResult.url;
+        } else {
+          showToast('Image upload failed: ' + (uploadResult.error || 'Unknown error'));
+          setIsUploading(false);
+          return;
+        }
+      }
+      await saveJournalPost(postData);
+      setIsJournalModalOpen(false);
+      setEditingPost(null);
+      setJournalImageFile(null);
+      setJournalImagePreview('');
+      showToast('Journal article published');
+      await loadAllData();
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -334,6 +372,18 @@ export default function AdminPortal({ onNavigate }) {
             <Layers className="w-4 h-4" />
             <span>Projects CMS ({projects.length})</span>
           </button>
+
+          <button
+            onClick={() => setActiveTab('journal')}
+            className={`flex items-center gap-2 px-4 py-2 text-xs uppercase tracking-widest font-semibold transition border-b-2 ${
+              activeTab === 'journal'
+                ? 'border-adobek-teal text-adobek-teal dark:border-adobek-gold dark:text-adobek-gold'
+                : 'border-transparent text-gray-500 hover:text-gray-900 dark:hover:text-white'
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            <span>Journal CMS ({journalPosts.length})</span>
+          </button>
         </div>
 
         {/* Tab 1: Consultation Leads */}
@@ -512,6 +562,73 @@ export default function AdminPortal({ onNavigate }) {
           </div>
         )}
 
+        {/* Tab 3: Journal CMS */}
+        {activeTab === 'journal' && (
+          <div className="space-y-6 animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-serif text-2xl text-adobek-charcoal dark:text-white">
+                  The Design Journal Articles
+                </h2>
+                <p className="text-xs text-gray-500">Publish architectural essays and design thought-leadership</p>
+              </div>
+              <button
+                onClick={() => {
+                  setEditingPost({
+                    title: '',
+                    category: 'CIVIC ARCHITECTURE',
+                    readTime: '4 MIN READ',
+                    excerpt: '',
+                    fullContent: ''
+                  });
+                  setJournalImageFile(null);
+                  setJournalImagePreview('');
+                  setIsJournalModalOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-adobek-teal dark:bg-adobek-gold text-white dark:text-adobek-dark text-xs uppercase tracking-widest font-semibold hover:opacity-90 transition"
+              >
+                <Plus className="w-4 h-4" />
+                <span>New Article</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {journalPosts.map((post) => (
+                <div 
+                  key={post.id}
+                  className="p-6 bg-white dark:bg-adobek-charcoal border border-gray-200 dark:border-white/10 rounded-xs shadow-xs space-y-3 flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="text-[9.5px] uppercase tracking-[0.2em] font-semibold text-adobek-teal dark:text-adobek-gold block">
+                      {post.category} • {post.readTime}
+                    </span>
+                    <h3 className="font-serif text-xl font-bold text-adobek-charcoal dark:text-white mt-1">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 font-light leading-relaxed mt-2 line-clamp-3">
+                      {post.excerpt || post.summary}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-end gap-2 pt-3 border-t border-gray-100 dark:border-white/5">
+                    <button
+                      onClick={() => {
+                        setEditingPost(post);
+                        setJournalImagePreview(post.image || '');
+                        setIsJournalModalOpen(true);
+                      }}
+                      className="p-2 text-gray-600 hover:text-adobek-teal dark:text-gray-300 dark:hover:text-adobek-gold transition"
+                      title="Edit Article"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
 
       {/* Modal: Project Edit/Add */}
@@ -659,6 +776,168 @@ export default function AdminPortal({ onNavigate }) {
                 >
                   {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   <span>{isUploading ? 'Uploading...' : 'Save Project'}</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Journal Edit/Add */}
+      {isJournalModalOpen && editingPost && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in">
+          <div className="bg-white dark:bg-adobek-charcoal border border-gray-200 dark:border-white/10 w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6 shadow-2xl rounded-xs">
+            <div className="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-white/10">
+              <h3 className="font-serif text-2xl text-adobek-charcoal dark:text-white">
+                {editingPost.id ? 'Edit Article' : 'Publish New Article'}
+              </h3>
+              <button onClick={() => setIsJournalModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveJournalPost} className="space-y-4">
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                  Article Title
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={editingPost.title}
+                  onChange={(e) => setEditingPost({ ...editingPost, title: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs sm:text-sm text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal"
+                  placeholder="e.g., Monumental Acoustics in Ethiopian Public Spaces"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                    Category
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingPost.category || ''}
+                    onChange={(e) => setEditingPost({ ...editingPost, category: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs sm:text-sm text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal"
+                    placeholder="e.g., CIVIC ARCHITECTURE"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                    Read Time
+                  </label>
+                  <input
+                    type="text"
+                    value={editingPost.readTime || '4 MIN READ'}
+                    onChange={(e) => setEditingPost({ ...editingPost, readTime: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs sm:text-sm text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                  Short Excerpt
+                </label>
+                <textarea
+                  rows="2"
+                  required
+                  value={editingPost.excerpt || editingPost.summary || ''}
+                  onChange={(e) => setEditingPost({ ...editingPost, excerpt: e.target.value, summary: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs sm:text-sm text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal resize-none"
+                  placeholder="Summary for cards..."
+                ></textarea>
+              </div>
+
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                  Article Cover Image
+                </label>
+
+                {/* Image Preview */}
+                {(journalImagePreview || editingPost.image) && (
+                  <div className="mb-3 relative aspect-[16/9] bg-gray-100 dark:bg-gray-800 overflow-hidden rounded-xs">
+                    <img 
+                      src={journalImagePreview || editingPost.image} 
+                      alt="Preview" 
+                      className="w-full h-full object-cover"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  </div>
+                )}
+
+                {/* Upload Button */}
+                <label className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border-2 border-dashed border-gray-300 dark:border-white/15 hover:border-adobek-teal dark:hover:border-adobek-gold text-gray-600 dark:text-gray-300 cursor-pointer transition-all duration-200 group">
+                  <ImagePlus className="w-4 h-4 group-hover:text-adobek-teal dark:group-hover:text-adobek-gold transition" />
+                  <span className="text-xs uppercase tracking-wider font-medium group-hover:text-adobek-teal dark:group-hover:text-adobek-gold transition">
+                    {journalImageFile ? journalImageFile.name : 'Click to upload cover image'}
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setJournalImageFile(file);
+                        const reader = new FileReader();
+                        reader.onload = () => setJournalImagePreview(reader.result);
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                  />
+                </label>
+
+                {/* Fallback URL Input */}
+                <div className="mt-2">
+                  <p className="text-[9px] uppercase tracking-wider text-gray-400 mb-1">Or paste image URL</p>
+                  <input
+                    type="text"
+                    value={editingPost.image || ''}
+                    onChange={(e) => {
+                      setEditingPost({ ...editingPost, image: e.target.value });
+                      setJournalImageFile(null);
+                      setJournalImagePreview('');
+                    }}
+                    className="w-full px-3.5 py-2 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal"
+                    placeholder="https://..."
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] uppercase tracking-wider font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                  Full Article Body
+                </label>
+                <textarea
+                  rows="6"
+                  required
+                  value={editingPost.fullContent || (editingPost.paragraphs ? editingPost.paragraphs.join('\n\n') : '')}
+                  onChange={(e) => setEditingPost({ ...editingPost, fullContent: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-xs sm:text-sm text-adobek-charcoal dark:text-white focus:outline-none focus:border-adobek-teal resize-none"
+                  placeholder="Full essay content..."
+                ></textarea>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setIsJournalModalOpen(false)}
+                  className="px-5 py-2.5 text-xs uppercase tracking-wider font-medium text-gray-600 dark:text-gray-300"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isUploading}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-adobek-teal dark:bg-adobek-gold text-white dark:text-adobek-dark text-xs uppercase tracking-wider font-semibold hover:opacity-90 transition disabled:opacity-50"
+                >
+                  {isUploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  <span>{isUploading ? 'Uploading...' : 'Publish Article'}</span>
                 </button>
               </div>
             </form>

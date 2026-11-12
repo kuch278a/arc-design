@@ -104,6 +104,14 @@ export default function Footer({ onNavigate }) {
               </li>
               <li>
                 <button
+                  onClick={() => onNavigate('journal')}
+                  className="text-white hover:text-terion-orange transition text-left"
+                >
+                  JOURNAL
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onNavigate('contact')}
                   className="text-white hover:text-terion-orange transition text-left"
                 >

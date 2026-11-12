@@ -10,6 +10,7 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
+const JournalPage = lazy(() => import('./pages/JournalPage'));
 const AdminPortal = lazy(() => import('./pages/AdminPortal'));
 
 // Minimal elegant fallback for route transitions
@@ -26,12 +27,12 @@ function PageLoadingFallback() {
 
 function getInitialPage() {
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-  if (['admin', 'projects', 'services', 'about', 'contact', 'project-detail'].includes(hash)) {
+  if (['admin', 'projects', 'services', 'about', 'journal', 'contact', 'project-detail'].includes(hash)) {
     return hash;
   }
   const searchParams = new URLSearchParams(window.location.search);
   const pageParam = searchParams.get('page') || (searchParams.has('admin') ? 'admin' : null);
-  if (pageParam && ['admin', 'projects', 'services', 'about', 'contact', 'project-detail'].includes(pageParam.toLowerCase())) {
+  if (pageParam && ['admin', 'projects', 'services', 'about', 'journal', 'contact', 'project-detail'].includes(pageParam.toLowerCase())) {
     return pageParam.toLowerCase();
   }
   const path = window.location.pathname.toLowerCase();
@@ -42,7 +43,7 @@ function getInitialPage() {
 }
 
 export default function App() {
-  const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'projects' | 'services' | 'about' | 'contact' | 'admin' | 'project-detail'
+  const [activePage, setActivePage] = useState(getInitialPage); // 'home' | 'projects' | 'services' | 'about' | 'journal' | 'contact' | 'admin' | 'project-detail'
   const [selectedProject, setSelectedProject] = useState(DEFAULT_PROJECTS_LIST[0]);
   const [theme] = useState('light');
 
@@ -129,6 +130,10 @@ export default function App() {
 
           {activePage === 'about' && (
             <AboutPage onNavigate={handleNavigate} onSelectProject={handleSelectProject} />
+          )}
+
+          {activePage === 'journal' && (
+            <JournalPage onNavigate={handleNavigate} />
           )}
 
           {activePage === 'contact' && (

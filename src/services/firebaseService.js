@@ -18,7 +18,7 @@ import {
   onAuthStateChanged
 } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
+import { DEFAULT_PROJECTS_LIST, DEFAULT_JOURNAL_POSTS } from '../data/defaultData';
 
 // Firebase configuration strictly from environment variables (No old Adobek-Interior fallbacks)
 const firebaseConfig = {
@@ -218,7 +218,57 @@ export async function deleteProject(projectId) {
 }
 
 // ----------------------------------------------------
-// 3. AUTHENTICATION HELPERS
+// 3. DYNAMIC JOURNAL CMS
+// ----------------------------------------------------
+
+/**
+ * Get all journal articles (Firestore with fallback to DEFAULT_JOURNAL_POSTS)
+ */
+export async function getDynamicJournalPosts() {
+  if (isFirebaseConfigured && db) {
+    try {
+      const snapshot = await getDocs(collection(db, 'journal_posts'));
+      if (!snapshot.empty) {
+        return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      }
+    } catch (error) {
+      console.warn('Firestore journal fetch failed, using default posts:', error);
+    }
+  }
+
+  const stored = localStorage.getItem('adobek_journal_posts');
+  return stored ? JSON.parse(stored) : DEFAULT_JOURNAL_POSTS;
+}
+
+/**
+ * Save or update a journal post in CMS
+ */
+export async function saveJournalPost(postData) {
+  const id = postData.id ? String(postData.id) : 'journal_' + Date.now();
+  const payload = { ...postData, id, updatedAt: new Date().toISOString() };
+
+  if (isFirebaseConfigured && db) {
+    try {
+      await setDoc(doc(db, 'journal_posts', id), payload, { merge: true });
+      return { success: true, id, isLive: true };
+    } catch (error) {
+      console.error('Firestore save journal error:', error);
+    }
+  }
+
+  const posts = await getDynamicJournalPosts();
+  const existingIdx = posts.findIndex(p => String(p.id) === String(id));
+  if (existingIdx >= 0) {
+    posts[existingIdx] = payload;
+  } else {
+    posts.unshift(payload);
+  }
+  localStorage.setItem('adobek_journal_posts', JSON.stringify(posts));
+  return { success: true, id, isLive: false };
+}
+
+// ----------------------------------------------------
+// 4. AUTHENTICATION HELPERS
 // ----------------------------------------------------
 
 export async function loginAdminUser(email, password) {
