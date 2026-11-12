@@ -38,7 +38,7 @@ export default function Footer({ onNavigate }) {
               <span className="font-serif tracking-[0.25em] font-semibold text-xs text-white uppercase">
                 ADOBEK
               </span>
-              <span className="text-[8.5px] uppercase tracking-[0.3em] text-white/60 font-light mt-0.5">
+              <span className="text-[8.5px] uppercase tracking-[0.3em] text-white font-normal mt-0.5">
                 INTERIORS
               </span>
             </button>
@@ -49,12 +49,12 @@ export default function Footer({ onNavigate }) {
             <h4 className="font-serif text-sm sm:text-base text-white font-medium">
               Contact
             </h4>
-            <div className="space-y-2 text-xs text-white/85 font-light">
+            <div className="space-y-2 text-xs text-white font-normal">
               <p>
-                <a href="tel:+251947325252" className="hover:text-terion-orange transition block">
+                <a href="tel:+251947325252" className="text-white hover:text-terion-orange transition block">
                   +251 947 325 252
                 </a>
-                <a href="tel:+251923704339" className="hover:text-terion-orange transition block text-white/60 hover:text-terion-orange mt-0.5">
+                <a href="tel:+251923704339" className="text-white hover:text-terion-orange transition block mt-0.5">
                   +251 923 704 339
                 </a>
               </p>
@@ -68,7 +68,7 @@ export default function Footer({ onNavigate }) {
             <h4 className="font-serif text-sm sm:text-base text-white font-medium">
               Address
             </h4>
-            <div className="space-y-1 text-xs text-white/75 font-light leading-relaxed">
+            <div className="space-y-1 text-xs text-white font-normal leading-relaxed">
               <p>Bole Medhanialem</p>
               <p>Behind Edna Mall</p>
               <p>Addis Ababa, Ethiopia</p>
@@ -77,11 +77,11 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 4: Navigation Links */}
           <div className="space-y-2.5">
-            <ul className="space-y-2 text-xs font-medium uppercase tracking-[0.15em] text-white/90">
+            <ul className="space-y-2 text-xs font-medium uppercase tracking-[0.15em] text-white">
               <li>
                 <button
                   onClick={() => onNavigate('projects')}
-                  className="hover:text-terion-orange transition text-left"
+                  className="text-white hover:text-terion-orange transition text-left"
                 >
                   PROJECTS
                 </button>
@@ -89,7 +89,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button
                   onClick={() => onNavigate('services')}
-                  className="hover:text-terion-orange transition text-left"
+                  className="text-white hover:text-terion-orange transition text-left"
                 >
                   OUR SERVICES
                 </button>
@@ -97,7 +97,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button
                   onClick={() => onNavigate('about')}
-                  className="hover:text-terion-orange transition text-left"
+                  className="text-white hover:text-terion-orange transition text-left"
                 >
                   ABOUT US
                 </button>
@@ -105,7 +105,7 @@ export default function Footer({ onNavigate }) {
               <li>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="hover:text-terion-orange transition text-left"
+                  className="text-white hover:text-terion-orange transition text-left"
                 >
                   CONTACT
                 </button>
@@ -171,7 +171,7 @@ export default function Footer({ onNavigate }) {
 
         {/* Bottom Bar: Centered Copyright & Scroll-to-Top Button */}
         <div className="pt-8 border-t border-white/10 relative flex items-center justify-center">
-          <p className="text-xs text-white/60 font-light text-center">
+          <p className="text-xs text-white font-normal text-center">
             &copy; Adobek Interior Design and Building | All rights reserved
           </p>
 
