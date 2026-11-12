@@ -294,16 +294,16 @@ export default function HomePage({ onNavigate, onSelectProject }) {
           </button>
         </div>
 
-        {/* Editorial Header Block (Below Hero Slider) */}
-        <div className="text-center max-w-5xl mx-auto space-y-4 pt-12 sm:pt-16 lg:pt-20">
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.08] tracking-tight">
-            Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
-          </h1>
-        </div>
-
       </section>
 
-      {/* 2. FEATURED WORKS (TERION EDITORIAL GRID) */}
+      {/* 2. EDITORIAL STATEMENT / HEADLINE (BETWEEN HERO AND PROJECTS) */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-8 py-10 sm:py-16 lg:py-20 text-center">
+        <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.12] tracking-tight">
+          Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
+        </h1>
+      </section>
+
+      {/* 3. FEATURED WORKS (TERION EDITORIAL GRID) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-8 space-y-8 sm:space-y-10">
         
         {/* Section Title */}
