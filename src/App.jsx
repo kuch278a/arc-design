@@ -10,7 +10,6 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
-const BlogPage = lazy(() => import('./pages/BlogPage'));
 const AdminPortal = lazy(() => import('./pages/AdminPortal'));
 
 // Minimal elegant fallback for route transitions
