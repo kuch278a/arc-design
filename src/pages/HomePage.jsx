@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@astryxdesign/core/Button';
 import { Badge } from '@astryxdesign/core/Badge';
+import InteractiveDotGrid from '../components/InteractiveDotGrid';
 import { DEFAULT_PROJECTS_LIST } from '../data/defaultData';
 import { getDynamicProjects } from '../services/firebaseService';
 
@@ -296,11 +297,22 @@ export default function HomePage({ onNavigate, onSelectProject }) {
 
       </section>
 
-      {/* 2. EDITORIAL STATEMENT / HEADLINE (BETWEEN HERO AND PROJECTS) */}
-      <section className="max-w-4xl lg:max-w-5xl 2xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 text-center">
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.18] sm:leading-[1.14] md:leading-[1.1] tracking-tight">
-          Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
-        </h1>
+      {/* 2. EDITORIAL STATEMENT / HEADLINE WITH INTERACTIVE CANVAS DOT GRID */}
+      <section className="w-full max-w-[1680px] 2xl:max-w-[1840px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
+        <InteractiveDotGrid
+          gap={26}
+          proximityRadius={140}
+          baseRadius={1.4}
+          activeRadius={3.8}
+          activeColor={{ r: 225, g: 29, b: 72 }}
+          className="py-12 sm:py-16 md:py-20 lg:py-24 rounded-3xl border border-gray-100/60 shadow-xs"
+        >
+          <div className="max-w-4xl lg:max-w-5xl 2xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center select-none">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-terion-charcoal dark:text-white leading-[1.18] sm:leading-[1.14] md:leading-[1.1] tracking-tight">
+              Elevating Spaces Through <span className="italic font-normal">Timeless Architecture</span>
+            </h1>
+          </div>
+        </InteractiveDotGrid>
       </section>
 
       {/* 3. FEATURED WORKS (TERION EDITORIAL GRID) */}
