@@ -194,14 +194,14 @@ export default function HomePage({ onNavigate, onSelectProject }) {
     <div className="space-y-24 sm:space-y-32 pb-24 transition-colors duration-300">
       
       {/* 1. ADOBEK HERO SECTION */}
-      <section className="max-w-7xl 2xl:max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-2 sm:pt-4">
+      <section className="w-full max-w-[1680px] 2xl:max-w-[1840px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 pt-2 sm:pt-4">
         
         {/* Terion Hero Visual Slider Box */}
         <div 
           onClick={handleHeroClick}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="group relative cursor-pointer w-full h-[52vh] sm:h-[60vh] md:h-[65vh] lg:h-[70vh] min-h-[360px] sm:min-h-[440px] max-h-[680px] 2xl:max-h-[760px] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#181715] shadow-terion-hover border border-terion-border/40 dark:border-white/10 select-none"
+          className="group relative cursor-pointer w-full h-[65vh] sm:h-[75vh] md:h-[80vh] lg:h-[85vh] min-h-[480px] sm:min-h-[560px] lg:min-h-[660px] max-h-[860px] 2xl:max-h-[940px] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#181715] shadow-terion-hover border border-terion-border/40 dark:border-white/10 select-none"
         >
           {/* Images Sliding Track */}
           <div 
