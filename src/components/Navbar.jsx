@@ -36,6 +36,10 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
     setMobileMenuOpen(false);
   };
 
+  if (activePage === 'admin') {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full pt-3 pb-2 px-4 sm:px-8 transition-all duration-300">
       {/* Scroll Progress Indicator */}

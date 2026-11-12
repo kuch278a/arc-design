@@ -105,13 +105,15 @@ export default function App() {
   return (
     <div data-astryx-theme="neutral" className="min-h-screen flex flex-col bg-white text-terion-charcoal font-serif antialiased transition-colors duration-300">
       
-      {/* 1. Figma Header Navigation Bar */}
-      <Navbar 
-        activePage={activePage} 
-        setActivePage={handleNavigate} 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
-      />
+      {/* 1. Header Navigation Bar (Client Website Only) */}
+      {activePage !== 'admin' && (
+        <Navbar 
+          activePage={activePage} 
+          setActivePage={handleNavigate} 
+          theme={theme} 
+          toggleTheme={toggleTheme} 
+        />
+      )}
 
       {/* 2. Main Page View Router with Suspense */}
       <main className="flex-1">
@@ -154,8 +156,10 @@ export default function App() {
         </Suspense>
       </main>
 
-      {/* 3. Figma Solid Deep Forest Teal Footer */}
-      <Footer onNavigate={handleNavigate} />
+      {/* 3. Footer (Client Website Only) */}
+      {activePage !== 'admin' && (
+        <Footer onNavigate={handleNavigate} />
+      )}
 
     </div>
   );
