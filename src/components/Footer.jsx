@@ -49,7 +49,7 @@ export default function Footer({ onNavigate }) {
             <h4 className="font-serif text-sm sm:text-base text-white font-medium">
               Contact
             </h4>
-            <div className="space-y-2 text-xs text-white font-normal">
+            <div className="space-y-2 text-xs sm:text-sm text-white font-normal">
               <p>
                 <a href="tel:+251947325252" className="text-white hover:text-terion-orange transition block">
                   +251 947 325 252
@@ -68,10 +68,10 @@ export default function Footer({ onNavigate }) {
             <h4 className="font-serif text-sm sm:text-base text-white font-medium">
               Address
             </h4>
-            <div className="space-y-1 text-xs text-white font-normal leading-relaxed">
-              <p>Bole Medhanialem</p>
-              <p>Behind Edna Mall</p>
-              <p>Addis Ababa, Ethiopia</p>
+            <div className="space-y-1 text-xs sm:text-sm text-white font-normal leading-relaxed">
+              <p className="text-white">Bole Medhanialem</p>
+              <p className="text-white">Behind Edna Mall</p>
+              <p className="text-white">Addis Ababa, Ethiopia</p>
             </div>
           </div>
 
