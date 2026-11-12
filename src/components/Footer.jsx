@@ -19,7 +19,7 @@ export default function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="w-full bg-[#181715] text-white pt-16 pb-8 px-6 sm:px-10 lg:px-16 border-t border-white/5 transition-colors duration-300">
+    <footer className="w-full bg-[#181715] text-white pt-16 pb-8 px-6 sm:px-10 lg:px-16 border-t border-white/5 transition-colors duration-300" style={{ color: '#ffffff' }}>
       <div className="max-w-7xl mx-auto space-y-12">
         
         {/* Main 5-Column Row */}
@@ -35,10 +35,10 @@ export default function Footer({ onNavigate }) {
               <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center p-2 mb-2 group-hover:border-white/40 transition">
                 <AdobekLogo size={42} light={true} className="text-white" textClassName="text-white" />
               </div>
-              <span className="font-serif tracking-[0.25em] font-semibold text-xs text-white uppercase">
+              <span className="font-serif tracking-[0.25em] font-semibold text-xs text-white uppercase" style={{ color: '#ffffff' }}>
                 ADOBEK
               </span>
-              <span className="text-[8.5px] uppercase tracking-[0.3em] text-white font-normal mt-0.5">
+              <span className="text-[8.5px] uppercase tracking-[0.3em] text-white font-normal mt-0.5" style={{ color: '#ffffff' }}>
                 INTERIORS
               </span>
             </button>
@@ -46,15 +46,15 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 2: Contact */}
           <div className="space-y-3">
-            <h4 className="font-serif text-sm sm:text-base text-white font-medium">
+            <h4 className="font-serif text-sm sm:text-base text-white font-medium" style={{ color: '#ffffff' }}>
               Contact
             </h4>
-            <div className="space-y-2 text-xs sm:text-sm text-white font-normal">
+            <div className="space-y-2 text-xs sm:text-sm text-white font-normal" style={{ color: '#ffffff' }}>
               <p>
-                <a href="tel:+251947325252" className="text-white hover:text-terion-orange transition block">
+                <a href="tel:+251947325252" className="text-white hover:text-terion-orange transition block" style={{ color: '#ffffff' }}>
                   +251 947 325 252
                 </a>
-                <a href="tel:+251923704339" className="text-white hover:text-terion-orange transition block mt-0.5">
+                <a href="tel:+251923704339" className="text-white hover:text-terion-orange transition block mt-0.5" style={{ color: '#ffffff' }}>
                   +251 923 704 339
                 </a>
               </p>
@@ -65,23 +65,24 @@ export default function Footer({ onNavigate }) {
 
           {/* Col 3: Address */}
           <div className="space-y-3">
-            <h4 className="font-serif text-sm sm:text-base text-white font-medium">
+            <h4 className="font-serif text-sm sm:text-base text-white font-medium" style={{ color: '#ffffff' }}>
               Address
             </h4>
-            <div className="space-y-1 text-xs sm:text-sm text-white font-normal leading-relaxed">
-              <p className="text-white">Bole Medhanialem</p>
-              <p className="text-white">Behind Edna Mall</p>
-              <p className="text-white">Addis Ababa, Ethiopia</p>
+            <div className="space-y-1 text-xs sm:text-sm text-white font-normal leading-relaxed" style={{ color: '#ffffff' }}>
+              <p className="text-white" style={{ color: '#ffffff' }}>Bole Medhanialem</p>
+              <p className="text-white" style={{ color: '#ffffff' }}>Behind Edna Mall</p>
+              <p className="text-white" style={{ color: '#ffffff' }}>Addis Ababa, Ethiopia</p>
             </div>
           </div>
 
           {/* Col 4: Navigation Links */}
           <div className="space-y-2.5">
-            <ul className="space-y-2 text-xs font-medium uppercase tracking-[0.15em] text-white">
+            <ul className="space-y-2 text-xs font-medium uppercase tracking-[0.15em] text-white" style={{ color: '#ffffff' }}>
               <li>
                 <button
                   onClick={() => onNavigate('projects')}
                   className="text-white hover:text-terion-orange transition text-left"
+                  style={{ color: '#ffffff' }}
                 >
                   PROJECTS
                 </button>
@@ -90,6 +91,7 @@ export default function Footer({ onNavigate }) {
                 <button
                   onClick={() => onNavigate('services')}
                   className="text-white hover:text-terion-orange transition text-left"
+                  style={{ color: '#ffffff' }}
                 >
                   OUR SERVICES
                 </button>
@@ -98,6 +100,7 @@ export default function Footer({ onNavigate }) {
                 <button
                   onClick={() => onNavigate('about')}
                   className="text-white hover:text-terion-orange transition text-left"
+                  style={{ color: '#ffffff' }}
                 >
                   ABOUT US
                 </button>
@@ -106,6 +109,7 @@ export default function Footer({ onNavigate }) {
                 <button
                   onClick={() => onNavigate('journal')}
                   className="text-white hover:text-terion-orange transition text-left"
+                  style={{ color: '#ffffff' }}
                 >
                   JOURNAL
                 </button>
@@ -114,6 +118,7 @@ export default function Footer({ onNavigate }) {
                 <button
                   onClick={() => onNavigate('contact')}
                   className="text-white hover:text-terion-orange transition text-left"
+                  style={{ color: '#ffffff' }}
                 >
                   CONTACT
                 </button>
@@ -179,7 +184,7 @@ export default function Footer({ onNavigate }) {
 
         {/* Bottom Bar: Centered Copyright & Scroll-to-Top Button */}
         <div className="pt-8 border-t border-white/10 relative flex items-center justify-center">
-          <p className="text-xs text-white font-normal text-center">
+          <p className="text-xs text-white font-normal text-center" style={{ color: '#ffffff' }}>
             &copy; Adobek Interior Design and Building | All rights reserved
           </p>
 

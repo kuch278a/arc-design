@@ -72,25 +72,7 @@ export default function Navbar({ activePage, setActivePage, theme, toggleTheme }
           </div>
         </button>
 
-        {/* Right-Aligned Nav Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-terion-bg/60 dark:bg-white/5 p-1 rounded-full border border-terion-border/40 dark:border-white/5">
-          {navLinks.map((link) => {
-            const isActive = activePage === link.id || (activePage === 'project-detail' && link.id === 'projects');
-            return (
-              <button
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className={`px-4.5 sm:px-5 py-2 rounded-full text-[14px] sm:text-[15px] font-medium transition-all duration-200 ${
-                  isActive
-                    ? 'bg-terion-charcoal text-white dark:bg-white dark:text-terion-charcoal shadow-sm'
-                    : 'text-terion-stone dark:text-terion-gray hover:text-terion-charcoal dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
-                }`}
-              >
-                {link.label}
-              </button>
-            );
-          })}
-        </nav>
+
 
         {/* Mobile Hamburger Toggle */}
         <button
