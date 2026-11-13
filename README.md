@@ -1,227 +1,191 @@
-# Adobek Interior
+# Adobek Interior Design & Architecture
 
-A luxury interior design & architecture portfolio website for **ADObek Design Build**, a premier interior architecture atelier based in Addis Ababa, Ethiopia.
+A bespoke, high-performance luxury interior design & architecture portfolio website and content management atelier for **ADObek Design Build**, a premier architectural firm based in Addis Ababa, Ethiopia, led by Founder & Principal Architect Bereket Grima.
+
+[![Live Website](https://img.shields.io/badge/Live_Site-GitHub_Pages-2ea44f?style=for-the-badge&logo=github)](https://kuch278a.github.io/arc-design/)
+[![React 19](https://img.shields.io/badge/React-19.3-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Vite 5](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Firebase 12](https://img.shields.io/badge/Firebase-12.18-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+
+---
+
+## Live Website
+
+- **Public Site**: [https://kuch278a.github.io/arc-design/](https://kuch278a.github.io/arc-design/)
+- **Studio Admin Atelier**: [https://kuch278a.github.io/arc-design/#admin](https://kuch278a.github.io/arc-design/#admin)
+
+---
+
+## Key Features & User Experience
+
+### 1. Global Interactive Canvas Dot Grid
+- High-performance 2D HTML5 canvas dot matrix running via `requestAnimationFrame`.
+- Calculates cursor Euclidean distance in real-time, producing a dynamic light ripple where dots scale up from `1.4px` to `3.8px` and smoothly transition into a vibrant ruby/crimson hue (`#e11d48`) with cubic falloff.
+- Features smooth linear interpolation spring decay (`scale += (target - scale) * 0.14`) as the mouse moves away.
+- Active as a global, full-viewport backdrop (`isGlobal={true}`) with `pointer-events: none` across the entire website.
+
+### 2. Cinematic Expanded Hero Slider
+- Viewport-adaptive sizing (`h-[65vh] sm:h-[85vh]` up to `940px` height and `1840px` max width) designed for modern displays, from 13-inch laptops to 4K monitors.
+- Automated sliding with mouse-pause detection, progress bar indicator, keyboard navigation, and direct card click-through to project case studies.
+- Followed by the architectural statement *"Elevating Spaces Through Timeless Architecture"* with generous, balanced vertical breathing room.
+
+### 3. Permanent Minimalist White Gallery Aesthetic
+- Enforced clean white mode (`#FFFFFF` background, `color-scheme: light`) with Cormorant Garamond, Lora, and Plus Jakarta Sans typography.
+- Contrasting charcoal `#181715` luxury footer with pure `#ffffff` text for contact lines, address details, navigation items, and social media links.
+
+### 4. Floating Sticky Navigation Bar
+- Responsive pill container with frosted glass blur (`backdrop-blur-md bg-white/90`).
+- Persistent top scroll progress indicator line.
+- Streamlined client navigation: **Home**, **Projects**, **Services**, **About**, and **Contact**.
+- Fully isolated from the Admin Portal (auto-hidden on `#/admin`).
+
+### 5. Dedicated Studio Admin & CMS Atelier
+- Private management interface with secure Firebase authentication and local sandbox fallback.
+- **Consultation Inquiries**: View incoming client inquiries with direct phone, email, and WhatsApp outreach shortcuts.
+- **Projects CMS**: Real-time CRUD capabilities for portfolio projects with direct image uploads to Firebase Storage.
+- **Journal CMS**: Complete publication suite for architectural essays and journal articles with cover image upload and category management.
+
+### 6. Three-Tier Offline Resilience
+All data operations follow a resilient fallback sequence:
+```
+Firebase Firestore / Storage ──► LocalStorage ──► Hardcoded Architectural Defaults
+```
+The application runs reliably in offline or demonstration mode even if Firebase credentials are not yet configured.
+
+---
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | React 18 |
-| Build Tool | Vite 5 |
-| Styling | Tailwind CSS 3 |
-| Backend | Firebase (Auth, Firestore, Storage) |
-| Icons | Lucide React |
-| Utilities | clsx, tailwind-merge |
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Framework** | React 19 (`^19.3.1`) | UI Component Architecture |
+| **Build Tool** | Vite 5 (`^5.4.2`) | Fast HMR & Production Bundler |
+| **Styling** | Tailwind CSS 3 (`^3.4.10`) | Utility-First Responsive Styling |
+| **Backend** | Firebase 12 (`^12.18.0`) | Authentication, Firestore DB, Cloud Storage |
+| **Design Core** | `@astryxdesign/core` | Polished Design System Controls |
+| **Icons** | Lucide React (`^0.439.0`) | Modern Vector Iconography |
+| **Routing** | Hash-Based Client Routing | Seamless GitHub Pages SPA Navigation |
 
-### Fonts
+---
 
-- **Serif:** Cormorant Garamond (headings, quotes)
-- **Sans:** Plus Jakarta Sans (body text)
-- **Script:** Pinyon Script, Alex Brush (decorative accents)
-
-## Pages
-
-### Home (`HomePage.jsx`)
-- Hero banner carousel with 6 slides, auto-advance (5.5s), keyboard nav, touch swipe
-- Philosophy quote section
-- "Our Works" 2x2 project grid
-- Embedded Services, About, Blog, and Contact sections as a continuous scroll
-
-### Projects (`ProjectsPage.jsx`)
-- Category filters: All, Governmental, Private Organization, Private Corporation, Private Company
-- Responsive 2-column project card grid with hover animations
-
-### Project Detail (`ProjectDetailPage.jsx`)
-- Full-width hero image
-- 2-column layout: title + architectural narrative
-- 7-image gallery with alternating full-width and grid layouts
-- "You May Like" recommendation cards
-
-### Services (`ServicesPage.jsx`)
-- Dark hero banner with vignette overlay
-- 4-item interactive accordion: Interior Design, Architectural Design, House Redesign, Design Consultancy
-- Recent projects showcase
-
-### About (`AboutPage.jsx`)
-- Leadership spotlight with founder profile
-- Core Values: Authentic Heritage, Architectural Rigor, Bespoke Execution
-- Recent projects showcase
-
-### Blog (`BlogPage.jsx`)
-- Featured articles (2-column) + more stories (3-column)
-- Full-screen modal reader with backdrop blur
-
-### Contact (`ContactPage.jsx`)
-- Contact details: phone, email, Telegram, physical address
-- Enquiry form with validation and submission to Firestore
-- Success state with reference ID
-
-### Admin Portal (`AdminPortal.jsx`)
-- Firebase email/password authentication with master passcode fallback
-- 3 tabbed sections:
-  - **Consultation Leads** — view, contact via WhatsApp/email
-  - **Projects CMS** — add, edit, delete projects with image upload
-  - **Journal CMS** — add, edit, delete blog posts with image upload
-- Live Firebase connection status indicator
-
-## Features
-
-### Dark Mode
-- Class-based toggling (`dark` on `<html>`)
-- Default: dark mode
-- 15 custom brand colors (teal, terracotta, gold, etc.)
-- Different background patterns for light/dark
-- Persisted per tab in `sessionStorage`
-
-### Loading Screen
-- Inline in `index.html` — renders instantly, no flash
-- Animated progress bar with brand gradient
-- Fades out after React mounts
-
-### Offline Support
-Every data operation follows a three-tier fallback:
+## Page Architecture
 
 ```
-Firebase Firestore → localStorage → hardcoded defaults
+/#/                 HomePage.jsx          Hero slider, editorial statement, works grid, philosophy, reviews
+/#/projects         ProjectsPage.jsx      Portfolio gallery with category filtering
+/#/project-detail   ProjectDetailPage.jsx Comprehensive project story, specifications & photo gallery
+/#/services         ServicesPage.jsx      Service offerings with interactive accordion deliverables
+/#/about            AboutPage.jsx         Studio heritage, architectural rigor & founder profile
+/#/journal          JournalPage.jsx       Architectural publications and design philosophy essays
+/#/contact          ContactPage.jsx       Studio address, direct telephone lines & consultation form
+/#/admin            AdminPortal.jsx       Secure atelier management (leads, projects & journal CMS)
 ```
 
-The site works fully without Firebase configured.
-
-### Performance
-- Code-split vendor chunks (React, Lucide, Firebase core, Firebase DB)
-- All pages lazy-loaded via `React.lazy()`
-- Image lazy loading with `loading="lazy"` and `decoding="async"`
-- Resource hints: `preconnect`, `dns-prefetch`, `preload`
-- Custom chunk splitting in Vite config
-
-### Animations
-- `animate-fade-in` — translateY + opacity transition
-- Image hover zoom with 700ms transitions
-- Card hover lift with shadow
-- Hero carousel with `translate3d` rolling transitions
-- Bouncing scroll-down chevron
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- A Firebase project ([console.firebase.google.com](https://console.firebase.google.com/))
-
-### Installation
-
-```bash
-npm install
-```
-
-### Environment Setup
-
-Copy `.env.example` to `.env` and fill in your Firebase config:
-
-```bash
-cp .env.example .env
-```
-
-```
-VITE_FIREBASE_API_KEY=
-VITE_FIREBASE_AUTH_DOMAIN=
-VITE_FIREBASE_PROJECT_ID=
-VITE_FIREBASE_STORAGE_BUCKET=
-VITE_FIREBASE_MESSAGING_SENDER_ID=
-VITE_FIREBASE_APP_ID=
-```
-
-> Without Firebase config, the site runs in offline mode using localStorage and hardcoded data.
-
-### Development
-
-```bash
-npm run dev
-```
-
-Opens at `http://localhost:5173`.
-
-### Build
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
+---
 
 ## Project Structure
 
 ```
+beka/
 ├── public/
-│   ├── assets/              # Logos, profile photos, project thumbnails
-│   ├── client_logos/        # Client logo library (40+ images)
-│   ├── 404.html             # GitHub Pages SPA redirect
-│   └── bg_pattern.svg       # Background textures
-├── media/
-│   ├── about/               # Profile photos
-│   └── projects/            # Project hero images + gallery
+│   ├── assets/                      # Studio photography, project images, logos
+│   │   ├── telegram/                # High-resolution architectural project captures
+│   │   └── adobek_logo_*.png        # Official Adobek architectural emblems
+│   ├── 404.html                     # SPA redirect handler for GitHub Pages
+│   └── .nojekyll                    # Disables Jekyll processing on GitHub Pages
 ├── src/
 │   ├── components/
-│   │   ├── Navbar.jsx       # Sticky nav, scroll progress bar, mobile menu, theme toggle
-│   │   ├── Footer.jsx       # 4-column footer with social links
-│   │   └── AdobekLogo.jsx   # Theme-aware logo component
+│   │   ├── InteractiveDotGrid.jsx   # Canvas-driven cursor proximity dot ripple
+│   │   ├── Navbar.jsx               # Sticky floating navigation bar & mobile menu
+│   │   ├── Footer.jsx               # Charcoal luxury footer with bright white typography
+│   │   └── AdobekLogo.jsx           # Theme-aware official architectural mark
 │   ├── pages/
-│   │   ├── HomePage.jsx     # Landing page with hero carousel + embedded sections
-│   │   ├── ProjectsPage.jsx # Portfolio grid with category filters
-│   │   ├── ProjectDetailPage.jsx # Individual project showcase
-│   │   ├── ServicesPage.jsx # Services accordion + recent projects
-│   │   ├── AboutPage.jsx    # Company story, founder spotlight, core values
-│   │   ├── BlogPage.jsx     # Blog listing with modal reader
-│   │   ├── ContactPage.jsx  # Contact form + company details
-│   │   └── AdminPortal.jsx  # CMS dashboard (auth, leads, projects, blog)
+│   │   ├── HomePage.jsx             # Landing page with expanded hero & interactive grid
+│   │   ├── ProjectsPage.jsx         # Categorized portfolio gallery
+│   │   ├── ProjectDetailPage.jsx   # Detailed project case study
+│   │   ├── ServicesPage.jsx         # Service breakdowns and deliverables
+│   │   ├── AboutPage.jsx            # Founder narrative & architectural philosophy
+│   │   ├── JournalPage.jsx          # Published essays and articles
+│   │   ├── ContactPage.jsx          # Contact information & consultation form
+│   │   └── AdminPortal.jsx          # Studio Admin & CMS management dashboard
 │   ├── data/
-│   │   └── defaultData.js   # 6 default projects + 3 default blog posts
+│   │   └── defaultData.js           # Hardcoded offline portfolio & fallback data
 │   ├── services/
-│   │   ├── firebaseService.js # Firebase CRUD + localStorage fallback
-│   │   └── firebase.js      # Barrel export
-│   ├── App.jsx              # Root component, hash router, theme, code splitting
-│   ├── main.jsx             # React entry point
-│   └── index.css            # Global styles, animations, scrollbar
-├── firestore.rules          # Firestore security rules
-├── storage.rules            # Firebase Storage security rules
-├── vite.config.js           # Build config with manual chunk splitting
-├── tailwind.config.js       # Brand colors, fonts, dark mode
-└── postcss.config.js        # Tailwind + Autoprefixer
+│   │   └── firebaseService.js       # Firebase Auth, Firestore & Storage integration
+│   ├── App.jsx                      # App router, global canvas integration & Suspense
+│   ├── main.jsx                     # Application entry point
+│   └── index.css                    # Global typography, smooth scrolling & animations
+├── index.html                       # HTML shell with instant inline loader & safety timer
+├── vite.config.js                   # Vite configuration with relative asset paths
+├── tailwind.config.js               # Luxury color palette, fonts & screen breakpoints
+└── package.json                     # Project scripts and dependencies
 ```
 
-## Firebase Collections
+---
 
-| Collection | Public Read | Write |
-|------------|:----------:|:-----:|
-| `projects` | Yes | Auth only |
-| `blog_posts` | Yes | Auth only |
-| `consultations` | Create + Read | Auth only (update/delete) |
+## Getting Started
 
-**Storage:** `/images/{folder}` — public read, auth write, max 10MB, images only.
+### Prerequisites
+- Node.js 18+
+- npm or pnpm
 
-## Brand Colors
+### Installation
+```bash
+cd beka
+npm install
+```
 
-| Name | Hex | Usage |
-|------|-----|-------|
-| Teal | `#1E4E4E` | Primary brand, navbar, footer |
-| Terracotta | `#DF6D27` | Accents, CTAs, progress bar |
-| Gold | `#C5A880` | Decorative accents, links |
-| Charcoal | `#1A1816` | Dark mode body text |
-| Dark | `#0A1525` | Dark mode background |
-| Cream | `#FAF8F5` | Light mode background |
+### Environment Configuration
+To connect to live Firebase Cloud services, create a `.env` file in the `beka/` directory:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+> **Note:** Without a `.env` file, the site automatically boots in **Local Sandbox Mode** with complete offline mock data and full functionality.
 
-## Deployment
+### Development Server
+```bash
+npm run dev
+```
+Starts the local development server at `http://localhost:5173`.
 
-The project is configured for static hosting (GitHub Pages, Netlify, Vercel):
+### Production Build
+```bash
+npm run build
+```
+Compiles production-ready bundles to the `dist/` directory.
 
-- `base: './'` in Vite config for relative paths
-- `public/404.html` handles SPA routing on GitHub Pages
-- All pages are client-side rendered with hash routing
+### Preview Production Build
+```bash
+npm run preview
+```
+
+---
+
+## Deployment to GitHub Pages
+
+The repository uses a dual-branch structure:
+- **`master`**: Source code, components, and project assets.
+- **`gh-pages`**: Compiled static build output (`dist/`) served directly by GitHub Pages.
+
+To build and deploy updates:
+```bash
+npm run build
+cp dist/index.html dist/404.html
+touch dist/.nojekyll
+cd dist
+git add -A
+git commit -m "deploy: update production build"
+git push -f origin gh-pages
+```
+
+---
 
 ## License
 
-Private project. All rights reserved.
+Private project. © Adobek Interior Design and Building. All rights reserved.
